@@ -12,6 +12,7 @@
 		vmargin={.98in,.98in},
 		ignoreheadfoot
 	]{geometry}
+	\usepackage[hangul]{kotex}
 	\input{common.tex}
 	\pagestyle{headings}
 	\setboolean{lulu}{true}
@@ -27,36 +28,36 @@
 	\sloppy
 \fi
 %=================================================================
-\chapter{Foreword}
+\chapter{서문}
 \chalabel{foreword1}
 
 %=================================================================
-\section*{Foreword by Martin Fowler}
+\section*{마틴 파울러 서문}
 
-For a long time it's puzzled me that most books on software development processes talk about what to do when you are starting from a blank sheet of editor screen. It's puzzled me because that's not the most common situation that people write code in. Most people have to make changes to an existing code base, even if it's their own. In an ideal world this code base is well designed and well factored, but we all know how often the ideal world appears in our career.
+오랫동안 소프트웨어 개발 프로세스에 관한 대부분의 책에서 아무 것도 없는 소프트웨어 개발을 위해 편집기 화면의 빈 시트에서 시작할 때 무엇을 해야 하는지에 대해 이야기하는 것은 매우 의아했다. 그 상황이 사람들이 코드를 작성하는 가장 일반적인 경우가 아니기 때문이다. 대부분의 사람들은 자신이 만든 것일지라도 기존 코드 베이스를 변경해야 한다. 이상적으로는 이 코드 베이스가 잘 설계되고 여러 사항을 잘 고려한 것이겠지만, 우리 모두는 얼마나 이상적인 세계가 어려운지 알고 있다.
 
-So this book is important because it's written from the perspective of what to do with an imperfect yet valuable code base. I also like the fact that it's based on an effective mix of academic and industrial work. I visited the FAMOOS group in their early days during a chill early winter in Bern. I liked the way that they cycled between the field and the lab, trying out ideas on real projects, coming back to the lab to reflect.
+따라서 이 책은 불완전하지만 가치 있는 코드 베이스로 무엇을 할 수 있는지에 대한 관점에서 쓰여졌기 때문에 의미가 있다. 또한 학계의 관점과 산업계의 관점이 효과적으로 혼합되어 있다는 점도 마음에 든다. 저는 초창기 베른의 쌀쌀한 초겨울에 파무스 그룹을 방문한 적이 있다. 현장과 연구실을 오가며 실제 프로젝트에 아이디어를 시도하고 연구실로 돌아와 반성하는 방식이 마음에 들었다.
 
-This resulting book speaks with that experience. It gives you the building blocks for a plan to tackle a difficult code base, it gives you context for techniques like refactoring. It is a sad fact that there are too few of these kinds of books out there, when reengineering is still a common event. But I'm at least glad to see that while there aren't many books in this vein, this book is an example of how good they are.
+이 책에는 그 경험이 고스란히 담겨 있다. 이 책은 어려운 코드 기반을 다루기 위한 빌딩 블록을 제공하고 리팩터링과 같은 기술을 언제 사용해야 하는지 설명한다. 리엔지니어링(reengineering)이 여전히 흔한 일인 상황에서 이런 종류의 책이 너무 적다는 것은 안타까운 사실이다. 하지만 적어도 이런 맥락의 책이 많지 않은 상황에서 이 책이 얼마나 좋은 책인지 보여주는 예라고 생각하니 다행이다.
 
-\hfill Martin Fowler, \emph{Thought Works, Inc.}
+\hfill 마틴 파울러, \emph{Thought Works, Inc.}
 
 \newpage
 ~
 \vfill
 %=================================================================
-\section*{Foreword by Ralph E. Johnson}
+\section*{랄프 존슨 서문}
 
 \noindent
-One of the signs of a good pattern is that experts who read it are likely to say ``of course, everybody knows that'' but beginners are likely to say ``interesting, but will it work?''  Patterns should be easy to follow, but the most valuable patterns are those that are not obvious.  Experts have learned from experience that the patterns work, but beginners have to take the patterns on faith until they use them and develop their own experience.
+좋은 패턴의 징후 중 하나는 그를 읽은 전문가가 '당연히 누구나 알고 있겠지'라고 말하지만 초보자는 '흥미롭긴 한데 잘 될까'라고 말할 가능성이 높다는 것이다.  패턴은 따라하기 쉬워야 하지만 가장 가치 있는 패턴은 뻔하지 않아야 한다.  전문가들은 경험을 통해 패턴이 효과가 있다는 것을 알게 되었지만 초보자는 패턴을 사용하기 전까지는 패턴을 믿고 자신의 경험을 발전시켜야 한다.
 
-Over the last couple of years, I've had the chance to give the patterns in this book to a wide variety of people and discuss them.  My pattern discussion group has a few members who have decades of consulting experience, and they could quickly regale the group with stories of using these patterns.  The younger members loved the stories as they were convinced of the value of the patterns.
+지난 몇 년 동안 나는 이 책의 패턴을 다양한 사람들에게 알려주고 토론할 기회를 가졌다.  나의 패턴 토론 그룹에는 수십 년의 컨설팅 경력을 가진 회원들이 몇 명 있는데, 그들은 이 패턴을 사용한 이야기를 금세 그룹에 들려주었다.  젊은 멤버들은 패턴의 가치를 확신하고 있었기 때문에 그 이야기를 좋아했다.
 
-I made students in my software engineering class read some of the patterns as part of a section on reengineering.  The section went well even though none of the students got excited by the patterns.  They didn't have the experience to evaluate them. However, one of the students came back to me after his summer job and said that of everything in the course, the material that was the most useful was the patterns on reverse engineering.  Before that experience, the patterns seemed believable.  Afterwards, they were believed!
+나는 소프트웨어 엔지니어링 수업에서 학생들에게 리엔지니어링에 관한 섹션의 일부로 패턴 중 일부를 읽게 했다.  패턴에 흥미를 보인 학생은 한 명도 없었지만 수업은 순조롭게 진행되었다.  학생들은 패턴을 평가할 경험이 없었기 때문이다. 그런데 한 학생이 여름방학을 마치고 저에게 돌아와서 이 강의의 모든 내용 중에서 리버스 엔지니어링에 관한 패턴이 가장 유용했다고 말했다.  처음에는 패턴이 믿을 만하다 생각했고, 나중에는 그 내용을 믿을 수 있었다.
 
-If you have a lot of experience with software reengineering then you probably won't learn much from this book.  You should read it anyway, because you'll want to give copies to people you work with, and you will want to use the vocabulary of the book when you talk with them.  If you are new to reengineering, you should read the book, learn the patterns, and try them.  You will learn a lot that will be valuable.  Don't expect to understand the patterns completely before you try them, because patterns are practical, and practical knowledge has to be experienced to be fully understood.  Nevertheless, the book will give you a big advantage.  It is much easier to learn when you have a path to follow, and this book provides a reliable guide.
+소프트웨어 리엔지니어링에 대한 경험이 많다면 이 책에서 많은 것을 배우지는 못할 것이다.  하지만 함께 일하는 사람들에게 책을 선물하고 싶고, 그들과 대화할 때 이 책의 어휘를 사용하고 싶을 것이기 때문에 어쨌든 읽어봐야 한다.  리엔지니어링을 처음 접한다면 이 책을 읽고 패턴을 익힌 다음 시도해 보라.  가치 있는 많은 것을 배울 수 있을 것이다.  패턴은 실용적이고 실용적인 지식은 경험해야 완전히 이해할 수 있으므로 시도하기 전에 패턴을 완전히 이해하리라고 기대하지 마라.  그럼에도 불구하고 이 책은 큰 도움이 될 것이다.  적용할 것이 있으면 훨씬 쉽게 배울 수 있으며, 이 책은 그를 위한 신뢰할 수 있는 가이드를 제공한다.
 
-\hfill Ralph E. Johnson, \emph{University of Illinois at Urbana-Champaign}
+\hfill 랄프 존슨, \emph{일리노이 대학 어바나 샴페인 캠퍼스}
 
 \vfill
 

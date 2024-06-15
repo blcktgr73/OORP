@@ -12,6 +12,7 @@
 		vmargin={.98in,.98in},
 		ignoreheadfoot
 	]{geometry}
+	\usepackage[hangul]{kotex}
 	\input{common.tex}
 	\pagestyle{headings}
 	\setboolean{lulu}{true}
@@ -28,89 +29,88 @@
 \fi
 
 %=================================================================
-\chapter{Preface}
+\chapter{서문}
 \chalabel{preface}
 
 %=================================================================
-\section*{A Fairy Tale}
+\section*{동화}
 
 \begin{center}
 \begin{Large}
-Once upon a time there was a Good Software Engineer whose Customers knew exactly what they wanted. The Good Software Engineer worked very hard to design the Perfect System that would solve all the Customers' problems now and for decades. When the Perfect System was designed, implemented and finally deployed, the Customers were very happy indeed. The Maintainer of the System had very little to do to keep the Perfect System up and running, and the Customers and the Maintainer lived happily every after.
+옛날 옛적에 고객이 원하는 것이 무엇인지 정확히 알고 있는 착한 소프트웨어 엔지니어가 있었다. 착한 소프트웨어 엔지니어는 현재 그리고 이 후 수십 년 동안 고객의 모든 문제를 해결할 수 있는 완벽한 시스템을 설계하기 위해 열심히 노력했다. 완벽한 시스템이 설계, 구현되고 마침내 배포되었을 때 고객은 정말 매우 만족했다. 시스템 유지 관리자는 완벽한 시스템을 계속 가동하기 위해 할 일이 거의 없었고, 고객과 유지 관리자는 그 후에도 행복하게 살았다.
 \end{Large}
 \end{center}
 
 \noindent
-Why isn't real life more like this fairy tale?
+현실은 왜 이 동화와 같지 않을까?
 
-Could it be because there are no Good Software Engineers? Could it be because the Users don't really know what they want? Or is it because the Perfect System doesn't exist? 
+좋은 소프트웨어 엔지니어가 없기 때문일까? 사용자가 자신이 원하는 것이 무엇인지 잘 모르기 때문일까? 아니면 완벽한 시스템이 존재하지 않기 때문일까?
 
-Maybe there is a bit of truth in all of these observations, but the real reasons probably have more to do with certain fundamental laws of software evolution identified several years ago by \index{Lehman, Manny} Manny Lehman and \index{Belady, Les} Les Belady. The two most striking of these laws are \cite{Lehm85a}:
+이 모든 항목은 어느 정도 진실이 포함되어 있을 수 있지만, 진짜 이유는 아마도 몇 년 전 매니 리먼\index{Lehman, Manny}과 레스 벨레디\index{Belady, Les}가 발견한 소프트웨어 진화의 기본 법칙과 더 관련이 있을 것이다. 이 법칙 중 가장 눈에 띄는 두 가지는 다음과 같다\cite{Lehm85a}.
 \begin{bulletlist}
-  \item \emphind{The Law of Continuing Change}\,---\,A program that is used in a real-world environment must change, or become progressively less useful in that environment.
-  \item \emphind{The Law of Increasing Complexity}\,---\,
-As a program evolves, it becomes more complex, and extra resources are needed to preserve and simplify its structure.
+  \item \emphind{지속적 변화의 법칙(The Law of Continuing Change)}\,---\,실제 환경에서 사용되는 프로그램은 반드시 변화하거나 그 환경에서 점차적으로 유용성이 떨어진다.
+  \item \emphind{복잡성 증가의 법칙(The Law of Increasing Complexity)}\,---\,
+프로그램이 진화함에 따라 더 복잡해지고, 구조를 보존하고 단순화하기 위해 더 많은 리소스가 필요하다.
 \end{bulletlist}
 
-In other words, we are kidding ourselves if we think that we can know all the requirements and build the perfect system. The best we can hope for is to build a useful system that will survive long enough for it to be asked to do something new. 
+다시 말해, 모든 요구 사항을 파악하고 완벽한 시스템을 구축할 수 있다고 생각한다면 이는 스스로에게 거짓말을 하는 것이다. 우리가 할 수 있는 최선은 새로운 작업 요청받을 때까지 충분히 오래 살아남을 수 있는 유용한 시스템을 구축하는 것이다. 
 
 %=================================================================
-\section*{What is this book?}
+\section*{책의 내용}
 
-This book came into being as a consequence of the realization that the most interesting and challenging side of software engineering may not be building brand new software systems, but rejuvenating existing ones.
+이 책은 소프트웨어 엔지니어링의 가장 흥미롭고 도전적인 측면은 새로운 소프트웨어 시스템을 구축하는 것이 아니라 기존 시스템을 재탄생시키는 것일 수 있다는 깨달음의 결과이다.
 
-From November 1996 to December 1999, we participated in a European industrial research project called \ind{FAMOOS} (\ind{ESPRIT} Project 21975\,---\,\emph{Framework-based Approach for Mastering Object-Oriented Software Evolution}). The partners were \ind{Nokia} (Finland), \ind{Daimler-Benz} (Germany), \ind{Sema Group} (Spain), Forschungszentrum Informatik Karlsruhe (\ind{FZI}, Germany), and the \ind{University of Bern} (Switzerland). Nokia and Daimler-Benz were both early adopters of object-oriented technology, and had expected to reap significant benefits from this tactic. Now, however, they were experiencing many of the typical problems of \ind{legacy systems}: they had very large, very valuable, object-oriented software systems that were very difficult to adapt to changing requirements. The goal of the FAMOOS project was to develop tools and techniques to rejuvenate these object-oriented legacy systems so they would continue to be useful and would be more amenable to future changes in requirements.
+1996년 11월부터 1999년 12월까지 저자들은 \ind{FAMOOS}(\ind{ESPRIT} Project 21975\,---\,\emph{객체지향 소프트웨어 진화를 위한 프레임워크 기반 접근법(Framework-based Approach for Mastering Object-Oriented Software Evolution)})라는 유럽 산업 연구 프로젝트에 참여했다. 파트너로는 \ind{노키아}(핀란드), 다임러 벤츠(독일), 세마 그룹(스페인), 포슝스젠트룸 인포매틱 카를스루에(독일), 베른 대학교(스위스)가 참여했다. 노키아와 다임러 벤츠는 모두 객체 지향 기술의 얼리 어답터였으며, 이 전략을 통해 상당한 이점을 얻을 수 있을 것으로 기대했다. 그러나 이제 그들은 변화하는 요구사항에 적응하기 매우 어려운 매우 크고 가치 있는 객체 지향 소프트웨어 시스템을 보유하고 있었기 때문에 기존 시스템의 전형적인 문제를 많이 경험하고 있었다. FAMOOS 프로젝트의 목표는 이러한 객체 지향 레거시 시스템을 계속 유용하게 사용하고 향후 요구 사항의 변화에 더 잘 적응할 수 있도록 재탄생시키는 도구와 기술을 개발하는 것이었다.
 
-Our idea at the start of the project was to convert these big, object-oriented applications into \emphind{frameworks}\,---\,generic applications that can be easily reconfigured using a variety of different programming techniques. We quickly discovered, however, that this was easier said than done. Although the basic idea was sound, it is not so easy to determine which parts of the legacy system should be converted, and exactly how to convert them. In fact, it is a non-trivial problem just to understand the legacy system in the first place, let alone figuring out what (if anything) is wrong with it.
+프로젝트 초기에는 이러한 대규모 객체 지향 애플리케이션을 \emphind{프레임워크},  다시 말해 다양한 프로그래밍 기법을 사용하여 쉽게 재구성할 수 있는 일반적인 여러 애플리케이션으로 전환하는 것이 목표였다. 그러나 이것이 말처럼 쉽지 않다는 것을 금방 알게 되었다. 기본 아이디어는 좋았지만 레거시 시스템에서 어떤 부분을 변환해야 하는지, 정확히 어떻게 변환해야 하는지 결정하는 것은 쉽지 않았다. 사실 레거시 시스템에 무엇이 문제인지 파악하는 것은 말할 것도 없고, 애초에 레거시 시스템을 이해하는 것만으로도 사소한 문제가 아니다.
 
-We learned many things from this project. We learned that, for the most part, the legacy code was not bad at all. The only reason that there were problems with the legacy code was that the requirements had changed since the original system was designed and deployed. Systems that had been adapted many times to changing requirements suffered from \emphind{design drift}\,---\,the original architecture and design was almost impossible to recognize\,---\,and that made it almost impossible to make further adaptations, exactly as predicted by Lehman and Belady's laws of software evolution.
+저자들는 이 프로젝트를 통해 많은 것을 배웠다. 대부분의 경우 레거시 코드가 전혀 나쁘지 않다는 것을 알게 되었다. 레거시 코드에 문제가 있었던 유일한 이유는 원래 시스템이 설계되고 배포된 이후 요구사항이 변경되었기 때문이었다. 변화하는 요구사항에 따라 여러 번 조정된 시스템은 원래의 아키텍처와 설계를 인식할 수 없는 \emphind{디자인 드리프트(design drift)}를 겪게 된다. 이로 인해 리먼과 벨라디의 소프트웨어 진화 법칙에서 예측한 대로 추가적인 조정이 거의 불가능하게 되는 상황이 발생한다.
 
-Most surprising to us, however, was the fact that, although each of the case studies we looked at needed to be reengineered for very different reasons\,---\,such as unbundling, scaling up requirements, porting to new environments, and so on\,---\,the actual technical problems with these systems were oddly similar. This suggested to us that perhaps a few simple techniques could go a long way to fixing some of the more common problems.
+그러나 가장 놀라운 사실은 우리가 살펴본 사례 연구 각각이 언번들링(unbundling)\footnote{그룹으로 되어 있던 제품 및 서비스 패키지를 분리하는 프로세스 -옮긴이}, 요구 사항 확장, 새로운 환경으로의 포팅 등 매우 다른 이유로 리엔지니어링(reengineering)이 필요했지만, 이러한 시스템의 실제 기술적 문제는 이상할 정도로 유사하다는 사실이었다. 
 
-We discovered that pretty well all reengineering activity must start with some reverse engineering, since you will not be able to trust the documentation (if you are lucky enough to have some). Basically you can analyze the source code, run the system, and interview users and developers to build a model of the legacy system. Then you must determine what are the obstacles to further progress, and fix them. This is the essence of \emph{reengineering}, which seeks to transform a legacy system into the system you would have built if you had the luxury of hindsight and could have known all the new requirements that you know today. But since you can't afford to rebuild everything, you must cut corners and just reengineer the most critical parts.
+운이 좋아 문서가 있다고 해도 이를 신뢰할 수 없기 때문에 모든 리엔지니어링(reengineering) 활동은 리버스 엔지니어링(reverse engineering)으로 시작해야 한다는 사실을 발견했다. 기본적으로 소스 코드를 분석하고, 시스템을 실행하고, 사용자와 개발자를 인터뷰하여 레거시 시스템의 모델을 구축할 수 있다. 그런 다음 더 발전하기 위한 장애물이 무엇인지 파악하고 이를 해결해야 한다. 이것이 바로 레거시 시스템을 현재 알고 있는 모든 새로운 요구 사항을 미리 알 수 있었다면 구축했을 시스템으로 전환하는 \emph{리엔지니어링(reengineering)}의 본질이다. 하지만 모든 것을 다시 구축할 여유가 없으므로 비용을 절감하고 가장 중요한 부분만 리엔지니어링해야 한다.
 
-Since \ind{FAMOOS}, we have been involved in many other reengineering projects, and have been able to further validate and refine the results of FAMOOS.
+ind{FAMOOS} 프로젝트 이후, 저희는 다른 많은 리엔지니어링 프로젝트에 참여했고, FAMOOS의 결과를 더욱 검증하고 개선할 수 있었다.
 
-In this book we summarize what we learned in the hope that it will help others who need to reengineer object-oriented systems. We do not pretend to have all the answers, but we have identified a series of simple techniques that will take you a long way.
+이 책에서 우리는 객체 지향 시스템을 리엔지니어링해야 하는 다른 사람들에게 도움이 되기를 바라며 우리가 배운 것을 정리했다. 모든 문제에 대한 해답을 제공하지는 못했지만, 먼 길을 가는 데 도움이 될 여러 간단한 기술을 확인했다.
 
 %=================================================================
-\section*{Why patterns?}
-
+\section*{패턴의 중요성}
 \index{Design Patterns}
-A pattern is a recurring motif, an event or structure that occurs over and over again. \emph{Design patterns} are generic solutions to recurring design problems \cite{Gamm95a}. It is because these design problems are never exactly alike, but only very similar, that the solutions are not pieces of software, but \emph{documents that communicate best practice}.
+패턴은 반복되는 모티프, 즉 반복해서 발생하는 이벤트 또는 구조를 말한다. \emph{디자인 패턴(Design patterns)}은 반복되는 디자인 문제에 대한 일반적인 해결책이다\cite{Gamm95a}. 이러한 디자인 문제는 완전히 똑같지는 않지만 매우 유사하기 때문에 그 해결책은 소프트웨어가 아니라 \emph{베스트 프랙티스를 전달하기위한 문서화된 것(documents that communicate best practice)}이다.
 
-Patterns have emerged in recent years as a literary form that can be used to document best practice in solving many different kinds of problems. Although many kinds of problems and solutions can be cast as patterns, they can be overkill when applied to the simplest kinds of problems. Patterns as a form of documentation are most useful and interesting when the problem being considered entails a number of conflicting \emph{forces}, and the solution described entails a number of \emph{tradeoffs}. Many well-known design patterns, for example, introduce run-time flexibility at the cost of increased design complexity.
+패턴은 최근 몇 년 동안 다양한 종류의 문제를 해결하는 베스트 프랙티스를 문서화하는 데 사용할 수 있는 형식으로 등장했다. 많은 종류의 문제와 해결책을 패턴으로 표현할 수 있지만, 가장 단순한 종류의 문제에 적용하는 것은 적절하지 않다. 문서화 형식으로서의 패턴은 고려 중인 문제가 여러 가지 상충하는 \emph{주요한 요구사항(forces)}을 다루고 설명하는 해결책이 여러 가지 \emph{트레이드오프(tradeoffs)}를 고려할 때 가장 유용하고 흥미롭다. 예를 들어, 잘 알려진 많은 디자인 패턴은 디자인 복잡성(design complexity)이 증가하는 대신 런타임 유연성(run-time flexibility)이 좋아진다.
 
-This book documents a catalogue of patterns for reverse engineering and reengineering legacy systems. None of these patterns should be applied blindly. Each patterns resolves some \emphsubind{pattern}{forces} and involves some \emphsubind{pattern}{tradeoffs}. Understanding these tradeoffs is essential to successfully applying the patterns. As a consequence the pattern form seems to be the most natural way to document the best practices we identified in the course of our reengineering projects.
+이 책에서는 레거시 시스템을 리버스 엔지니어링(reverse engineering)하고 리엔지니어링(reengineering)하기 위한 패턴 카탈로그를 제공한다. 이러한 패턴 중 어떤 것도 맹목적으로 적용해서는 안 된다. 각 패턴은 몇 가지 \emphsubind{패턴(pattern)}{주요한 요구사항(forces)}을 해결하고 몇 가지 \emphsubind{패턴(pattern)}{트레이드오프(tradeoffs)}를 감수한다. 패턴을 성공적으로 적용하려면 이러한 트레이드오프를 이해하는 것이 필수적이다. 결과적으로 패턴 양식은 리엔지니어링 프로젝트 과정에서 확인한 모범 사례를 문서화하는 가장 자연스러운 방법인 것 같다.
 \seeindex{forces}{pattern, forces}
 \seeindex{tradeoffs}{pattern, tradeoffs}
 
 \index{pattern!language}
-A \emph{pattern language} is a set of related patterns that can be used in combination to solve a set of complex problems. We found that clusters of patterns seemed to function well in combination with each other, so we have organized this book into chapters that each presents such a cluster as a small pattern language.
+\emph{패턴 언어(pattern language)}는 일련의 복잡한 문제를 해결하기 위해 조합하여 사용할 수 있는 관련 패턴의 집합이다. 우리는 패턴의 클러스터가 서로 잘 조합되어 작동하는 것처럼 보였기 때문에 작은 패턴 언어으로서 클러스터를 하나의 장으로 제시하도록 이 책을 구성했다.
 
-We do not pretend that these clusters are ``complete'' in any sense, and we do not even pretend to have patterns that cover all aspects of reengineering. We certainly do not pretend that this book represents a systematic method for object-oriented reengineering. What we do claim is simply to have encountered and identified a number of best practices that exhibit interesting synergies. Not only is there strong synergy within a cluster of patterns, but the clusters are also interrelated in important ways. Each chapter therefore contains not only a pattern map that suggests how the patterns may function as a ``language'', but each pattern also lists and explains how it may be combined or composed with other patterns, whether in the same cluster or a different one. 
-
-%=================================================================
-\section*{Who should read this book?}
-
-This book is addressed mainly to practitioners who need to reengineer object-oriented systems. If you take an extreme viewpoint, you could say that \emph{every} software project is a reengineering project, so the scope of this book is quite broad.
-
-We believe that most of the patterns in this book will be familiar to anyone with a bit of experience in object-oriented software development. The purpose of the book is to document the details.
+우리는 이러한 클러스터가 어떤 의미에서든 ``완전''하다고 생각하지 않으며, 리엔지니어링의 모든 측면을 포괄하는 패턴을 가지고 있는 것처럼 가장하지도 않는다. 이 책이 객체 지향 리엔지니어링을 위한 체계적인 방법을 제시한다고 주장하지도 않는다. 다만 흥미로운 시너지를 발휘하는 여러 모범 사례를 접하고 확인했다고 주장할 뿐이다. 패턴 클러스터 내에는 강력한 시너지가 있을 뿐만 아니라, 패턴 클러스터는 중요한 방식으로 상호 연관되어 있다. 따라서 각 장에는 패턴이 ``언어''로서 어떻게 기능할 수 있는지 제안하는 패턴 맵이 포함되어 있을 뿐만 아니라 각 패턴이 동일한 클러스터 또는 다른 클러스터에서 다른 패턴과 어떻게 결합되거나 구성될 수 있는지도 나열하고 설명한다. 
 
 %=================================================================
-\section*{Acknowledgments}
+\section*{대상 독자}
 
-We would like to thank first and foremost our \ind{FAMOOS} partners at \ind{Nokia}, \ind{Daimler-Benz}, \ind{FZI} and \ind{Sema} who provided the context for discovering these patterns. Persons like Juha (Julho) Tuominen, Roland Trauter, Eduardo Casais and Theo Dirk Meijler played a crucial role while starting the project. We would especially like to thank our co-authors of the prototype for this book, \emph{The FAMOOS Object-Oriented Reengineering Handbook:} Holger B\"ar, Markus Bauer, Oliver Ciupke, Michele Lanza, Radu Marinescu, Robb Nebbe, Michael Przybilski, Tamar Richner, Matthias Rieger, Claudio Riva, Anne-Marie Sassen, Benedikt Schulz, Patrick Steyaert, Sander Tichelaar and Joachim Weisbrod.
+이 책은 주로 객체 지향 시스템을 리엔지니어링해야 하는 실무자를 대상으로 한다. 극단적인 관점을 취한다면 모든 소프트웨어 프로젝트가 리엔지니어링 프로젝트라고 할 수 있으므로 이 책의 범위는 상당히 넓다.
 
-We gratefully acknowledge the financial support of the European Union towards \ind{ESPRIT} project 21975 (FAMOOS) as well as that of the Swiss Government towards projects NFS-2000-46947.96 and BBW-96.0015. The University of Antwerp provided financial support in terms of a grant entitled ``Object Oriented Reengineering'' while the Fund for Scientific Research in Flanders sponsored by means of a research network named ``Foundations of Software Evolution''.
+이 책에 나오는 대부분의 패턴은 객체 지향 소프트웨어 개발 경험이 조금이라도 있는 사람이라면 누구나 쉽게 읽을 수 있을 것이다. 이 책은 세부 사항을 문서화하는 것을 목표로 삼았다.
 
-Some of the material in this book was presented in the graduate course ``Object-Oriented software Reengineering'' held at the \ind{University of Bern} in the winter semesters of 1998 and 1999, and at several tutorials at OOPSLA. We would like to thank the participants of the courses and tutorials for their feedback and input. We also would like to thank members of the Software Composition Group at the University of Bern for participating in several pattern workshops and giving valuable feedback on many of the patterns in this book: Michele Lanza, Pietro Malorgio, Robbe Nebbe, Tamar Richner, Matthias Rieger and Sander Tichelaar.
+%=================================================================
+\section*{감사 인사}
 
-Several of the patterns in this book have been presented elsewhere. We would like to thank our \ind{EuroPLoP} shepherds Kent Beck (1998), Kyle Brown (1999), Neil Harrison (2000), Mary Lynn Manns (2000), Don Roberts (1998) and Charles Weir (1998) and all participants of the writers' workshops where these patterns have been discussed. Special thanks go to Jens Coldewey for helping us out with pattern forms and forces. 
+이 패턴을 발견할 수 있는 배경을 제공한 \ind{노키아}, \ind{다임러 벤츠}, \ind{포슝스젠트룸 인포매틱 카를스루에}, \ind{세마 그룹}와 같은 \ind{FAMOOS} 프로젝트 파트너들에게 무엇보다 먼저 감사를 전한다. 프로젝트를 시작하는 동안 Juha (Julho) Tuominen, Roland Trauter, Eduardo Casais, Theo Dirk Meijler와 같은 사람들이 중요한 역할을 했다. 특히 이 책의 프로토타입 공동 저자인 다음과 같은 분들께 감사를 전한다. Holger B\"ar, Markus Bauer, Oliver Ciupke, Michele Lanza, Radu Marinescu, Robb Nebbe, Michael Przybilski, Tamar Richner, Matthias Rieger, Claudio Riva, Anne-Marie Sassen, Benedikt Schulz, Patrick Steyaert, Sander Tichelaar 및 Joachim Weisbrod이다.
 
-We would like to thank the members and friends of Ralph Johnson's Software Architecture Group who workshopped several chapters of this book: John Brant, Brian Foote, Alejandra Garrido, Peter Hatch, Ralph Johnson, Brian Marick, Andrew Rosenfeld, Weerasak Witthawaskul and Joe Yoder. Downloading and playing voluminous megabytes of workshop recordings in mp3 format truly made each of us feel like a ``fly on the wall''!
+우리는 \ind{ESPRIT} 프로젝트 21975(FAMOOS)에 대한 유럽 연합의 재정 지원과 NFS-2000-46947.96 및 BBW-96.0015 프로젝트에 대한 스위스 정부의 재정 지원에 감사드린다. 앤트워프 대학교는 ``객체 지향 리엔지니어링''이라는 제목의 보조금으로 재정 지원을 제공했고, 플랑드르 과학 연구 기금은 ``소프트웨어 진화의 기초''라는 연구 네트워크를 통해 후원했다.
 
-We would like to thank Tim Cox, our editor, and Stacie Pierce, his assistant, both at Morgan Kaufmann, for following our project with such dedication. Also, thanks to Christa Preisendanz at DPunkt Verlag for putting us in touch with Tim in the first place! We especially appreciated the two very thorough rounds of reviews that this book underwent, and we only regret that the final draft of this book is nothing like the definitive work some of reviewers clearly hoped it would be! We thank our reviewers for reading between the lines and helping to explain many of these patterns to us: Kyle Brown, Thierry Cattel, Oliver Ciupke, Koen De Hondt, Jim Coplien, Gert Florijn, Neil Harrison, Mary Lynn Manns, Alan O'Callaghan, Don Roberts and Benedikt Schulz.
+이 책의 일부 자료는 1998년과 1999년 겨울 학기에 베른 대학교에서 열린 대학원 과정 ``객체 지향 소프트웨어 리엔지니어링''과 OOPSLA에서 열린 여러 튜토리얼에서 발표되었다. 이 강좌와 튜토리얼의 참가자들이 보내준 피드백과 의견에 감사드린다. 또한 여러 패턴 워크숍에 참여하여 이 책의 많은 패턴에 대해 귀중한 피드백을 주신 베른 대학교의 소프트웨어 컴포지션 그룹 회원들에게도 감사를 전한다. Michele Lanza, Pietro Malorgio, Robbe Nebbe, Tamar Richner, Matthias Rieger, Sander Tichelaar이 그 회원들이다.
+
+이 책에 소개된 패턴 중 일부는 다른 곳에 소개된 바 있다. ind{EuroPLoP}의 쉐퍼드(shepherd)인 Kent Beck(1998), Kyle Brown(1999), Neil Harrison(2000), Mary Lynn Manns(2000), Don Roberts(1998), Charles Weir(1998)와 이러한 패턴을 논의했던 저자 워크숍(Writer's workshop)의 모든 참가자들에게 감사를 전하고 싶다. 패턴의 형태와 힘에 대해 도움을 주신 Jens Coldewey에게 특별히 감사드린다. 
+
+이 책의 여러 챕터에 대해 워크샵을 진행한 Ralph Johnson의 소프트웨어 아키텍처 그룹 멤버와 친구들에게도 감사를 전한다. John Brant, Brian Foote, Alejandra Garrido, Peter Hatch, Ralph Johnson, Brian Marick, Andrew Rosenfeld, Weerasak Witthawaskul 그리고 Joe Yoder이다. 방대한 크기의 워크샵 녹음을 MP3 형식으로 다운로드하고 재생하면서 우리 모두는 정말 ``벽 위의 파리''\footnote{제 3자의 입장에서 담백하게 내용을 담는 다큐멘터리 제작 스타일 - 옮긴이}가 되어 자신을 바라보는 기분이었다.
+
+저희의 프로젝트를 헌신적으로 도와준 Morgan Kaufmann의 편집자 Tim Cox와 그의 조수 Stacie Pierce에게 감사를 전한다. 또한 처음에 Tim과 연락을 취하게 해준 DPunkt Verlag의 Christa Preisendanz에게도 감사드린다. 특히 두 차례에 걸친 철저한 검토에 감사드리며, 이 책의 최종 초안이 일부 검토자가 기대했던 최종 결과물과는 전혀 달라서 아쉬울 뿐입니다! 행간을 읽어주시고 많은 패턴을 설명해 주신 리뷰어 여러분께 감사드린다. Kyle Brown, Thierry Cattel, Oliver Ciupke, Koen De Hondt, Jim Coplien, Gert Florijn, Neil Harrison, Mary Lynn Manns, Alan O'Callaghan, Don Roberts 그리고 Benedikt Schulz가 그들이다.
 
 %=============================================================
 \ifx\wholebook\relax\else

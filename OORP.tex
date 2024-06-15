@@ -12,6 +12,7 @@
 	vmargin={.98in,.98in},
 	ignoreheadfoot
 ]{geometry}
+\usepackage[hangul]{kotex}
 \input{common.tex}
 \setboolean{lulu}{true}
 %=================================================================
@@ -34,13 +35,14 @@
 %=================================================================
 %:Inside cover
 \author{
-	Serge Demeyer\\[1ex]
-	St\'ephane Ducasse\\[1ex]
-	Oscar Nierstrasz
+	세르게이 디마이어\\[1ex]
+	스테판 뒤카스\\[1ex]
+	오스카 니어스트라스\\[1ex]
+	이승범 옮김
 }
-\title{\Huge\bf Object-Oriented\\ Reengineering Patterns}
+\title{\Huge\bf 객체 지향\\ 리엔지니어링 패턴}
 \isodate
-\date{\emph{Version of \today}}
+\date{\emph{\today 버전}}
 % \date{\emph{Version of 2009-09-13}}
 \maketitle
 %=================================================================
@@ -60,28 +62,27 @@ This book is available as a free download from \url{http://scg.unibe.ch/oorp/}.\
 Copyright \copyright~2003 by Elsevier Science (USA).\\
 Copyright \copyright~2008, 2009 by Serge Demeyer, St\'ephane Ducasse and Oscar Nierstrasz.
 
-The contents of this book are protected under Creative Commons Attribution-ShareAlike 3.0 Unported license.
-
-\emph{You are free:}
+이 책의 콘텐츠는 크리에이티브 커먼즈 저작자표시-동일조건변경허락 3.0 Unported 라이선스에 따라 보호된다.
+\emph{이용자는 다음 권리를 갖는다.}
 \begin{description}
-  \item[to Share] \,---\, to copy, distribute and transmit the work
-  \item[to Remix] \,---\, to adapt the work
+  \item[공유] \,---\, 복제, 배포, 및 공중송신으로 이용이 가능하다.
+  \item[리믹스] \,---\, 변형하여 이용이 가능하다.
 \end{description}
-\emph{Under the following conditions:}
+\emph{다음과 같은 조건을 따라야 한다}
 \begin{description}
-  \item[Attribution.] You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).
-  \item[Share Alike.] If you alter, transform, or build upon this work, you may distribute the resulting work only under the same, similar or a compatible license.
+  \item[저작자표시.] 적절한 출처 와, 해당 라이센스 링크를 표시하고, 변경이 있는 경우 공지 해야 한다. (합리적인 방식으로 이렇게 하면 되지만, 이용 허락권자가 귀하에게 권리를 부여한다거나 귀하의 사용을 허가한다는 내용을 나타내서는 안 된다.)
+  \item[동일조건변경허락.] 이 저작물을 리믹스, 변형하거나 2차적 저작물을 작성하고 그 결과물을 공유할 경우에는 원 저작물과 동일한 조건의 라이선스를 적용하여야 한다.
 \end{description}
 \begin{bulletlist}
-  \item For any reuse or distribution, you must make clear to others the license terms of this work. The best way to do this is with a link to this web page:
-  \url{http://creativecommons.org/licenses/by-sa/3.0/}
-  \item Any of the above conditions can be waived if you get permission from the copyright holder.
-  \item Nothing in this license impairs or restricts the author's moral rights.
+  \item 재사용하거나 배포하려면 다른 사람에게 이 저작물의 라이선스 조건을 명확히 알려야 한다. 이를 위한 가장 좋은 방법은 이 웹 페이지로 연결되는 링크를 제공하는 것이다.
+  \url{https://creativecommons.org/licenses/by-sa/3.0/deed.ko}
+  \item 저작권 소유자의 허가를 받으면 위의 조건 중 어느 것이든 면제될 수 있다.
+  \item 이 라이선스의 어떤 내용도 저작자의 저작인격권을 손상하거나 제한하지 않는다.
 \end{bulletlist}
 \raisebox{-0.25cm}{\includegraphics[width=2cm]{CreativeCommons-BY-SA}}\quad
 \parbox{\textwidth-2cm-1em}{
-	Your fair dealing and other rights are in no way affected by the above.
-	This is a human-readable summary of the Legal Code (the full license):\\
+	공정 거래 및 기타 권리는 위의 내용에 영향을 받지 않는다.
+	다음은 사람이 읽을 수 있는 법률 규정 요약본이다(전체 라이선스).\\
 	\url{http://creativecommons.org/licenses/by-sa/3.0/legalcode}}\\[1cm]
 Published by Square Bracket Associates, Switzerland. \sba\\
 ISBN 978-3-9523341-2-6\\
@@ -93,9 +94,9 @@ First Open-Source Edition, June, 2008. Revised, September, 2009.
 \newpage
 ~\vfill
 \begin{center}
-\emph{For Ann, Sara and Niels.\\
-For Florence, Quentin, Thibaut and Camille.\\
-For Angela and Frida.}
+\emph{앤, 사라, 그리고 닐스에게.\\
+플로렌스, 쿠엔틴, 티보, 그리고 카미유에게.\\
+안젤라 그리고 프라다에게.}
 \end{center}
 \vfill
 %=================================================================
@@ -116,18 +117,18 @@ For Angela and Frida.}
 \mainmatter
 %=================================================================
 %:PART 1 -- Introduction
-\part{Introduction}
+\part{개요}
 \input{Introduction.tex}
 %=================================================================
 %:PART 2 -- Reverse Engineering
-\part{Reverse Engineering}
+\part{리버스 엔지니어링}
 \input{SettingDirection.tex}
 \input{FirstContact.tex}
 \input{Initial.tex}
 \input{DetailedModel.tex}
 %=================================================================
 %:PART 3 -- Reengineering
-\part{Reengineering}
+\part{리엔지니어링}
 \input{TestingCluster.tex}
 \input{MigrationStrategies.tex}
 \input{DupPatterns.tex}
@@ -136,7 +137,7 @@ For Angela and Frida.}
 %=================================================================
 %:PART 4 -- Appendices
 \appendix
-\part{Appendices}
+\part{부록}
 \input{Thumbnails.tex}
 %=================================================================
 %:BIBLIOGRAPHY

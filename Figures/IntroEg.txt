@@ -1,6 +1,8 @@
-If It Ain't Broke, Don't Fix It
+If It Ain't Broke, Don't Fix It고장나지 않았다면 고치지 마세요.
+고장나지 않았다면 고치지 마라.
 
-Intent: Save your reengineering effort for the parts of the system that will make a difference.
+Intent: Save your reengineering effort for the parts of the system that will make a differe마라.
+
 
 Problem
 
