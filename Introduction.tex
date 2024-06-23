@@ -301,26 +301,25 @@
 그러나 지속적인 리엔지니어링(continuous reengineering)은 아직 일반적인 실천법이 아니기 때문에 이 책에서는 주요 리엔지니어링 노력의 맥락에서 패턴을 제시한다. 그럼에도 불구하고 독자들은 여기서 소개하는 대부분의 기법이 소규모 반복(iteration)에서 리엔지니어링에도 적용될 수 있다는 점을 염두에 두어야 한다.
 
 %=================================================================
-\section{Reengineering Patterns}
+\section{리엔지니어링 패턴}
 
-\index{reengineering patterns}
-\index{Alexander, Christopher}
-Patterns as a literary form were introduced by the architect Christopher Alexander in his landmark 1977 book, \emph{A Pattern Language}. In this book, Alexander and his colleagues presented a systematic method for architecting a range of different kinds of physical structures, from rooms to buildings and towns. Each issue was presented as a recurring \emph{pattern}, a general solution which resolves a number of forces, but must be applied in a unique way to each problem according to the specific circumstances. The actual solution presented in each pattern was not necessarily so interesting, but rather the discussion of the \emph{forces} and \emph{tradeoffs} consisted of the real substance they communicated.
+\index{리엔지니어링 패턴}
+\index{알렉산더, 크리스토퍼}
+글의 형식으로서의 패턴은 건축가 크리스토퍼 알렉산더가 1977년 그의 획기적인 저서인 \emph{패턴 랭귀지(A Pattern Language)}에서 소개했다. 이 책에서 알렉산더와 그의 동료들은 방에서 건물과 도시에 이르기까지 다양한 종류의 물리적 구조물을 설계하는 체계적인 방법을 제시했다. 각 문제는 여러 가지 주요한 요구사항(force)을 해결하는 일반적인 해결책인 반복되는 \emph{패턴(patter)}의 형태를 제시했지만, 특정 상황에 따라 각 문제에 고유한 방식으로 적용되어야 한다. 각 패턴에서 제시된 실제 해법은 그다지 흥미롭지 않았고, 오히려 패턴이 전달하는 \emph{중요한 요구 사항(force)}과 \emph{트레이드오프(tradeoff)}에 대한 논의가 포함되어 있다.
 
-Patterns were first adopted by the software community as a way of documenting recurring solutions to design problems. As with Alexander's patterns, each design pattern entailed a number of forces to be resolved, and a number of tradeoffs to consider when applying the pattern. Patterns turn out to be a compact way to communicate \emph{best practice}: not just the actual techniques used by experts, but the motivation and rationale behind them. Patterns have since been applied to many aspects of software development other than design, and particularly to the \emph{process} of designing and developing software.
+패턴은 디자인 문제에 대한 반복적인 해결책을 문서화하는 방법으로 소프트웨어 커뮤니티에서 처음 채택되었다. 알렉산더의 패턴과 마찬가지로, 각 디자인 패턴에는 해결해야 할 여러 가지 주요한 요구사항과 패턴을 적용할 때 고려해야 할 여러 가지 트레이드오프가 포함되었다. 패턴은 전문가들이 사용하는 실제 기법뿐만 아니라 그 뒤에 숨은 동기와 근거를 전달하는 간결한 방법인 것으로 밝혀졌다. 이후 패턴은 디자인 이외의 소프트웨어 개발의 여러 측면, 특히 소프트웨어를 설계하고 개발하는 \emph{프로세스(process)}에 적용되었다.
 
-The process of reengineering is, like any other process, one in which many standard techniques have emerged, each of which resolves various forces and may entail many tradeoffs. Patterns as a way of communicating best practice are particularly well-suited to presenting and discussing these techniques. 
+리엔지니어링 프로세스는 다른 프로세스와 마찬가지로 많은 표준 기법이 등장했으며, 각 기법은 다양한 주요한 요구사항을 해결하고 많은 트레이드오프를 포함할 수 있다. 모범 사례를 전달하는 방법으로서의 패턴은 이러한 기법을 제시하고 논의하는 데 특히 적합하다. 
 
-\emph{Reengineering patterns} codify and record knowledge about modifying legacy software: they help in diagnosing problems and identifying weaknesses which may hinder further development of the system, and they aid in finding solutions which are more appropriate to the new requirements. We see \ind{reengineering patterns} as stable units of expertise which can be consulted in any reengineering effort: they describe a process without proposing a complete methodology, and they suggest appropriate tools without ``selling'' a specific one. 
+\엠프{리엔지니어링 패턴(reengineering patterns)}은 레거시 소프트웨어 수정에 관한 지식을 체계화하고 기록하여 문제를 진단하고 시스템의 추가 개발을 방해할 수 있는 약점을 파악하는 데 도움이 되며, 새로운 요구 사항에 더 적합한 솔루션을 찾는 데도 도움이 된다. \ind{리엔지니어링 패턴}은 모든 리엔지니어링 작업에서 참조할 수 있는 안정적인 전문 지식 단위로, 완전한 방법론을 제안하지 않고 프로세스를 설명하며 특정 도구를 ``판매''하려는 것보다는 적절한 도구를 제안한다. 
 
-Many of the reverse engineering and reengineering patterns have some superficial resemblance to design patterns, in the sense that they have something to do with the design of software. But there is an importance difference in that design patterns have to do with choosing a particular solution to a design problem, whereas reengineering patterns have to do with \emph{discovering an existing design}, determining what \emph{problems} it has, and \emph{repairing} these problems. As a consequence, reengineering patterns have more to do with the \emph{process of discovery and transformation} than purely with a given design structure. For this reason the names of most of the patterns in this book are process-oriented, like \patpgref{Always Have a Running Version}{AlwaysHaveARunningVersion}, rather than being structure-oriented, like \patpgref{Adapter}{Adapter} or \patpgref{Facade}{Facade}. 
+리버스 엔지니어링 및 리엔지니어링 패턴의 대부분은 소프트웨어 설계와 관련이 있다는 점에서 디자인 패턴과 표면적으로 유사하다. 그러나 디자인 패턴은 디자인 문제에 대한 특정 해결책을 선택하는 것과 관련이 있는 반면, 리엔지니어링 패턴은 \emph{기존 디자인을 발견(discovering an existing design)}하고, 어떤 \emph{문제(problem)}가 있는지 파악하고, 이러한 \emph{문제를 해결(reparing)}하는 것과 관련이 있다는 점에서 중요한 차이가 있다. 결과적으로 리엔지니어링 패턴은 순전히 주어진 디자인 구조보다는 \emph{발견과 변형의 프로세스(process of discovery and transformation)}와 더 관련이 있다. 이러한 이유로 이 책에 나오는 대부분의 패턴의 이름은 \patpgref{어뎁터}{Adapter} 또는 \patpgref{파사드}{Facade}와 같이 구조 지향적이기보다는 \patpgref{항상 실행 버전 보유하기}{AlwaysHaveARunningVersion}와 같이 프로세스 지향적이다. 
 
-Whereas a design pattern presents a solution for a recurring \emph{design} problem, a reengineering pattern presents a solution for a recurring \emph{reengineering} problem. The artifacts produced by reengineering patterns are not necessarily designs. They may be as concrete as refactored code, or in the case of reverse engineering patterns, they may be abstract as insights into how the system functions.
+디자인 패턴이 반복되는 \emph{디자인(design)} 문제에 대한 해결책을 제시하는 반면, 리엔지니어링 패턴은 반복되는 \emph{리엔지니어링(reengineering)} 문제에 대한 해결책을 제시한다. 리엔지니어링 패턴으로 생성되는 산출물이 반드시 디자인일 필요는 없다. 리팩터링된 코드처럼 구체적일 수도 있고, 리버스 엔지니어링 패턴의 경우 시스템 작동 방식에 대한 인사이트처럼 추상적일 수도 있다.
 
-The mark of a good reengineering pattern is (a) the clarity with which it exposes the advantages, the cost and the consequences of the target artifacts with respect to the existing system state, and \emph{not} how elegant the result is, (b) the description of the reengineering \emph{process}: how to get from one state of the system to another.
+좋은 리엔지니어링 패턴의 특징은 (a) 기존 시스템 상태와 비교하여 목표 산출물의 장점, 비용 및 결과를 명확하게 드러내는 것이지, 그 결과가 얼마나 우아한지가 \emph{아닌} 것이고, (b) 리엔지니어링 \emph{프로세스(process)}에 대한 설명, 즉 시스템의 한 상태에서 다른 상태로 이동하는 방법을 명확하게 설명하는 것이다.
 
-Reengineering patterns entail more than code refactorings. A reengineering pattern may describe a process which starts with the detection of the symptoms and ends with the refactoring of the code to arrive at the new solution. Refactoring is only the last stage of this process, and addresses the technical issue of automatically or semi-automatically modifying the code to implement the new solution. Reengineering patterns also include other elements which are not part of refactorings: they emphasize the context of the symptoms, by taking into account the constraints that reengineers are facing, and include a discussion of the impact of the changes that the refactored solution may introduce. 
-
+리엔지니어링 패턴은 코드 리팩터링 그 이상을 포함한다. 리엔지니어링 패턴은 증상을 감지하는 것으로 시작하여 새로운 솔루션에 도달하기 위한 코드 리팩터링으로 끝나는 프로세스를 설명할 수 있다. 리팩터링은 이 프로세스의 마지막 단계에 불과하며, 새로운 솔루션을 구현하기 위해 코드를 자동 또는 반자동으로 수정하는 기술적 문제를 해결한다. 리엔지니어링 패턴에는 리팩터링의 일부가 아닌 다른 요소도 포함되는데, 리엔지니어가 직면하고 있는 제약 조건을 고려하여 증상의 맥락을 강조하고 리팩터링된 솔루션이 가져올 수 있는 변경의 영향에 대한 논의가 여기에 포함된다. 
 %=================================================================
 \section{리엔지니어링 패턴의 형식}
 
