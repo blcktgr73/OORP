@@ -509,7 +509,7 @@
 		\hyperpage{66}, \hyperpage{74}, \hyperpage{78}, 
 		\hyperpage{83}
   \item 문서 스키밍하기 (패턴), \hyperpage{67}
-  \item 방향 설정 (Pattern cluster), \hyperpage{18}
+  \item 방향 설정 (Pattern cluster), \hyperpage{18}, \hyperpage{24}
   \item 버그 리포트, \hyperpage{50}
   \item 베넷, 사이몬, \hyperpage{81}
   \item 벡, 켄트, \hyperpage{7}, \hyperpage{31}, \hyperpage{65}
@@ -531,7 +531,6 @@
     \subitem 누락, \hyperpage{12}
     \subitem 오용, \hyperpage{12}
   \item 새로운 마을로 다리 만들기 (Pattern), \hyperpage{37}
-  \item 설정 방향 (Pattern cluster), \hyperpage{24}
   \item 세마 그룹, \hyperpage{xix}
   \item 소프트웨어 유지보수, \hyperpage{13}
     \subitem 정의, \hyperpage{13}
