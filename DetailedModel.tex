@@ -30,177 +30,181 @@
 \chapter{디테일한 모델 캡처}
 \chalabel{DetailedModelCapture}
 
-The patterns in \charef{First Contact}{FirstContact} should have helped you to get acquainted with the software system, while those in \charef{Initial Understanding}{InitialUnderstanding} should have helped you to understand which are the most important entities in the system. Your main priority now is to build up a detailed model of those parts of the system that will be important for your reengineering effort.
+\charef{첫 번째 컨택}{FirstContact}의 패턴은 소프트웨어 시스템에 익숙해지는 데 도움이 되었을 것이고, \charef{초기 이해}{InitialUnderstanding}의 패턴은 시스템에서 가장 중요한 엔터티를 이해하는 데 도움이 되었을 것이다. 이제 여러분의 최우선 과제는 리엔지니어링 작업에 중요한 시스템 부분의 세부 모델을 구축하는 것이다.
 
-Most of the patterns concerned with \charef{Detailed Model Capture}{DetailedModelCapture} entail considerably more technical knowledge, use of tools and investment of effort than the patterns we have applied up to now. This is only natural, since only after you have built up your \charef{Initial Understanding}{InitialUnderstanding} can you determine whether more intensive investment of effort will pay off.
+지금까지 적용한 패턴보다 훨씬 더 많은 기술 지식, 도구 사용, 노력 투자를 수반하는 \charef{디테일한 모델 캡처}{DetailedModelCapture}와 관련된 패턴이 대부분이다. 이는 당연한 일이다. \charef{초기 이해}{InitialUnderstanding}를 쌓은 후에야 더 집중적인 노력 투자가 성과를 거둘 수 있는지 여부를 판단할 수 있기 때문이다.
 
-\subsection*{Forces}
+\subsection*{주요한 요구사항}
 
-Although you already have an impression of the system, there are several forces at play that may make it difficult to extract a more detailed model:
+시스템에 대한 인상은 이미 가지고 있지만, 더 자세한 모델을 추출하기 어려울 수 있는 몇 가지 주요한 요구사항(force)가 작용하고 있다.
 
-\index{Brooks, Frederick}
+\index{브룩스, 프레드릭}
 \begin{bulletlist}
-\item \emph{Details matter.}
-As argued by Brooks \cite{Broo87a}, software engineering is different from other engineering disciplines because of the inherent lack of abstraction barriers. Other engineering disciplines rely on the laws of nature to hide irrelevant details, but software engineering must build on less solid foundations. \emph{Consequently, it is essential to pay attention to the details.} The only question is how to filter out those details that do not matter, because you cannot possible investigate everything.
+\item \emph{세부 사항이 중요하다.}
+브룩스 \cite{Broo87a}가 주장했듯이 소프트웨어 엔지니어링은 추상화 장벽이 내재되어 있기 때문에 다른 엔지니어링 분야와 다르다. 다른 공학 분야는 자연 법칙에 의존하여 관련 없는 세부 사항을 숨기지만 소프트웨어 공학은 덜 견고한 토대 위에 구축해야 한다. \emph{따라서 세부 사항에 주의를 기울이는 것이 필수적이다.} 문제는 모든 것을 조사할 수 없기 때문에 중요하지 않은 세부 사항을 어떻게 걸러낼 수 있느냐는 것이다.
 
-\item \emph{Design remains implicit.}
-As you read the code, many design decisions will become apparent to you, but it will not be clear why and how these decisions were made. In particular, it will be hard to tell which design decisions were easy to make, and which of them created a lot of grief. Nevertheless, such knowledge is crucial during a reengineering project because you want to avoid making the same mistakes over and over again. \emph{Consequently, once you discover the underlying design rationale, make sure that it is properly recorded.} This way, your successors will be able to build on your discoveries rather than be forced to reinvent the wheel.
+\item \emph{디자인에는 암시적인 부분이 계속 존재한다.}
+코드를 읽다 보면 많은 디자인 결정이 분명해지지만 왜, 어떻게 이러한 결정이 내려졌는지는 명확하지 않을 것이다. 특히 어떤 디자인 결정은 쉽게 내릴 수 있었고 어떤 결정은 많은 고민을 불러일으켰는지 알기 어려울 것이다. 그럼에도 불구하고 리엔지니어링 프로젝트에서 이러한 지식이 중요한 이유는 같은 실수를 반복하지 않기 위해서이다. \emph{따라서, 설계 근거를 발견했다면 이를 제대로 기록해 두어야 한다}. 이렇게 하면 후임자가 처음부터 다시 시작해야 하는 번거로움 없이 발견한 내용을 기반으로 작업할 수 있다.
 
-\item \emph{Design does evolve.}
-Change is an essential ingredient of a successful system, certainly in object-oriented development processes with their emphasis on iterative development. As a consequence, design documents will always be out-of date with respect to the actual situation. However, this also implies that change itself is the key to understand how and why the design of a system has evolved the way it is. \emph{Consequently, assume that important design issues will be reflected in the source code and in the way this code has changed over time.}
+\item \emph{디자인은 진화한다.}
+반복 개발을 강조하는 객체 지향 개발 프로세스에서 변화는 성공적인 시스템의 필수 요소이다. 결과적으로 설계 문서는 실제 상황과 관련하여 항상 시대에 뒤떨어지게 된다. 그러나 이는 또한 변화 자체가 시스템 설계가 어떻게 그리고 왜 지금과 같이 발전했는지 이해하는 열쇠라는 것을 의미한다. \emph{따라서 중요한 디자인 이슈가 소스 코드와 이 코드가 시간이 지남에 따라 변경된 방식에 반영될 것이라고 가정한다.}
 
-\item \emph{Static structure versus Dynamic behavior.}
-Object-oriented source code tells you which classes are defined, and how they are arranged in a class hierarchy. It is much harder to see which objects are instantiated at run-time, and how they collaborate to support the system. On a fine-grained level however, the latter is much more relevant than the former, especially due to the use of polymorphism. \emph{Consequently, to extract the detailed design one must inevitably study the dynamic behavior.}
+\item \emph{정적 구조(static structure) 대 동적 동작(dynamic behavior).}
+객체 지향 소스 코드는 어떤 클래스가 정의되어 있고 클래스 계층 구조에서 어떻게 배열되어 있는지를 알려준다. 런타임에 어떤 객체가 인스턴스화되고 시스템을 지원하기 위해 어떻게 협업하는지 파악하는 것은 훨씬 더 어렵다. 그러나 세분화된 수준에서는 특히 다형성의 사용으로 인해 후자가 전자보다 훨씬 더 관련성이 높다. \emph{따라서 세부적인 디자인을 추출하려면 필연적으로 동적 동작을 연구해야 한다.}
 \end{bulletlist}
 
-\subsection*{Overview}
+\subsection*{개요}
 
-The patterns of \charef{Detailed Model Capture}{DetailedModelCapture} propose a series of activities that help you to expose design artifacts that are hidden in the code. Although some of these patterns, in particular \patref{Tie Code and Questions}{TieCodeAndQuestions}, are lightweight, most of them entail considerable effort, so you should evaluate carefully how much you expect to get out of applying them.
+\charef{디테일한 모델 캡처}{DetailedModelCapture}의 패턴은 코드에 숨겨진 디자인 산출물을 노출하는 데 도움이 되는 일련의 활동을 제안한다. 이러한 패턴 중 일부, 특히 \patref{코드에 대한 질문을 연결하기}{TieCodeAndQuestions}은 가볍운 도구이지만 대부분은 상당한 노력이 필요하므로 적용하여 얻을 수 있을 것으로 기대하는 것이 무엇인지 신중하게 평가해야 한다.
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{DetailedModelMap}
-\caption{The patterns of \charef{Detailed Model Capture}{DetailedModelCapture} help you to expose the design of the software system and keep track of your understanding.}
+\caption{\charef{상세 모델 캡춰하기}{DetailedModelCapture}의 패턴은 소프트웨어 시스템의 설계를 노출하고 이해도를 추적하는 데 도움이 된다.}
 \figlabel{DetailedModelMap}
 \end{center}
 \end{figure}
 
-\figref{DetailedModelMap} suggests some possible relationships between the patterns. \patref{Tie Code and Questions}{TieCodeAndQuestions} is perhaps the most fundamental of these patterns, and the easiest to apply. As you work through the source code, keep track of comments, questions, hypotheses and possible actions to perform by directly annotating the source code \emph{at the point where the comment applies}. This pattern works well with the other patterns in this cluster, and can be productively applied throughout a reengineering project.
+\figref{DetailedModelMap}은 패턴 간의 몇 가지 가능한 관계를 제안한다. 패턴 중 가장 기본적이고 적용하기 가장 쉬운 패턴은 \patref{코드에 대한 질문을 연결하기}{TieCodeAndQuestions}이다. 소스 코드를 살펴보면서 주석, 질문, 가설 및 수행 가능한 작업을 추적하여 소스 코드에 직접 \emph{주석이 적용되는 지점에} 주석을 달아 놓자. 이 패턴은 이 클러스터의 다른 패턴과 잘 작동하며 리엔지니어링 프로젝트 전반에 걸쳐 생산적으로 적용될 수 있다.
 
-\patref{Refactor to Understand}{RefactorToUnderstand} helps you to expose the design of cryptic code. It is important to understand that the intent of this pattern is \emph{not} to improve the code base itself, but only to improve your understanding. It might well be that you decide to keep the results of your refactorings, but this should not be your goal at this point. Your refactorings should instead be treated as experiments to tests various hypotheses concerning the code. 
+\patref{이해하기 위해 리팩터링하기}{RefactorToUnderstand}는 암호화된 코드의 설계를 노출하는 데 도움이 된다. 이 패턴의 의도는 코드 베이스 자체를 개선하는 것이 아니라 이해력을 향상시키는 데 있다는 점을 이해하는 것이 중요하다. 리팩터링의 결과를 유지하기로 결정할 수도 있지만, 이 시점에서 이것이 목표가 되어서는 안 된다. 리팩터링은 코드와 관련된 다양한 가설을 테스트하기 위한 실험으로 간주해야 한다. 
 
-Since the source code gives you only a very static view of the class hierarchy, it is useful to \patref{Step Through the Execution}{StepThroughTheExecution} to learn what objects are instantiated and run time and how they interact.
+소스 코드는 클래스 계층 구조에 대한 매우 정적인 보기만 제공하므로 \patref{단계 별 실행해 보기}{StepThroughTheExecution}을 사용하여 어떤 객체가 인스턴스화되고 런타임에 어떻게 상호 작용하는지 알아보는 것이 유용하다.
 
-Although it is very easy to extract the interfaces of the classes in the system, this will not tell you very much about how these interfaces can or should be used. What you really need is to do is \patref{Look for the Contracts}{LookForTheContracts} supported by each class. The contracts tell you which client-supplier relationships exist, and how the public interface of a class supports that relationship. Idiomatic coding practices and design patterns typically express such contracts in direct way, so you should train yourself to recognize them.
+시스템에서 클래스의 인터페이스를 추출하는 것은 매우 쉽지만, 이러한 인터페이스가 어떻게 사용될 수 있는지 또는 어떻게 사용해야 하는지에 대해 많은 것을 알려주지는 않는다. 실제로 필요한 것은 각 클래스에서 지원하는 \patref{컨트랙트 찾기}{LookForTheContracts}를 수행하는 것이다. 컨트랙트는 어떤 클라이언트-공급자 관계가 존재하는지, 클래스의 공용 인터페이스가 그 관계를 어떻게 지원하는지 알려준다. 관용적 코딩 관행과 디자인 패턴은 일반적으로 이러한 계약을 직접적인 방식으로 표현하므로 이를 인식할 수 있도록 스스로 훈련해야 한다.
 
-Finally, though you may be able to extract various design artifacts from the source code, you will not necessarily be able to get an insight into how the system evolved that way. In particular, you may wonder whether certain design decisions were really justified, or whether they were arbitrary, and you may wonder how stable parts of the design are. By comparing different versions of the code base and focussing on places where functionality was \emph{removed} or refactored, you will be able to \patref{Learn from the Past}{LearnFromThePast}.
+마지막으로, 소스 코드에서 다양한 디자인 산출물을 추출할 수는 있지만 시스템이 어떻게 그런 식으로 진화했는지에 대한 통찰력을 반드시 얻을 수 있는 것은 아니다. 특히 특정 설계 결정이 정말 정당한 것인지, 아니면 자의적인 것인지 궁금할 수 있으며, 설계의 일부가 얼마나 안정적인지 궁금할 수 있다. 코드 베이스의 여러 버전을 비교하고 기능이 제거되거나 리팩터링된 부분을 집중적으로 살펴봄으로써 과거로부터 \patref{과거로부터 배우기}{LearnFromThePast}를 할 수 있다.
 
-\subsection*{What Next}
+\subsection*{다음 단계}
 
-Now that you have mastered the details of a part of your system, it is a good time to prepare for the actual reengineering by applying the patterns in \charef{Tests: Your Life Insurance!}{TestsYourLifeInsurance}. In particular, as you \patref{Refactor to Understand}{RefactorToUnderstand}, it is a good idea to \patpgref{Write Tests to Understand}{WriteTestsToUnderstand}, as this will give you confidence in your experiments. Also, patterns like \patref{Step Through the Execution}{StepThroughTheExecution}, \patref{Look for the Contracts}{LookForTheContracts} and \patref{Learn from the Past}{LearnFromThePast} help you to see which components implement what functionality: this knowledge must be used to \patpgref{Test the Interface, Not the Implementation}{TestTheInterfaceNotTheImplementation} and to \patpgref{Record Business Rules as Tests}{RecordBusinessRulesAsTests}.
-
+이제 시스템 일부의 세부 사항을 마스터했으니 \charef{테스트라는 생명 보험}{TestsYourLifeInsurance}의 패턴을 적용하여 실제 리엔지니어링을 준비할 때이다. 특히 \patref{이해하기 위해 리팩터링하기}{RefactorToUnderstand}와 같은 패턴은 실험에 자신감을 줄 수 있으므로 \patpgref{이해하기 위해 테스트 작성하기}{WriteTestsToUnderstand}와 같은 패턴을 사용하는 것이 좋다. 또한 \patref{단계 별 실행해 보기}{StepThroughTheExecution}, \patref{컨트랙트 찾기}{LookForTheContracts}, \patref{과거로부터 배우기}{LearnFromThePast} 같은 패턴은 어떤 구성 요소가 어떤 기능을 구현하는지 파악하는 데 도움이 된다. 이 지식은 \patpgref{구현이 아닌 인터페이스 테스트하기}{TestTheInterfaceNotTheImplementation} 및 \patpgref{비즈니스 규칙을 테스트로 기록하기}{RecordBusinessRulesAsTests}에 사용해야 한다.
 
 
 %=================================================================
 %:PATTERN -- {Tie Code and Questions}
-\pattern{Tie Code and Questions}{TieCodeAndQuestions}
+\pattern{코드에 대한 질문을 연결하기}{TieCodeAndQuestions}
 
+\intent{리엔지니어링 활동과 관련된 질문과 답변을 소스 파일에 직접 저장하여 코드와 동기화한다.}
 
-\intent{Keep the questions and answers concerning your reengineering activities synchronized with the code by storing them directly in the source files.}
+\subsection*{문제}
 
-\subsection*{Problem}
+코드와 그에 대해 궁금한 점을 어떻게 \emph{이해하고 추적하고}, 향후 코드가 발전하는 동안 이러한 \emph{코멘트를 코드와 동기화하고}, 다른 팀원들과 \emph{공유하는가?} 
 
-How do you \emph{keep track of your understanding} about a piece of code and the questions that you have, keep these \emph{remarks synchronized with the code} during its future evolution, and \emph{share them} with the other members of your team? 
-
-\emph{This problem is difficult because:}
+\emph{이 문제는 다음과 같은 이유로 어렵다.}
 
 \begin{bulletlist}
-\item Writing up what you know and don't know about the system you are analyzing is tedious and time-consuming.
+\item 분석 중인 시스템에 대해 알고 있는 것과 모르는 것을 작성하는 것은 지루하고 시간이 많이 걸린다.
 
-\item Your understanding is a moving target, so it is hard to keep a written document up-to-date.
+\item 시스템을 이해하는 것은 움직이는 과녁과 같아서 문서화를 최신 상태를 유지하기가 어렵습니다.
 
-\item If you don't write down your questions and insights as soon as they occur to you, you will not be able to keep track of them.
+\item 질문과 인사이트가 떠오르는 즉시 기록하지 않으면 이를 추적할 수 없다.
 
-\item You want to share your knowledge with the team to maximize its value.
+\item 지식을 팀과 공유하여 그 가치를 극대화하고 싶다.
 
-\item Logging questions and answers in log files, bulletin boards or email distribution lists may be convenient for disseminating knowledge within the team, and may provide a convenient searchable history of the team's understanding, but when you are looking at a piece of code, it will be hard to tell what questions and answers pertain to it.
+\item 로그 파일, 게시판 또는 이메일 배포 목록에 질문과 답변을 기록하면 팀 내에서 지식을 전파하는 데 편리하고 팀이 이해한 내용을 편리하게 검색할 수 있지만 코드 조각을 볼 때 어떤 질문과 답변이 해당 코드와 관련이 있는지 알기 어려울 수 있다.
 \end{bulletlist}
 
-\emph{Yet, solving this problem is feasible because:}
+\emph{그러나 이 문제를 해결할 수 있는 이유는 다음과 같다.}
 
 \begin{bulletlist}
-\item You can annotate the code, and therefore record your understanding physically close to the code element it refers to.
+\item 코드에 에너테이션(annotation)을 달 수 있으므로 참조하는 코드 요소에 물리적으로 가깝게 이해한 내용을 기록할 수 있다.
 \end{bulletlist}
 
-\subsection*{Solution}
+\subsection*{솔루션}
 
-While you are working on the code annotate it directly and immediately with the questions you are facing. 
+코드를 작업하는 동안 직면하고 있는 질문에 직접 즉시 에너테이션을 달아 보자. 
 
-In principle there are two ways to annotate the code.
+원칙적으로 코드에 에너테이션을 다는 방법에는 두 가지가 있다.
 
 \begin{bulletlist}
-\item \emph{Comment-based Annotations.}
-This approach uses the commenting conventions of the programming language and as such is better-suited for a text-oriented environment. A few conventions are needed to distinguish the normal comments from the annotations.
+\item \emph{주석 기반 에너테이션.}
+이 접근 방식은 프로그래밍 언어의 주석 규칙을 사용하므로 텍스트 중심 환경에 더 적합하다. 일반 주석과 에너테이션을 구분하기 위해 몇 가지 규칙이 필요하다.
+
+% 코드는 한글로 넣으면 에러가 난다.
 \begin{code}
 /*  #to: John #by: SD #on: 3/12/99 *****
-    Screws up when we have nested IFs. */
+    Screws up when we have nested I Fs. */
 \end{code}
-Basic tools that are part of your program environment can then be used to search and modify annotations. With a little bit of extra effort one can easily build tools to query, extract and cross-index all comment-based annotations.
+그런 다음 프로그램 환경의 일부인 기본 도구를 사용하여 주석을 검색하고 수정할 수 있다. 약간의 추가 노력으로 모든 주석 기반 에너테이션을 쿼리, 추출 및 교차 색인하는 도구를 쉽게 만들 수 있다.
 
-\item \emph{Method-based annotations.}
-This approach exploits the possibility to query which method invokes a given method, a feature provided by many of today's programming environments. The idea is to declare a global method accepting a few strings as an argument and having an empty method body. Each time you want to annotate a particular piece of code, you invoke that method passing your annotations as a parameter.
+\item \emph{메서드 기반 에너테이션.}
+이 접근 방식은 오늘날의 많은 프로그래밍 환경에서 제공하는 기능인 특정 메서드를 호출하는 메서드를 쿼리할 수 있는 가능성을 활용한다. 이 아이디어는 몇 개의 문자열을 인수로 받아들이고 메서드 본문이 비어 있는 전역 메서드를 선언하는 것입니다. 특정 코드에 주석을 달고 싶을 때마다 해당 메서드를 호출하여 주석을 매개변수로 전달하면 된다.
+
+% 코드는 한글로 넣으면 에러가 난다.
 \begin{code}
 this.annotateCode("#to: John #by: SD #on: 3/12/99",
-    "Screws up when we have nested IFs.");
+    "Screws up when we have nested I Fs.");
 \end{code}
-You can then use the querying and browsing facilities of your programming environment to identify the locations where this special method is invoked, thus where the annotations occur. Most programming environments can be extended by means of little scripts, in which case it is possible to develop tools to generate reports about all annotations.
+그런 다음 프로그래밍 환경의 쿼리 및 탐색 기능을 사용하여 이 특수 메서드가 호출되는 위치, 즉 주석이 발생하는 위치를 식별할 수 있다. 대부분의 프로그래밍 환경은 작은 스크립트를 통해 확장할 수 있으며, 이 경우 모든 주석에 대한 보고서를 생성하는 도구를 개발할 수 있다.
 
-Note that the less you change the code, the less likely it is that you will introduce errors. This makes the comment-based version safer than the method-based version.
+코드를 덜 변경할수록 오류가 발생할 가능성이 줄어든다는 점에 알아두자. 따라서 주석 기반 버전이 메서드 기반 버전보다 더 안전하다.
 \end{bulletlist}
 
-\subsubsection*{Hints}
+\subsubsection*{힌트}
 
 \begin{bulletlist}
-\item Record your annotations \emph{as close as possible} to the code to which they refer.
+\item 에너테이션은 참조하는 코드에 \emph{가능한 한 가깝게} 기록하자.
 
-\item Annotations may be \emph{questions}, \emph{hypotheses}, \emph{``to do'' lists}, or simply \emph{observations} about the code that you wish to record for future reference.
+\item 에너테이션은 나중에 참조할 수 있도록 기록하려는 코드에 대한 \emph{질문}, \emph{가설}, \emph{``할 일'' 목록} 또는 단순히 \emph{관찰 사항}이 될 수 있다.
 
-\item Use conventions to \emph{identify your annotations}. In a team context, include, for example, the initials of the developer that made the comments and the date the comment was entered. This way you can easily query them.
+\item 규칙을 사용해 \emph{에너테이션을 구별하자}. 예를 들어 팀 맥락에서는 주석을 작성한 개발자의 이니셜과 주석을 입력한 날짜를 포함하자. 이렇게 하면 쉽게 쿼리할 수 있다.
 
-\item \emph{Follow the corporate practices.} If comments are written in a language other than English, continue if you can. However, if you have the choice never write your annotations in a language different from that in which the source code is written (English in most cases). Otherwise, you create a different context and force the reader to switch between them. 
+\item \emph{회사 관행을 따르자.} 댓글이 영어가 아닌 다른 언어로 작성된 경우 가능한 경우 계속 진행하자. 그러나 선택의 여지가 있다면 소스 코드가 작성된 언어(대부분의 경우 영어)와 다른 언어로 주석을 작성하지 않도록 하자. 그렇지 않으면 다른 컨텍스트를 만들어 독자가 그 사이에서 전환해야 한다. 
 
-\item When you discover the \emph{answer} to any one of your questions, \emph{immediately update} the annotation for the benefit of future readers, or simply \emph{delete} the question if it is no longer relevant.
+\item 질문 중 하나에 대한 \emph{답변}을 발견하면 향후 독자를 위해 주석을 \emph{즉시 업데이트}하거나 더 이상 관련이 없는 질문은 간단히 \emph{삭제}하자.
 \end{bulletlist}
 
-\subsection*{Tradeoffs}
+\subsection*{트레이드오프}
 
-\subsubsection*{Pros}
+\subsubsection*{장점}
 
 \begin{bulletlist}
-\item \emph{Natural Synchronization.} You keep the code and the annotations in close physical proximity, and you thereby improve your chances of keeping them in sync. While modifying the code, you will more naturally modify the annotations, or remove them if they become obsolete.
+\item \emph{자연적인 동기화.} 코드와 주석을 물리적으로 가깝게 유지하면 코드와 주석이 동기화될 확률이 높아진다. 코드를 수정하는 동안 자연스럽게 에너테이션을 수정하거나 더 이상 사용되지 않는 경우 에너테이션을 제거할 수 있다.
 
-\item \emph{Improves Team Communication.} \patref{Tie Code and Questions}{TieCodeAndQuestions} avoids that team members must open an extra communication channel (e-mail, bulletin boards, $\cdots$). They must read the code they work with anyhow so you can multiplex the code as a communication channel.
+\item \emph{팀 커뮤니케이션 개선.} \patref{코드에 대한 질문을 연결하기}{TieCodeAndQuestions}를 사용하면 팀원이 별도의 커뮤니케이션 채널(이메일, 게시판, $\cdots$)을 열지 않아도 된다. 팀원들은 어떻게든 자신이 작업하는 코드를 읽어야 하므로 코드를 커뮤니케이션 채널로 사용하여 다중화할 수 있다.
 
-\item \emph{Minimize Context Description.} When you annotate the code you are immediately in context. This way you will minimize the need to describe the context of your questions and keep your effort low while documenting your questions and annotations.
+\item \emph{컨텍스트 설명 최소화.} 코드에 주석을 달면 즉시 컨텍스트를 파악할 수 있다. 이렇게 하면 질문의 맥락을 설명할 필요성을 최소화하고 질문과 주석을 문서화하는 데 드는 노력을 줄일 수 있다.
 \end{bulletlist}
 
-\subsubsection*{Cons}
+\subsubsection*{단점}
 
 \begin{bulletlist}
-\item \emph{Passive in Nature.} Questions that you enter are not necessarily directed to anyone and even if they are, it is not certain that the addressee will read them or answer them in time. Additional tools are needed to collect the annotations and maybe even notify the appropriate persons.
+\item \emph{본질적으로 수동적.} 입력한 질문이 반드시 누구에게 전달되는 것은 아니며, 전달되더라도 수신자가 제때 읽거나 답변할지 확신할 수 없다. 주석을 수집하고 적절한 사람에게 알리려면 추가 도구가 필요할 수도 있다.
 
-\item \emph{Process Incompatibility.} Many companies are organized around a hierarchical reporting structure. \patref{Tie Code and Questions}{TieCodeAndQuestions} may be rejected by these organizations because it circumvents the normal communication channels. Also, some corporate practices impose strong constraints on what programmers are allowed to do with the code, which may limit the potential if this pattern. For instance, if annotations cannot be removed when they become obsolete, they will create too much noise to be useful.
+
+\item \emph{프로세스 비호환성.} 많은 회사가 계층적 보고 구조를 중심으로 조직되어 있다. 이러한 조직에서는 \patref{코드에 대한 질문을 연결하기}{TieCodeAndQuestions}가 정상적인 커뮤니케이션 채널을 우회하기 때문에 거부될 수 있다. 또한 일부 기업 관행에서는 프로그래머가 코드로 할 수 있는 작업에 강력한 제약을 가하기 때문에 이 패턴을 사용할 경우 잠재력이 제한될 수 있다. 예를 들어, 주석이 더 이상 사용되지 않을 때 제거할 수 없다면 너무 많은 노이즈가 발생하여 유용하지 않게 된다.
 \end{bulletlist}
 
-\subsubsection*{Difficulties}
+\subsubsection*{어려움}
 
 \begin{bulletlist}
-\item \emph{Finding the Right Granularity.} As with any kind of comments, you should take care to introduce just the right amount of detail. Terse or cryptic annotations quickly lose their value, and verbose annotations will distract the reader from the code itself.
+\item \emph{적합한 세분성 찾기.} 모든 종류의 주석과 마찬가지로 적절한 양의 세부 정보를 소개하는 데 주의를 기울여야 한다. 간결하거나 난해한 주석은 금방 가치를 잃고, 장황한 주석은 독자의 주의를 코드 자체로부터 분산시킬 수 있다.
 
-\item \emph{Motivating the Programmers to Write Comments.} Programmers generally do not like to write comments or documentation. One way of motivating them is to use the annotations during code reviews or status meetings: this way the comments have an immediate benefit.
+\item \emph{프로그래머가 주석을 작성하도록 동기 부여하기.} 프로그래머는 일반적으로 주석이나 문서를 작성하는 것을 좋아하지 않는다. 동기를 부여하는 한 가지 방법은 코드 리뷰나 상태 회의 중에 주석을 사용하는 것이다. 이렇게 하면 주석이 즉각적인 이점을 제공한다.
 
-\item \emph{Quality of the Answers.}
-As with any other kinds of documentation, it may happen that wrong answers are given. One way to deal with this situation is to review the annotations regularly within the team.
+\item \emph{답변의 품질.}
+다른 종류의 문서와 마찬가지로 잘못된 답변이 제공될 수 있다. 이러한 상황에 대처하는 한 가지 방법은 팀 내에서 주석을 정기적으로 검토하는 것이다.
 
-\item \emph{Eliminating the Annotations.}
-On certain occasions you may wish the remove the annotations. For instance, if you must deliver a ``clean'' version of the source-code to your customer, or if your compiler isn't smart enough to remove an invocation of an empty method body. In that case, make sure that you have the proper tools to filter out the annotations.
+\item \emph{에너테이션 제거하기.}
+어떤 경우에는 주석을 제거하고 싶을 수도 있다. 예를 들어, 고객에게 ``깨끗한'' 버전의 소스 코드를 제공해야 하거나 컴파일러가 빈 메서드 바디의 호출을 제거할 만큼 똑똑하지 않은 경우이다. 이 경우 에너테이션을 필터링할 수 있는 적절한 도구가 있는지 확인하자.
 \end{bulletlist}
 
-\subsection*{Rationale}
+\subsection*{근거}
 
-This pattern has its roots in \emphind{literate programming} \cite{Reen89a}\cite{Knut92a}. A literate program reverses the usual relationship between program text and comments: executable code is embedded within documentation, not the other way around. Literate programming puts the emphasis on keeping the code and its documentation physically close. The physical proximity reduces the effort spent in keeping the code and its documentation in sync.
+이 패턴의 뿌리는 \emphind{문학적 프로그래밍(literate programming)}에 있다. \cite{Reen89a}\cite{Knut92a}. 문학적 프로그램은 프로그램 텍스트와 주석 사이의 일반적인 관계를 뒤집어 실행 코드가 문서 안에 포함되는 것이 아니라 그 반대가 된다. 문학적 프로그래밍은 코드와 문서를 물리적으로 가깝게 유지하는 데 중점을 둔다. 물리적으로 가까우면 코드와 문서를 동기화하는 데 드는 노력이 줄어든다.
 
-\subsection*{Known Uses}
+\subsection*{알려진 용도}
 
-\emph{Comment-based annotations.}
-Various programming environments provide implicit support for managing annotations within the code. Emacs, for example, has a built-in tool, called e-tags, which allows you to easily generate a cross-reference database of a a set of files \cite{Came96a}. The \ind{Eiffel} environment, on the other hand, allows you to assign different levels of visibility to your comments (and your code). If you assign private scope to your annotations you can easily separate the annotations yet make sure that these will not be seen externally.
+\emph{주석 기반 에너테이션.}
+다양한 프로그래밍 환경에서는 코드 내 에너테이션 관리를 암시적으로 지원한다. 예를 들어, Emacs에는 e-tag라는 도구가 내장되어 있어 \cite{Came96a} 파일 집합의 상호 참조 데이터베이스를 쉽게 생성할 수 있다. 반면에 \ind{Eiffel} 환경에서는 댓글(및 코드)에 다양한 수준의 가시성을 할당할 수 있다. 에너테이션에 비공개 범위를 지정하면 에너테이션을 쉽게 분리하면서도 외부에 표시되지 않도록 할 수 있다.
 
-The company \ind{MediaGeniX} --- a Belgian company operating in the multi-media sector --- used a systematic code tagging mechanism to record information about changes. The programming environment was altered in such a way that every change to the code was automatically annotated with a tag that describes the motivation for the code change (bug fix, change request, new release), the name of developer, and the time of the modification. Only the last tag is kept in the code, but via the configuration management system it is possible to inspect previous tags and changes. The tag also includes a free field where the developers may write what they want and is often used for questions and answers. 
+벨기에의 멀티미디어 분야 회사인 \ind{MediaGeniX}는 체계적인 코드 태깅 메커니즘을 사용해 변경 사항에 대한 정보를 기록했다. 프로그래밍 환경은 코드가 변경될 때마다 코드 변경 동기(버그 수정, 변경 요청, 새 릴리스), 개발자 이름, 수정 시간을 설명하는 태그가 자동으로 주석이 달리는 방식으로 변경되었다. 마지막 태그만 코드에 보관되지만 구성 관리 시스템을 통해 이전 태그와 변경 사항을 검사할 수 있다. 이 태그에는 개발자가 원하는 내용을 작성할 수 있는 자유 필드도 포함되어 있어 질문과 답변에 자주 사용된다. 
 
 \noindent
-\emph{Method-based annotations.}
-The \ind{Squeak} development team \cite{Inga97a} used this technique not so much to keep track of questions but as a means to facilitate communication in an open-source development project. In this team comments were introduced by invoking the method flag: defined in the class \lct{Object}. Developers can query all senders of the flag: message to locate annotations. Furthermore, the method is defined to accept a symbol as its argument. This makes it possible to search more specifically, for example, for all the annotations flagged with the symbol \ct{#noteForJohn}.
+\emph{메서드 기반 에너테이션.}
+\ind{Squeak} 개발팀 \cite{Inga97a}는 이 기술을 질문을 추적하기 위한 것이 아니라 오픈소스 개발 프로젝트에서 커뮤니케이션을 원활하게 하기 위한 수단으로 사용했다. 이 팀에서는 메서드 플래그를 호출하는 방식으로 코멘트를 도입했는데, 이는 \lct{Object} 클래스에 정의되어 있다. 개발자는 flag: 메시지를 보낸 모든 발신자를 쿼리하여 주석을 찾을 수 있다. 또한 이 메서드는 심볼을 인자로 받도록 정의되어 있다. 이를 통해 예를 들어 \ct{#noteForJohn} 기호로 플래그가 지정된 모든 에너테이션을 보다 구체적으로 검색할 수 있다.
 
+% 코드에는 한글을 넣을 수 없다.
 \begin{code}
 Object>>flag: aSymbol
 	"Send this message, with a relevant symbol as argument, to flag
@@ -214,433 +218,433 @@ Object>>flag: aSymbol
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{DetailedModelAllSenders}
-\caption{Finding all senders of a message in Squeak.}
+\caption{Squeak에서 메시지의 모든 발신자 찾기.}
 \figlabel{DetailedModelAllSenders}
 \end{center}
 \end{figure}
 
-\figref{DetailedModelAllSenders} shows on the top pane all the senders of the flag: message in the Squeak2.7 environment. The bottom pane then shows the code of the method \lct{removeEmptyRows} that contains a call to the method flag: highlighted. The flag: message is sent with argument \lct{\#noteToJohn}. The actual content of the annotation follows as a comment. 
+\figref{DetailedModelAllSenders}는 Squeak2.7 환경에서 플래그: 메시지의 모든 발신자를 위쪽 창에 표시한다. 그러면 아래쪽 창에 flag: 메서드 호출이 포함된 \lct{removeEmptyRows} 메서드의 코드가 강조 표시되어 표시된다. flag: 메시지는 인자 \lct{\#noteToJohn}과 함께 전송된다. 에너테이션의 실제 내용은 코멘트로 이어진다. 
 
-\subsection*{Related Patterns}
+\subsection*{관련된 패턴}
 
-\patref{Tie Code and Questions}{TieCodeAndQuestions} works well in tandem with \patref{Refactor to Understand}{RefactorToUnderstand}. Questions in the code may often be resolved by refactoring it. Conversely, as you \patref{Refactor to Understand}{RefactorToUnderstand}, new questions will be raised and can be entered as annotations.
+\patref{코드에 대한 질문을 연결하기}{TieCodeAndQuestions}는 \patref{이해하기 위해 리팩터링하기}{RefactorToUnderstand}와 함께 잘 작동헌다. 코드의 의문점은 종종 리팩터링을 통해 해결될 수 있다. 반대로 \patref{이해하기 위해 리팩터링하기}{RefactorToUnderstand}를 사용하면 새로운 질문이 제기되고 에너테이션으로 입력할 수 있다.
 
 %=================================================================
 %:PATTERN -- {Refactor to Understand}
-\pattern{Refactor to Understand}{RefactorToUnderstand}
+\pattern{이해하기 위해 리팩터링하기}{RefactorToUnderstand}
 
-\intent{Iteratively refactor a part of a software system in order to validate and reflect your understanding of how it works.}
+\intent{소프트웨어 시스템의 작동 방식에 대한 이해를 검증하고 반영하기 위해 소프트웨어 시스템의 일부를 반복적으로 리팩터링한다.}
 
-\subsection*{Problem}
+\subsection*{문제}
 
-How can you understand a cryptic piece code?
+암호화된 것 같은 코드를 어떻게 이해할 수 있는가?
 
-\emph{This problem is difficult because:}
-
-\begin{bulletlist}
-\item Cryptic code is difficult to read, hence to understand.
-
-\item You may have some idea how the code works, but it is hard to verify because the code does not reflect your ideas.
-\end{bulletlist}
-
-\emph{Yet, solving this problem is feasible because:}
+\emph{이 문제는 다음과 같은 이유로 어렵다.}
 
 \begin{bulletlist}
-\item The piece of code is \emph{relatively small} and has clearly defined boundaries.
+\item 암호화된 것같은 코드는 읽기 어렵기 때문에 이해하기 어렵다.
 
-\item Your development tools allow for \emph{rapid edit-compile cycles}, so you can make some small changes and check whether you're still able to compile the source-code or that your tests still run.
-
-\item You have a \emph{source-code browser} that allows you to query dependencies between source-code entities (\ie which methods invoke a given operation, which methods access a given attribute, ...), so that you can infer its purpose.
+\item 코드가 어떻게 작동하는지 어느 정도는 알 수 있지만 코드가 여러분의 아이디어를 반영하지 않아 확인하기가 어렵다.
 \end{bulletlist}
 
-\subsection*{Solution}
-
-Iteratively rename and refactor the code to introduce meaningful names and to make sure the structure of the code reflects what the system is actually doing. Run regression tests after each change if they are available, else compile often to check whether your changes make sense. Decide what to do with the code after you have refactored it.
-
-\subsubsection*{Hints}
-
-Your primary goal here is to \emph{understand the system}, not to improve the code. The changes you make to the code should therefore be treated as ``experiments'' to test your understanding of the code. As a consequence, you should \emph{make a copy of the code} before you start. After you have refactored the code, it is possible that you release any of the changes you make, but you do not want to make that decision up front. Perhaps your refactoring experiments will actually improve the code, but it is just as likely that you will make a mess of things since you do not yet understand the code. It does not really matter at this stage. After a first experience you will be in a better position to do a proper job of refactoring. 
-
-It is hard to do a good job of \ind{refactoring} without having tests in place to verify that your changes have not broken anything. If adequate tests do not exist, you should \emph{not} seriously consider keeping the results of your refactoring experiments. However, consider applying \patpgref{Write Tests to Understand}{WriteTestsToUnderstand} in tandem with \patref{Refactor to Understand}{RefactorToUnderstand}. 
-
-You should select refactoring operations that will make design decisions more explicit in the code. The typical refactorings applied during this iterative restructuring are \patpgref{Rename Attribute}{RenameAttribute}, \patpgref{Rename Method}{RenameMethod}, and \patpgref{Extract Method}{ExtractMethod}.
-
-The following guidelines will help you to find out where and how to apply these refactorings to improve the readability of the code. Many of these guidelines are considered to be just good, standard practice in Smalltalk programming \cite{Beck97a}. They apply, however, equally well to other programming languages. They can be applied in any order; each of them participates in the understanding of the others.
+\emph{그러나 이 문제를 해결할 수 있는 이유는 다음과 같다.}
 
 \begin{bulletlist}
-\item \emph{Rename attributes to convey roles.}
-Focus on attributes with cryptic names. To find out about their roles, look at all the attribute accesses (including invocations of accessors methods). Afterwards, rename the attribute and its accessors according to its role, update all references and re-compile the system.
+\item 코드 조각이 \emph{상대적으로 작고} 경계가 명확하게 정의되어 있다.
 
-\item \emph{Rename methods to convey intent.}
-To retrieve the intent of a method that does not have an intention revealing name, investigate all invocations and attribute uses, and deduce the method's responsibility. Afterwards, rename the method according to its intent, update all invocations and re-compile the system.
+\item 개발 도구에서 \emph{빠르게 편집-컴파일 반복하기}를 허용하므로 약간의 변경을 수행하고 소스 코드를 컴파일할 수 있는지 또는 테스트가 계속 실행되는지 확인할 수 있다.
 
-\item \emph{Rename classes to convey purpose.}
-To capture the purpose of class having an unclear name, investigate clients of the class by examining who is invoking its operations or who is creating instances of it. Afterwards, rename the class according to its purpose, update all references and re-compile the system.
-
-\item \emph{Remove duplicated code.}
-If you identify duplicated code, try to refactor it into a single location. As such, you will identify slight differences that you probably would not have noticed before refactoring and that are likely to reveal some subtle design issues. 
-
-\item \emph{Replace condition branches by methods.}
-If you encounter conditions with large branches, extract the leaves as new (private) methods. To name these methods, study the condition until you understand it well enough to choose an intention revealing name.
-
-\item \emph{Refactor method bodies to a consistent level of abstraction.}
-Long method bodies with comments separating blocks of code violate the rule of the thumb that all statements in a single method body should have the same level of abstraction. Refactor such code by introducing a new (private) method for each separated block of code; name the method after the intent recorded in the comment.
+\item 소스 코드 엔티티 간의 종속성(예: 어떤 메서드가 주어진 작업을 호출하는지, 어떤 메서드가 주어진 속성에 액세스하는지 등)을 쿼리할 수 있는 \emph{소스 코드 브라우저}가 있으므로 그 목적을 유추할 수 있다.
 \end{bulletlist}
 
-\subsection*{Tradeoffs}
+\subsection*{솔루션}
 
-\subsubsection*{Pros}
+반복적으로 코드의 이름을 바꾸고 리팩터링하여 의미 있는 이름을 도입하고 코드의 구조가 시스템이 실제로 수행하는 작업을 반영하는지 확인한다. 변경할 때마다 레그레션 테스트(regression tests)가 가능한 경우 이를 실행하고, 그렇지 않은 경우 자주 컴파일하여 변경 사항이 합당한지 확인한다. 코드를 리팩토링한 후 코드를 어떻게 처리할지 결정하자.
+
+\subsubsection*{힌트}
+
+여기서 가장 중요한 목표는 코드를 개선하는 것이 아니라 시스템을 이해하는 것이다. 따라서 코드에 대한 변경 사항은 코드에 대한 이해를 테스트하기 위한 ``실험(experiments)''으로 취급해야 한다. 따라서 시작하기 전에 코드의 복사본을 만들어야 한다. 코드를 리팩터링한 후에는 변경한 내용을 릴리스할 수도 있지만, 미리 결정하고 싶지는 않을 것이다. 리팩터링 실험을 통해 실제로 코드가 개선될 수도 있지만, 아직 코드를 이해하지 못하기 때문에 일을 엉망으로 만들 가능성도 똑같이 높다. 이 단계에서는 크게 중요하지 않다. 첫 경험을 하고 나면 리팩터링을 제대로 할 수 있는 더 나은 위치에 서게 될 것이다. 
+
+변경 사항이 아무것도 깨뜨리지 않았는지 확인할 수 있는 테스트가 없다면 리팩터링을 제대로 수행하기 어렵다. 적절한 테스트가 없다면 리팩터링 실험 결과를 보관하는 것을 심각하게 고려하지 않아야 한다. 그러나 \patref{이해하기 위해 테스트 작성하기}{WriteTestsToUnderstand}를 \patref{이해하기 위해 리팩터링하기}{RefactorToUnderstand}와 함께 적용하는 것을 고려하자. 
+
+코드에서 설계 결정을 보다 명확하게 할 수 있는 리팩터링 작업을 선택해야 한다. 이 반복적인 재구조화 중에 적용되는 일반적인 리팩터링은 \patpgref{속성 이름 바꾸기}{RenameAttribute}, \patpgref{메서드 이름 바꾸기}{RenameMethod} 및 \patpgref{메서드 추출하기}{ExtractMethod}이다.
+
+다음 가이드라인은 코드의 가독성을 개선하기 위해 이러한 리팩터링을 적용하는 위치와 방법을 찾는 데 도움이 될 것이다. 이러한 가이드라인 중 다수는 Smalltalk 프로그래밍 \cite{Beck97a}에서 좋은 표준 관행으로 간주된다. 그러나 다른 프로그래밍 언어에도 동일하게 적용된다. 어떤 순서로든 적용될 수 있으며, 각 지침은 다른 지침을 이해하는 데 도움이 된다.
 
 \begin{bulletlist}
-\item \emph{Expose design.}
-Not only will the refactoring process improve your understanding of the code, but this understanding will also become explicit in the structure of the code. This will make it easier to further document that understanding by means of \patref{Tie Code and Questions}{TieCodeAndQuestions} or \patpgref{Write Tests to Understand}{WriteTestsToUnderstand}.
+\item \emph{역할(role)을 전달하기 위해 속성(attribute)의 이름을 바꾼다.}
+암호화된 겉 같은 이름을 가진 속성에 집중하자. 속성의 역할을 파악하려면 모든 속성 액세스(접근자 메서드 호출 포함)를 살펴보자. 그런 다음 역할에 따라 속성(attribute)와 해당 접근자(accessor)의 이름을 바꾸고 모든 참조를 업데이트하고 시스템을 다시 컴파일하자.
 
-\item \emph{Incremental validation.}
-Normally, understanding does not arise as part of a single revelation, but as the result of an iterative process in which earlier understanding is the base for the next iteration. \patref{Refactor to Understand}{RefactorToUnderstand} encourages such an approach, because of its emphasis on small steps and frequent verification (either by running tests or either by compiling often).
+\item \emph{의도를 전달하기 위해 메서드 이름 바꾸기.}
+의도를 드러내는 이름이 없는 메서드의 의도를 검색하려면 모든 호출과 속성 사용을 조사하고 메서드의 책임을 추론한다. 그런 다음 의도에 따라 메서드의 이름을 바꾸고 모든 호출을 업데이트한 후 시스템을 다시 컴파일한다.
+
+\item \emph{목적(purpose)을 전달하기 위해 클래스 이름 바꾸기.}
+이름이 불분명한 클래스의 목적을 파악하려면 해당 클래스의 클라이언트를 조사하여 누가 해당 연산을 호출하는지 또는 누가 해당 클래스의 인스턴스를 생성하는지 조사하자. 그런 다음 목적에 따라 클래스 이름을 변경하고 모든 참조를 업데이트한 후 시스템을 다시 컴파일하자.
+
+\item \emph{중복된 코드 제거.}
+중복된 코드를 발견하면 한 곳으로 리팩터링하자. 이렇게 하면 리팩토링 전에는 알아차리지 못했을 사소한 차이점을 식별하고 미묘한 디자인 문제를 드러낼 수 있다. 
+
+\item \emph{조건 분기를 메서드로 대체.}
+큰 가지가 있는 조건이 있는 경우 해당 가지를 새로운 (프라이빗) 메서드(private method)로 추출하자. 이러한 메서드의 이름을 지정하려면 조건을 충분히 이해하여 의도를 드러내는 이름을 선택할 수 있을 때까지 조건을 연구하자.
+
+\item \emph{메서드 본문을 일관된 추상화 수준으로 리팩터링.}
+코드 블록을 구분하는 주석이 있는 긴 메서드 본문은 단일 메서드 본문의 모든 문이 동일한 수준의 추상화를 가져야 한다는 경험 법칙을 위반한다. 분리된 각 코드 블록에 새로운 (프라이빗) 메서드(private method)를 도입하여 이러한 코드를 리팩터링하고, 주석에 기록된 의도를 따라 메서드 이름을 지정하자.
 \end{bulletlist}
 
-\subsubsection*{Cons}
+\subsection*{트레이드오프}
+
+\subsubsection*{장점}
 
 \begin{bulletlist}
-\item \emph{Risk of introducing errors.}
-The less you change the code, the smaller your chances of introducing errors. Small refactorings should be behavior-preserving, but it may be non-trivial to verify that even simple refactorings do not break the code. If you do not have adequate regression tests in place, it can be risky to introduce changes, or costly to develop the needed tests. For these reasons it is important to attempt to \patref{Refactor to Understand}{RefactorToUnderstand} only on a working copy of the software.
+\item \emph{디자인 노출.}
+리팩토링 프로세스를 통해 코드에 대한 이해도가 향상될 뿐만 아니라 코드 구조에 대한 이해도도 명확해진다. 이렇게 하면 \patref{코드에 대한 질문을 연결하기}{TieCodeAndQuestions} 또는 \patpgref{이해하기 위해 테스트 작성하기}{WriteTestsToUnderstand}를 통해 이해도를 더욱 쉽게 문서화할 수 있다.
+
+\item \emph{증가하는 유효성 검사.}
+일반적으로 이해는 단일 계시의 일부로 발생하는 것이 아니라 이전 이해가 다음 반복의 기반이 되는 반복적인 과정의 결과로 발생한다. \patref{이해를 위해 리팩터링하기}{RefactorToUnderstand}는 작은 단계와 빈번한 검증(테스트를 실행하거나 자주 컴파일하여)을 강조하기 때문에 이러한 접근 방식을 권장한다.
 \end{bulletlist}
 
-\subsubsection*{Difficulties}
+\subsubsection*{단점}
 
 \begin{bulletlist}
-\item \emph{Tool Support.}
-Manually refactoring code can be tedious and risky \cite{Fowl99a}. Various tools, like the \ind{Refactoring Browser} \cite{Robe97a}, greatly simplify the task of refactoring, and especially help to apply non-trivial refactorings such as \patref{Extract Method}{ExtractMethod}.
-
-\item \emph{Acceptance of Changes.}
-Refactoring someone else's code may prove a lot harder than refactoring your own. A lot of companies have a strong culture of code ownership, so improving someone else's code is often considered an insult. That is one of the reasons why you should not necessarily release the refactored version to the rest of the team.
-
-\item \emph{When to stop.}
-It is often difficult to stop changing code when you identify problems. Remember that your primary goal here is to just understand the system. When you have achieved that goal, it is time to stop. 
+\item \emph{오류 발생 리스크.}
+코드를 적게 변경할수록 오류가 발생할 가능성이 줄어든다. 작은 리팩터링은 동작을 보존해야 하지만, 간단한 리팩터링이라도 코드가 깨지지 않는지 확인하는 것은 쉽지 않을 수 있다. 적절한 레그레션 테스트가 마련되어 있지 않은 경우 변경 사항을 도입하는 것이 위험하거나 필요한 테스트를 개발하는 데 비용이 많이 들 수 있다. 이러한 이유로 소프트웨어의 작업 복사본에서만 \patref{이해하기 위해 리팩터링하기}{RefactorToUnderstand}를 시도하는 것이 중요하다.
 \end{bulletlist}
 
-\subsection*{Known Uses}
+\subsubsection*{어려움}
 
-\index{Roberts, Don}
-\index{Brant, John}
-Don Roberts and John Brant coined the term \patref{Refactor to Understand}{RefactorToUnderstand} at ESUG '97 and Smalltalk Solutions '97 during a demonstration of the \emph{Refactoring Browser}. They showed how they gradually understood an algorithm by renaming and refactoring its code. During the subsequent iterations of the pattern, the code slowly started to make sense and the design gradually became explicit in the code. 
+\begin{bulletlist}
+\item \emph{도구 지원.}
+수동으로 코드를 리팩토링하는 것은 지루하고 위험할 수 있다 \cite{Fowl99a}. \ind{리팩토링 브라우저}\emph{(Refactoring Browser)}와 같은 다양한 도구가 있다. \cite{Robe97a}와 같은 다양한 도구는 리팩터링 작업을 크게 간소화하며, 특히 \patref{메서드 추출하기}{ExtractMethod}와 같이 사소하지 않은 리팩터링을 적용하는 데 도움이 된다.
 
-We applied this pattern ourselves during a \ind{FAMOOS} case study. We had to understand a single method of about 3000 lines of \ind{C++}, which was a deeply nested conditional. We first replaced the leaf condition branches by methods, gradually working our way up the nesting structure. After several iterations, we discovered that this method was actually implementing a complete parser for a small command language. 
+\item \emph{변경 수락.}
+다른 사람의 코드를 리팩토링하는 것은 자신의 코드를 리팩토링하는 것보다 훨씬 더 어려울 수 있다. 많은 회사에서 코드 소유권 문화가 강하기 때문에 다른 사람의 코드를 개선하는 것은 종종 모욕으로 간주된다. 이것이 바로 리팩터링된 버전을 반드시 다른 팀원에게 공개해서는 안 되는 이유 중 하나이다.
 
-\index{Sneed, Harry}
-Harry Sneed reports several reengineering projects where a large \ind{Cobol} program was refactored by removing all goto statements. However, he was later forced to reintroduce the go-to statements because the developers rejected his changes \cite{Snee99a}.
+\item \emph{멈춤 시기.}
+문제를 발견했을 때 코드 변경을 중단하기 어려운 경우가 많다. 여기서 여러분의 일차적인 목표는 시스템을 이해하는 것임을 기억하자. 그 목표를 달성했다면 이제 멈춰야 할 때이다. 
+\end{bulletlist}
 
-\subsection*{Related Patterns}
+\subsection*{알려진 용도}
 
-``\ind{Arranging the Furniture}'' \cite{Tayl00a} is a pattern to help newcomers feel at home when they start in a new project. The pattern solution is: ``An adopter should be encouraged to `move in' by cosmetically arranging the code.'' 
+\index{로버트, 돈}
+\index{브랜트, 존}
+돈 로버츠와 존 브랜트는 ESUG '97과 Smalltalk Solutions '97에서 \emph{리팩터링 브라우저}를 시연하는 동안 \patref{이해하기 위해 리팩터링하기}{RefactorToUnderstand}라는 용어를 만들었다. 그들은 코드의 이름을 바꾸고 리팩토링하여 알고리즘을 점차적으로 이해하는 과정을 보여주었다. 이후 이 패턴을 반복하는 동안 코드가 서서히 이해되기 시작했고 디자인이 점차 코드에 명시적으로 드러나기 시작했다. 
 
-\subsection*{What Next}
+저희는 이 패턴을 \ind{FAMOOS} 사례 연구에 직접 적용했다. 우리는 약 3000줄의 \ind{C++}로 이루어진 하나의 메서드를 이해해야 했는데, 이 메서드는 중첩된 조건 명령을 가졌다. 먼저 리프 조건 분기를 메서드로 대체하면서 중첩 구조를 점차적으로 파악해 나갔다. 몇 번의 반복 끝에 이 메서드가 실제로 작은 명령어에 대한 완전한 파서를 구현하고 있다는 것을 발견했다. 
 
-\patref{Refactor to Understand}{RefactorToUnderstand} works well in tandem with \patref{Tie Code and Questions}{TieCodeAndQuestions}. Refactorings are more expensive to implement than simply annotating the code, so first annotate, and then refactor. Also, consider to \patpgref{Write Tests to Understand}{WriteTestsToUnderstand} as you refactor. These two activities reinforce each other since tests document your understanding of how a software artifact works, and refactoring helps you to expose its design. Furthermore, tests will help you to verify that your refactorings didn't break anything.
+\index{스니드, 해리}
+해리 스니드는 모든 goto 문을 제거하여 대규모 \ind{Cobol} 프로그램을 리팩터링한 여러 리엔지니어링 프로젝트에 대해 리포트를 만들었다. 그러나 나중에 개발자들이 그의 변경 사항을 거부했기 때문에 \cite{Snee99a}를 다시 goto문을 도입할 수밖에 없었다.
 
-When you have finished a round of \patref{Refactor to Understand}{RefactorToUnderstand}, you must decide what to do with your changes. If you discard the experimental code, you should consider applying \patref{Tie Code and Questions}{TieCodeAndQuestions} to annotate the code base with the knowledge you have acquired.
+\subsection*{관련된 패턴}
+
+``\ind{가구 배치}''\emph{(Arranging the Furniture)} \cite{Tayl00a}는 새 프로젝트에 새로 들어온 사람이 편안하게 시작할 수 있도록 도와주는 패턴이다. 이 패턴의 해결책은 ``코드를 깔끔하게 정리하여 `적응'하도록 도입하는 사람이 유도해야 한다''이다. 
+
+\subsection*{다음 단계}
+
+\patref{이해하기 위해 리팩터링하기}{RefactorToUnderstand}는 \patref{코드에 대한 질문을 연결하기}{TieCodeAndQuestions}와 함께 잘 작동한다. 리팩터링은 단순히 코드에 주석을 다는 것보다 구현하는 데 비용이 많이 들기 때문에 먼저 주석을 다는 작업을 한 다음 리팩터링하자. 또한 리팩터링할 때 \patpgref{이해할 수 있는 테스트 작성하기}{WriteTestsToUnderstand}를 고려하자. 테스트는 소프트웨어 산출물의 작동 방식에 대한 이해를 문서화하고 리팩터링은 디자인을 노출하는 데 도움이 되므로 이 두 가지 활동은 서로를 강화한다. 또한 테스트는 리팩터링으로 인해 문제가 발생하지 않았는지 확인하는 데 도움이 된다.
+
+\patref{이해를 위해 리팩터링하기}{RefactorToUnderstand}를 완료했다면, 변경 사항을 어떻게 처리할지 결정해야 한다. 실험 코드를 폐기하는 경우 \patref{코드에 대한 질문 연결하기}{TieCodeAndQuestions}를 적용하여 습득한 지식으로 코드 베이스에 주석을 달아야 한다.
 
 %=================================================================
 %:PATTERN -- {Step Through the Execution}
-\pattern{Step Through the Execution}{StepThroughTheExecution}
+\pattern{단계 별 실행해 보기}{StepThroughTheExecution}
 
 
-\intent{Understand how objects in the system collaborate by stepping through examples in a \ind{debugger}.}
+\intent{시스템의 객체들이 어떻게 협업하는지 \ind{디버거}에서 예제를 단계별로 실행해 보고 이해한다.}
 
-\subsection*{Problem}
+\subsection*{문제}
 
-How do you discover which objects are instantiated at run-time and how they collaborate?
+런타임에 어떤 객체가 인스턴스화되고 어떻게 협업하는지 어떻게 알 수 있는가?
 
-\emph{This problem is difficult because:}
-
-\begin{bulletlist}
-\item The source code exposes the class hierarchy, not the objects instantiated at run time and how they interact.
-
-\item Collaborations are typically spread out through the code. Although it is easy to see which classes and methods are defined in a system, it can be hard to tell by reading the source code alone which sequence of events will lead to an object being created or a method being invoked.
-
-\item In the presence of polymorphism, it can be especially difficult to tell which objects are clients of which service providers. Just because an object uses a certain interface that another object provides, does not mean that the former is actually a client of the latter.
-
-\item Reading the code will not tell you what concrete scenarios can take place. The actual flow of execution will depend on the internal state of all participating objects and this cannot be inferred directly from the source code.
-
-\item The source code will not tell you which objects are long-lived and which are ephemeral (\ie local to the execution of a single method).
-\end{bulletlist}
-
-\emph{Yet, solving this problem is feasible because:}
+\emph{이 문제는 다음과 같은 이유로 어렵다.}
 
 \begin{bulletlist}
-\item You are aware of some typical usage scenarios.
+\item 소스 코드는 런타임에 인스턴스화된 객체와 객체 간 상호 작용 방식이 아닌 클래스 계층 구조를 노출한다.
 
-\item You can run the code inside a debugger.
+\item 공동 작업은 일반적으로 코드를 통해 분산되어 있다. 시스템에서 어떤 클래스와 메서드가 정의되어 있는지 쉽게 확인할 수 있지만, 소스 코드만으로는 어떤 이벤트 시퀀스로 인해 객체가 생성되거나 메서드가 호출되는지 알기 어려울 수 있다.
 
-\item Your attention is focussed on part of the system.
+\item 다형성(polymorphism)이 있는 경우 어떤 객체가 어떤 서비스 제공자의 클라이언트인지 구분하기가 특히 어려울 수 있다. 한 객체가 다른 객체가 제공하는 특정 인터페이스를 사용한다고 해서 전자가 실제로 후자의 클라이언트라는 의미는 아니다.
+
+\item 코드를 읽는다고 해서 어떤 구체적인 시나리오가 발생할 수 있는지 알 수 없다. 실제 실행 흐름은 모든 참여 객체의 내부 상태에 따라 달라지며 이는 소스 코드에서 직접 유추할 수 없다.
+
+\item 소스 코드는 어떤 객체가 수명이 긴지, 어떤 객체가 일시적인지(즉, 단일 메서드의 실행에 국한되는지) 알려주지 않는다.
 \end{bulletlist}
 
-\subsection*{Solution}
-
-Run each of the scenarios and use your debugger to step through the code. Observe which objects collaborate and how they are instantiated. Afterwards, generalize these observations and record your knowledge for future reference, possibly by means of \patref{Tie Code and Questions}{TieCodeAndQuestions} and \patpgref{Record Business Rules as Tests}{RecordBusinessRulesAsTests}.
-
-\subsubsection*{Hints}
-
-It is too time-consuming to step through every single statement of a running system. The assumption here is that you are focussed on some specific aspect of the system that is difficult to understand.
+\emph{그러나 이 문제를 해결할 수 있는 이유는 다음과 같다.}
 
 \begin{bulletlist}
-\item Set \emph{breakpoints} to interrupt execution when the system enters the code you are interested in.
+\item 몇 가지 일반적인 사용 시나리오를 알고 있다.
 
-\item Change the \emph{internal state} of the objects to see how alternative execution paths are triggered.
+\item 디버거 내에서 코드를 실행할 수 있다.
 
-\item \emph{Restart a method} currently on the execution stack to quickly verify a similar scenario.
+\item 시스템의 일부에 주의를 집중하고 있다.
 \end{bulletlist}
 
-\subsection*{Tradeoffs}
+\subsection*{솔루션}
 
-\subsubsection*{Pros}
+각 시나리오를 실행하고 디버거를 사용하여 코드를 단계별로 살펴보자. 어떤 객체가 협업하고 어떻게 인스턴스화되는지 관찰하자. 그런 다음, 이러한 관찰을 일반화하고 나중에 참조할 수 있도록 \patref{코드에 대한 질문을 연결하기}{TieCodeAndQuestions} 및 \patpgref{비즈니스 규칙을 테스트로 기록하기}{RecordBusinessRulesAsTests}를 사용하여 알게된 지식을 기록해 두자.
+
+\subsubsection*{힌트}
+
+실행 중인 시스템의 모든 문을 일일이 살펴보기에는 시간이 너무 많이 걸린다. 여기서는 이해하기 어려운 시스템의 특정 측면에 초점을 맞추고 있다고 가정한다.
 
 \begin{bulletlist}
-\item \emph{Realistic View.}
-By stepping through the running program, you get a precise picture of how the scenario unfolds. Moreover, you can inspect the internal state of the objects involved, see how new objects are created and observe which objects collaborate under which circumstances.
+\item 시스템이 관심 있는 코드에 들어갈 때 실행을 중단하도록 \emph{브레이크포인트(breakpoint)}를 설정한다.
 
-\item \emph{Handles complexity.}
-On a small scale it is possible to infer object collaborations from analyzing the source code. Slicing tools for instance may tell you which statements of the source code are affected by a given variable. For large and complex systems however, the number of possibilities and interactions is just too large. Therefore, the only reasonable way to learn how objects collaborate is to study the execution traces.
+\item 개체의 \emph{내부 상태(internal state)}를 변경하여 대체 실행 경로가 어떻게 트리거되는지 확인한다.
+
+\item 현재 실행 스택에 있는 \emph{메서드 다시 시작(restart a method)}을 사용하여 유사한 시나리오를 빠르게 확인할 수 있다.
 \end{bulletlist}
 
-\subsubsection*{Cons}
+\subsection*{트레이드오프}
+
+\subsubsection*{장점}
 
 \begin{bulletlist}
-\item \emph{Scenario-based.}
-Your must restrict yourself to a limited set of scenarios, hence the observed object-collaborations are necessarily incomplete. Of course you must do your best to choose representative scenarios. Unfortunately, this choice brings you back to square one, because the only way to be sure that you have a representative set of scenarios is to verify whether they cover all possible object-collaborations.
+\item \emph{현실적 뷰.}
+실행 중인 프로그램을 단계별로 살펴보면 시나리오가 어떻게 전개되는지 정확하게 파악할 수 있다. 또한 관련된 객체의 내부 상태를 검사하고, 새로운 객체가 어떻게 생성되는지 확인하고, 어떤 상황에서 어떤 객체가 협업하는지 관찰할 수 있다.
 
-\item \emph{Restricted Applicability.}
-For systems where time plays a crucial role, stepping through the execution will give you an unrealistic view of the system's behavior. Worse, for concurrent or distributed systems the mere fact of stepping through concurrent code may perturb the execution of the system itself. As such, you get the same effects as in Heisenberg's uncertainty experiments, where determining exact positions of quantum particles imply that other attributes about these particles become uncertain.
+\item \emph{복잡성 다루기.}
+소규모로 소스 코드를 분석하여 객체 협업을 유추할 수 있다. 예를 들어 슬라이싱 도구는 소스 코드의 어떤 문이 주어진 변수의 영향을 받는지 알려줄 수 있다. 그러나 크고 복잡한 시스템의 경우 가능성과 상호 작용의 수가 너무 많다. 따라서 객체가 어떻게 협업하는지 알아내는 유일한 합리적인 방법은 실행 추적을 연구하는 것이다.
 \end{bulletlist}
 
-\subsubsection*{Difficulties}
+\subsubsection*{단점}
 
 \begin{bulletlist}
-\item \emph{Dependency on Tools.}
-You need to have good debugger to \patref{Step Through the Execution}{StepThroughTheExecution}. Not only must it allow to set and remove breakpoints dynamically, it also should provide the means to examine the state of the objects involved. And to easily verify alternative paths, the debugger should allow you to change the internal state of an object, or even restart a method currently on the execution stack.
+\item \emph{시나리오 기반.}
+제한된 시나리오 집합으로 제한해야 하므로 관찰된 개체-협업은 반드시 불완전할 수밖에 없다. 물론 대표 시나리오를 선택하기 위해 최선을 다해야 한다. 안타깝게도 이러한 선택은 다시 원점으로 돌아가게 된다. 왜냐하면 대표적인 시나리오 집합이 있는지 확인하는 유일한 방법은 가능한 모든 개체 협업을 포함하는지 확인하는 것이기 때문이다.
+
+\item \emph{제한된 적용가능성(applicability).}
+시간이 중요한 역할을 하는 시스템의 경우 실행을 단계별로 진행하면 시스템의 동작을 비현실적으로 파악할 수 있다. 더 나쁜 것은 동시 또는 분산 시스템의 경우 동시 코드를 단계별로 살펴본다는 사실만으로도 시스템 실행 자체가 교란될 수 있다는 점입이다. 따라서 양자 입자의 정확한 위치를 결정하면 해당 입자에 대한 다른 속성이 불확실해지는 하이젠베르크의 불확실성 실험(Heisenberg's uncertainty experiments)과 같은 효과를 얻을 수 있다.
 \end{bulletlist}
 
-\subsection*{What Next}
+\subsubsection*{어려움}
 
-You will need concrete scenarios in order to \patref{Step Through the Execution}{StepThroughTheExecution} (possibly inferred from \patpgref{Interview During Demo}{InterviewDuringDemo}). Consider encoding these scenarios as test cases. You can then iteratively \patpgref{Write Tests to Understand}{WriteTestsToUnderstand} as you \patref{Step Through the Execution}{StepThroughTheExecution} since the insights you gain into the states of collaborating objects can then be formulated as concrete tests.
+\begin{bulletlist}
+\item \emph{도구 의존성.}
+\patref{단계별 실행해 보기}{StepThroughTheExecution}를 위한 좋은 디버거가 있어야 한다. 중단점을 동적으로 설정하고 제거할 수 있어야 할 뿐만 아니라 관련된 객체의 상태를 검사할 수 있는 수단도 제공해야 한다. 또한 대체 경로를 쉽게 확인할 수 있도록 디버거는 객체의 내부 상태를 변경하거나 현재 실행 스택에 있는 메서드를 다시 시작할 수도 있어야 한다.
+\end{bulletlist}
 
-As you \patref{Step Through the Execution}{StepThroughTheExecution}, it is a good idea to keep an eye on the way collaborating objects use each other's interface. Afterwards, you can exploit the knowledge you have gained to \patref{Look for the Contracts}{LookForTheContracts}.
+\subsection*{다음 단계}
+
+\patref{단계별 실행해 보기}{StepThroughTheExecution}(아마도 \patpgref{데모 중 인터뷰하기}{InterviewDuringDemo}에서 유추 가능)를 수행하려면 구체적인 시나리오가 필요하다. 이러한 시나리오를 테스트 케이스로 인코딩하는 것을 고려해 보자. 그런 다음 \patref{이해하기 위해 테스트 작성하기}{WriteTestsToUnderstand}을 반복적으로 수행하면 협업 객체의 상태에 대한 통찰력을 구체적인 테스트로 공식화할 수 있으므로 \patpgref{이해하기 위해 테스트 작성하기}{WriteTestsToUnderstand}을 반복적으로 수행할 수 있다.
+
+\patref{단계 별 실행해 보기}{StepThroughTheExecution}을 사용할 때 협업하는 개체가 서로의 인터페이스를 사용하는 방식을 계속 주시하는 것이 좋다. 그 후에는 \patref{컨트랙트 찾기}{LookForTheContracts}에 습득한 지식을 활용할 수 있다.
 
 %=================================================================
 %:PATTERN -- {Look for the Contracts}
-\pattern{Look for the Contracts}{LookForTheContracts}
+\pattern{컨트랙트 찾기}{LookForTheContracts}
 
-\intent{Infer the proper use of a class interface by studying the way clients currently use it.}
+\intent{클라이언트가 현재 사용하는 방식을 연구하여 클래스 인터페이스(class interface)의 적절한 사용법을 추론한다.}
 
-\subsection*{Problem}
+\subsection*{문제}
 
-How do you determine which contracts a class supports? That is, how do you know what a class expects from its client classes in order to function as intended.
+클래스가 어떤 컨트랙트(contracts)를 지원하는지 어떻게 결정하는가? 즉, 클래스가 의도한 대로 작동하기 위해 클라이언트 클래스에서 무엇을 기대하는지 어떻게 알 수 있을까?
 
-\emph{This problem is difficult because:}
-
-\begin{bulletlist}
-\item Client/supplier relationships and contracts are only implicit in the code. Although interfaces are easy to extract from the code, they do not necessarily tell you how to use them properly. If not explicitly documented, it can be hard to guess (a) the proper sequence in which methods should be invoked, (b) the valid parameters that should be supplied, (c) which methods should be invoked by which clients, (d) which methods should be overridden by subclasses.
-
-\item Typing and scoping rules often force programmers to compromise the provider's interface. Moreover, encapsulation constructs (\eg public/private declarations) are frequently misused to cope with implementation issues. For instance, database and user-interface toolkits often require the presence of public accessor methods.
-\end{bulletlist}
-
-\emph{Yet, solving this problem is feasible because:}
+\emph{이 문제는 다음과 같은 이유로 어렵다.}
 
 \begin{bulletlist}
-\item You have a \emph{good understanding} of the system's structure (for example obtained via \charef{Initial Understanding}{InitialUnderstanding}), so you can distinguish key classes from less important ones.
+\item 클라이언트/공급자 관계와 계약은 코드에 암시적으로만 존재한다. 코드에서 인터페이스를 추출하기는 쉽지만 인터페이스를 올바르게 사용하는 방법을 반드시 알려주지는 않는다. 명시적으로 문서화되어 있지 않으면 (a) 메서드가 호출되어야 하는 적절한 순서, (b) 제공되어야 하는 유효한 매개변수, (c) 어떤 메서드가 어떤 클라이언트에서 호출되어야 하는지, (d) 서브클래스에 의해 재정의되어야 하는 메서드는 무엇인지 추측하기 어려울 수 있다.
 
-\item You trust that the class is being used properly by its clients and its subclasses.
+\item 입력 및 범위 지정 규칙은 종종 프로그래머가 공급자의 인터페이스를 손상시키도록 강요한다. 또한 캡슐화 구조(encapsulation)(예: 퍼블릭/프라이빗 선언)는 구현 문제에 대처하기 위해 자주 오용된다. 예를 들어 데이터베이스 및 사용자 인터페이스 툴킷에는 공용 접근자 메서드가 필요한 경우가 많다.
 \end{bulletlist}
 
-\subsection*{Solution}
-
-Look for common programming idioms that expose the way clients make use of the class interface. Generalize your observations in the form of \emph{contracts}, \ie explicit declarations of what a class expects from its clients.
-
-\subsubsection*{Hints}
-
-Your goal here is to understand how classes collaborate by exposing the way in which the interface to a class is used by its different clients. Since an exhaustive analysis of the code will probably exhaust you, you need some way to expose the contracts without stepping through every single line of code.
-
-Although contracts are only implicit in the code, most frequently there will be hints in the code that a particular relationship exists between various classes. These hints may manifest themselves as idioms particular to the programming language in use, conventions in use by the development team, or even common design patterns. 
-
-What precisely you should look for will depend on the context, but here are a few examples that are generally useful:
-
-\noindent
-\emph{Use Your Tools.}
-To get an overview of the relationships between classes, make the best use you can of the available tools. Although you could analyze the code by hand to infer relationships between classes, the process is tedious when applied to \emph{more than a couple of classes}.
-
-Many organizations use design extraction or round-trip engineering tools to document their systems. You can easily generate a draft view of the system you are analyzing without investing too much time. However, be prepared to be flooded with ``boxes and arrows'' diagrams containing irrelevant detail. Nevertheless, design extraction tools let you specify filters and ways to interpret code, so once your mappings are defined you can reuse them over multiple extractions.
-
-The design overview can help you to identify key classes in the hierarchy (\ie abstract classes that many other classes inherit from), part-whole relationships, and so on.
-
-\noindent
-\emph{Look for Key Methods.}
-Focus on the most important methods. With your knowledge of the system you will recognize key methods based on their signature.
+\emph{그러나 이 문제를 해결할 수 있는 이유는 다음과 같다.}
 
 \begin{bulletlist}
-\item \emph{Method Names.}
-Key methods are likely to bear intention revealing names \cite{Beck97a}.
+\item 시스템 구조에 대해 \emph{잘 이해하고 있다.}(예: \charef{초기 이해}{InitialUnderstanding}를 통해 얻은 정보), 따라서 주요 클래스와 덜 중요한 클래스를 구분할 수 있다.
 
-\item \emph{Parameter types.}
-Methods taking parameters with types corresponding to key classes in the system are likely to be important.
-
-\item \emph{Recurring parameter types.}
-Parameters represent temporary associations between objects. When the same parameter types often recur in method signatures, they are likely to represent important associations.
+\item 클래스가 클라이언트와 그 하위 클래스에서 제대로 사용되고 있음을 신뢰한다.
 \end{bulletlist}
 
-\noindent
-\emph{Look For Constructor Calls.}
-To understand how and when to instantiate objects of a particular class, look for methods in other classes invoking the constructors.
+\subsection*{솔루션}
 
-Pay particular attention to which parameters are passed to the constructor, and whether the parameters are shared or not. This will help you determine which instance variables are parts of the constructed object, and which are merely references to shared objects.
+클라이언트가 클래스 인터페이스를 사용하는 방식을 드러내는 일반적인 프로그래밍 관용구를 찾아보자. \emph{컨트랙트}, 즉 클래스가 클라이언트에게 기대하는 바를 명시적으로 선언하는 형태로 관찰한 내용을 일반화하자.
 
-Invocations of constructor methods may reveal a \emph{part-whole relationship}. When a client stores the result of a constructor method in an attribute then this client will probably serve as the whole. On the other hand, when a client passes itself as an argument to a constructor method it is likely to act as a part.
+\subsubsection*{힌트}
 
-Invocations of a constructor method may also expose a \patpgref{Factory Method}{FactoryMethod} or even an \patpgref{Abstract Factory}{AbstractFactory}. If they do, then you know that you will be able extend the system by subclassing the class under study.
+여기서 목표는 클래스에 대한 인터페이스가 다른 클라이언트에서 사용되는 방식을 노출하여 클래스가 어떻게 협업하는지 이해하는 것이다. 코드를 철저하게 분석하면 지칠 수 있으므로 코드의 모든 줄을 살펴보지 않고 컨트랙트를 노출할 수 있는 방법이 필요하다.
 
-\noindent
-\emph{Look for Template/Hook Methods.}
-To understand how to specialize a class, look for (protected) methods that are overridden by subclasses, and identify the public methods that call them. The public, calling method is almost certainly a \patpgref{Template Method}{TemplateMethod}. Check the class hierarchy to determine whether the overridden method is \emph{abstract}, in which case subclasses must implement it, or whether a default implementation is provided. In the latter case, it is a \emphind{hook method}, and subclasses may choose to override it or be happy with the default.
+컨트랙트는 코드에 암시적으로만 존재하지만, 대부분의 경우 코드에는 다양한 클래스 간에 특정 관계가 존재한다는 힌트가 있을 것이다. 이러한 힌트는 사용 중인 프로그래밍 언어의 관용구, 개발팀에서 사용하는 규칙, 심지어 일반적인 디자인 패턴으로 나타날 수도 있다. 
 
-For each template method check all other methods it invokes as these are likely to represent other hook methods.
+정확히 무엇을 찾아야 하는지는 상황에 따라 다르지만 일반적으로 유용한 몇 가지 예는 다음과 같다.
 
 \noindent
-\emph{Look for Super Calls.}
-To understand what assumptions a class makes about its subclasses, look for super calls. Super calls may be used by subclasses to extend an inherited method in an \emph{ad hoc} way. But very often super calls express the fact that a particular method \emph{must not be overridden by subclasses} unless the overridden method is explicitly invoked by a super call.
+\emph{도구 사용.}
+클래스 간의 관계에 대한 개요를 파악하려면 사용 가능한 도구를 최대한 활용하자. 수작업으로 코드를 분석하여 클래스 간의 관계를 유추할 수도 있지만, \emph{두 개 이상의 클래스}에 적용하면 그 과정이 지루하다.
 
-This idiom is heavily used in \ind{Java} by classes that define multiple constructors. Any subclass of \lct{java.lang.Exception}, for example, is expected to define both a default constructor and a constructor that takes a \lct{String} argument. Those constructors should do nothing in particular except invoke the super constructor so that the exception subclass will be correctly initialized.
+많은 조직에서 설계 추출 또는 왕복 엔지니어링 도구를 사용하여 시스템을 문서화한다. 너무 많은 시간을 투자하지 않고도 분석 중인 시스템의 초안 보기를 쉽게 생성할 수 있다. 하지만 관련 없는 세부 정보가 포함된 ``박스와 화살표(boxes and arrows)'' 다이어그램이 넘쳐날 수 있다는 점에 대비하자. 하지만 디자인 추출 도구를 사용하면 필터와 코드 해석 방법을 지정할 수 있으므로 매핑이 정의되면 여러 추출에 걸쳐 재사용할 수 있다.
 
-\subsection*{Tradeoffs}
+디자인 개요는 계층 구조의 주요 클래스(즉, 다른 많은 클래스가 상속하는 추상 클래스), 부분- 전체 관계 등을 식별하는 데 도움이 될 수 있다.
 
-\subsubsection*{Pros}
+\noindent
+\emph{주요 메서드 찾기.}
+가장 중요한 메서드에 집중하자. 시스템에 대한 지식이 있으면 시그니처(signature)를 기반으로 주요 메서드를 알아볼 수 있다.
 
 \begin{bulletlist}
-\item \emph{Reliable.}
-You can trust the source code more than the documentation.
+\item \emph{메서드 이름.}
+주요 메서드에는 의도가 드러나는 이름 \cite{Beck97a}가 있을 가능성이 높다.
+
+\item \emph{매개 변수 타입.}
+시스템의 주요 클래스에 해당하는 유형을 가진 매개변수를 받는 메서드는 중요할 가능성이 높다.
+
+\item \emph{반복 매개변수 타입.}
+매개변수는 객체 간의 일시적인 연결을 나타낸다. 메서드 서명에서 동일한 매개변수 타입이 자주 반복되는 경우 중요한 연관성을 나타낼 가능성이 높다.
 \end{bulletlist}
 
-\subsubsection*{Cons}
+\noindent
+\emph{생성자 호출 찾기.}
+특정 클래스의 객체를 인스턴스화하는 방법과 시기를 이해하려면 생성자를 호출하는 다른 클래스에서 메서드를 찾아보자.
+
+특히 생성자에 전달되는 매개변수와 매개변수가 공유되는지 여부에 주의를 기울이자. 이렇게 하면 어떤 인스턴스 변수가 생성된 객체의 일부인지, 어떤 변수가 공유 객체에 대한 참조에 불과한지를 파악하는 데 도움이 된다.
+
+생성자 메서드를 호출하면 \emph{부분-전체 관계(part-whole relationship)}가 드러날 수 있다. 클라이언트가 생성자 메서드의 결과를 속성에 저장하면 이 클라이언트는 아마도 전체로 사용될 것이다. 반면에 클라이언트가 생성자 메서드에 인자로 자신을 전달하면 클라이언트는 부분으로 작동할 가능성이 높다.
+
+생성자 메서드를 호출하면 \patpgref{팩토리 메서드}{FactoryMethod} 또는 심지어 \patpgref{추상 팩토리}{AbstractFactory}가 노출될 수도 있다. 만약 그렇다면 연구 중인 클래스를 서브클래싱하여 시스템을 확장할 수 있다는 것을 알 수 있다.
+
+\noindent
+\emph{템플릿/후크 메서드 찾기.}
+클래스를 전문화하는 방법을 이해하려면 서브클래스에 의해 재정의되는 (프로텍티드) 메서드를 찾고, 이를 호출하는 공용 메서드를 식별하자. 호출하는 공용 메서드는 거의 확실하게 \patpgref{템플리트 메서드}{TemplateMethod}입니다. 클래스 계층구조를 확인하여 재정의된 메서드가 \emph{추상화(abstract)}인지, 이 경우 서브클래스가 구현해야 하는지, 아니면 기본 구현이 제공되는지 확인한다. 후자의 경우 \emphind{후크 메서드(hook method)}이며, 서브클래스는 이를 재정의하거나 기본값에 만족할 수 있다.
+
+각 템플릿 메서드에 대해 다른 훅 메서드를 나타낼 가능성이 있으므로 호출하는 다른 모든 메서드를 확인하자.
+
+\noindent
+\emph{슈퍼 호출 찾기.}
+클래스가 서브클래스에 대해 어떤 가정을 하는지 이해하려면 슈퍼 호출을 찾아보자. 슈퍼 호출은 서브클래스가 상속된 메서드를 \emph{애드혹(ad hoc)} 방식으로 확장하는 데 사용할 수 있다. 그러나 수퍼 호출은 재정의된 메서드가 수퍼 호출에 의해 명시적으로 호출되지 않는 한 특정 메서드가 서브클래스에 의해 재정의되어서는 안 된다는 사실을 표현하는 경우가 매우 많다.
+
+이 관용구는 \ind{Java}에서 여러 생성자를 정의하는 클래스에서 많이 사용된다. 예를 들어 \lct{java.lang.Exception}의 모든 서브클래스는 기본 생성자와 \lct{String} 인자를 받는 생성자를 모두 정의해야 한다. 이러한 생성자는 예외 서브클래스가 올바르게 초기화되도록 수퍼 생성자를 호출하는 것 외에는 특별한 작업을 수행하지 않아야 한다.
+
+\subsection*{트레이드오프}
+
+\subsubsection*{장점}
 
 \begin{bulletlist}
-\item \emph{Bad habits linger.}
-Just because certain practices appear in the code doesn't mean that's the right way to do things. The contracts that clients and subclasses adhere to are not necessarily the ones that the class actually supports.
-
-\item \emph{Noise.}
-Browsing the source code is like mining --- once in a while you will find a gem but you will have to dig through a lot of dirt first. By focussing your attention on idiomatic usages, you should be able to reduce the noise factor to a large degree.
+\item \emph{신뢰.}
+문서보다 소스 코드를 더 신뢰할 수 있다.
 \end{bulletlist}
 
-\subsection*{Known Uses}
+\subsubsection*{단점}
 
-Many researchers have investigated ways to analyze how clients use a class interface. For instance, Brown \cite{Brow96c}, Florijn \cite{Flor97a} and Wuyts \cite{Wuyt98a} have all shown that it is possible to find symptoms of design patterns in code. Also, Schauer \etal \cite{Scha99a} report about a technique to semi-automatically detect hook methods based on analysis of overridden methods. The latter technique scales quite well, due to their particular way of visualizing class hierarchies and emphasizing classes where many methods are overridden, hence are likely to define hook methods. Additionally, Steyaert \etal \cite{Stey96a} have shown that it is possible to capture how subclasses depend on their superclasses (they have named these dependencies \emph{reuse contracts}) and afterwards detect potential conflicts when the superclasses gets changed.
+\begin{bulletlist}
+\item \emph{남아 있는 나쁜 습관.}
+코드에 특정 관행이 나타난다고 해서 그것이 올바른 방법이라는 의미는 아니다. 클라이언트와 서브클래스가 준수하는 계약이 클래스가 실제로 지원하는 계약과 반드시 일치하는 것은 아니다.
 
-\subsection*{What Next}
+\item \emph{노이즈.}
+소스 코드를 탐색하는 것은 채굴과 비슷하다. 가끔씩 보석을 발견할 수 있지만 먼저 많은 흙을 파헤쳐야 한다. 관용적 사용법에 주의를 집중하면 노이즈 요소를 상당 부분 줄일 수 있을 것이다.
+\end{bulletlist}
 
-One way to validate the contracts you have identified is to \patref{Step Through the Execution}{StepThroughTheExecution}. Conversely, as you \patref{Step Through the Execution}{StepThroughTheExecution} you will uncover collaborations between various objects. At that point you may \patref{Look for the Contracts}{LookForTheContracts} that govern those collaborations.
+\subsection*{알려진 용도}
 
-If the code is hard to read, you may wish to \patref{Refactor to Understand}{RefactorToUnderstand} before you \patref{Look for the Contracts}{LookForTheContracts}. To understand how the contracts evolved to their current state, you might \patref{Learn from the Past}{LearnFromThePast}.
+많은 연구자들이 클라이언트가 클래스 인터페이스를 어떻게 사용하는지 분석하는 방법을 연구했다. 예를 들어 브라운 \cite{Brow96c}, 플로레인 \cite{Flor97a}, 우이츠 \cite{Wuyt98a}는 모두 코드에서 디자인 패턴의 증상을 찾을 수 있다는 것을 보여주었다. 또한 재정의된 메서드 분석을 기반으로 후크 메서드를 반자동으로 탐지하는 기법에 대한 쉐워 \cite{Scha99a}의 보고서도 있다. 후자의 기법은 클래스 계층 구조를 시각화하고 많은 메서드가 재정의되어 후크 메서드를 정의할 가능성이 높은 클래스를 강조하는 특별한 방식으로 인해 확장성이 매우 뛰어나다. 또한 스테야트 외 저자들 \cite{Stey96a}은 서브클래스가 슈퍼클래스에 어떻게 의존하는지를 포착하고(이러한 의존성을 \emph{재사용 계약(reuse contracts)}이라고 명명했다) 나중에 슈퍼클래스가 변경될 때 잠재적인 충돌을 감지하는 것이 가능하다는 것을 보여주었다.
+
+\subsection*{다음 단계}
+
+식별한 컨트랙트의 유효성을 검사하는 한 가지 방법은 \patref{단계별 실행해 보기}{StepThroughTheExecution}을 사용하는 것이다. \patref{단계 별 실행해 보기}{StepThroughTheExecution}을 사용하면 다양한 개체 간의 협업을 발견할 수 있다. 이 시점에서 해당 협업을 관리하는 \patref{컨트랙트 찾기}{LookForTheContracts}를 사용할 수 있다.
+
+코드가 읽기 어려운 경우 \patref{이해하기 위해 리팩터링하기}{RefactorToUnderstand}를 먼저 수행한 후 \patref{컨트랙트 찾기}{LookForTheContracts}를 수행할 수 있다. 컨트랙트가 어떻게 현재 상태로 진화했는지 이해하려면 \patref{과거로부터 배우기}{LearnFromThePast}를 활용할 수 있다.
 
 %=================================================================
 %:PATTERN -- {Learn from the Past}
-\pattern{Learn from the Past}{LearnFromThePast}
+\pattern{과거로부터 배우기}{LearnFromThePast}
 
-\intent{Obtain insights into the design by comparing subsequent versions of the system.}
+\intent{시스템의 이전 버전을 비교하여 디자인에 대한 통찰력을 얻는다.}
 
-\subsection*{Problem}
+\subsection*{문제}
 
-How can you discover why the system is designed the way it is? How can you learn which parts of the system are stable and which parts aren't?
+시스템이 왜 그렇게 설계되었는지 어떻게 알 수 있을까? 시스템의 어떤 부분이 안정적이고 어떤 부분이 안정적이지 않은지 어떻게 알 수 있는가?
 
-\emph{This problem is difficult because:}
-
-\begin{bulletlist}
-\item The lessons learned during a development process are rarely recorded in documentation. Furthermore, the developers' perceptions and memory of design decisions tend to warp over time. Therefore, you can only rely on source code and must reconstruct the learning process from there.
-
-\item The system is large and has been released in successive versions, and therefore you have a large quantity of source code to analyze. Text comparison tools (such as \ind{Unix} \lct{diff}) will not scale up for the sizes you're dealing with.
-
-\item Even if you have a tool to identify the changes between two subsequent releases, most of the changes will concern adding \emph{new} functionality. For the reconstruction of the learning process and how this consolidated into the class design, you're main interest lies in what happened with the \emph{old} functionality.
-\end{bulletlist}
-
-\emph{Yet, solving this problem is feasible because:}
+\emph{이 문제는 다음과 같은 이유로 어렵다.}
 
 \begin{bulletlist}
-\item You have a \emph{good understanding} of the system's structure (for example obtained via \charef{Initial Understanding}{InitialUnderstanding}), so you're able to focus on appropriate subsystems.
+\item 개발 과정에서 얻은 교훈은 문서로 기록되는 경우가 거의 없다. 게다가 개발자의 디자인 결정에 대한 인식과 기억은 시간이 지남에 따라 왜곡되는 경향이 있다. 따라서 소스 코드에만 의존할 수밖에 없고 거기서부터 학습 과정을 재구성해야 한다.
 
-\item You have access to the \emph{subsequent releases} of the system, so you can reconstruct the changes by comparing the source code of the versions.
+\item 시스템이 크고 여러 버전으로 출시되었기 때문에 분석할 소스 코드의 양이 많다. 텍스트 비교 도구(예: \ind{Unix} \lct{diff})는 처리하는 크기에 맞게 확장되지 않는다.
 
-\item You have the means to examine what happened with individual source code entities. For instance, you have a \emph{metrics tool} at your disposal, which allows you to quantify the size of entities in the source-code and use these numbers as a basis for comparison. As an alternative, you have a \emph{configuration management} system that can provide you with information about particular changes to source-code entities.
-
-\item You have enough \emph{expertise with refactorings} in the implementation language being used, so you are able to recognize refactorings from their effects on source-code. Moreover, once you know which refactorings have been applied, you can use this expertise to make an educated guess at the underlying design rationale.
-
-\item You have a \emph{source-code browser} that allows you to query which methods invoke a given operation (even for polymorphic operations), so you can find out dependencies between classes and investigate how they are affected by the refactorings.
+\item 두 후속 릴리스 사이의 변경 사항을 식별하는 도구가 있더라도 대부분의 변경 사항은 \emph{새로운} 기능 추가와 관련이 있다. 학습 과정을 재구성하고 이것이 수업 디자인에 어떻게 통합되었는지에 대한 주된 관심은 \emph{예전} 기능에 어떤 일이 일어났는지에 있다.
 \end{bulletlist}
 
-\subsection*{Solution}
+\emph{그러나 이 문제를 해결할 수 있는 이유는 다음과 같다.}
 
-Use the \ind{metrics} or configuration management tool to find entities where functionality has been \emph{removed}, because such entities are a sign of a consolidating design. Also, look for entities which change often as these may point you to an unstable part of the design.
+\begin{bulletlist}
+\item 여러분은 시스템 구조에 대해 \emph{잘 이해하고 있다}(예: \charef{초기 이해}{InitialUnderstanding}를 통해 얻은 정보), 따라서 적절한 하위 시스템에 집중할 수 있다.
 
-\subsubsection*{Hints}
+\item 시스템의 \emph{후속 릴리즈}에 액세스할 수 있으므로 버전별 소스 코드를 비교하여 변경 사항을 재구성할 수 있다.
 
-Your goal is to get a feeling for how and why the system has evolved to its current state. In particular, you want to understand which parts of the system have been heavily refactored, which parts have become stable, and which parts are hot spots of activity.
+\item 개별 소스 코드 엔티티에 어떤 일이 발생했는지 조사할 수 있는 수단이 있다. 예를 들어, 소스 코드의 엔티티 크기를 정량화하고 이 수치를 비교의 기준으로 사용할 수 있는 \emph{메트릭 도구(metrics tools)}를 사용할 수 있다. 또는 소스 코드 엔티티의 특정 변경 사항에 대한 정보를 제공할 수 있는 \emph{구성 관리} 시스템을 사용할 수도 있다.
 
-Portions of the software system that have been heavily extended are simply a sign of growth, not of evolution of the design. On the other hand, portions where software has been \emph{removed} are signs that the design of the system has been altered. By understanding how it has been altered, you can obtain insights into the stability of the design.
+\item 사용 중인 구현 언어에 대한 충분한 \emph{리팩터링에 대한 전문 지식}이 있으므로 소스 코드에 대한 리팩터링의 영향을 통해 리팩터링을 인식할 수 있다. 또한 어떤 리팩터링이 적용되었는지 알고 나면 이 전문 지식을 바탕으로 기본 설계 근거를 추측할 수 있다.
+
+\item 특정 연산을 호출하는 메서드(다형성 연산의 경우에도)를 쿼리할 수 있는 \emph{소스 코드 브라우저}가 있으므로 클래스 간의 종속성을 파악하고 리팩터링의 영향을 받는 방식을 조사할 수 있다.
+\end{bulletlist}
+
+\subsection*{솔루션}
+
+\ind{메트릭}\emph{(metrics)} 또는 구성 관리 도구를 사용하여 기능이 \emph{제거된(removed)} 엔티티를 찾으면 이러한 엔티티는 통합 설계의 신호이므로 이를 찾아보자. 또한 자주 변경되는 엔티티는 디자인의 불안정한 부분을 가리킬 수 있으므로 자주 변경되는 엔티티를 찾아보자.
+
+\subsubsection*{힌트}
+
+여러분의 목표는 시스템이 어떻게 그리고 왜 현재 상태로 발전해 왔는지를 파악하는 것이다. 특히 시스템의 어느 부분이 크게 리팩터링되었는지, 어느 부분이 안정화되었는지, 어느 부분이 활동의 핫스팟인지 파악하고 싶을 것이다.
+
+소프트웨어 시스템에서 크게 확장된 부분은 설계의 진화가 아니라 단순히 성장의 신호일 뿐이다. 반면에 소프트웨어가 \emph{제거된(removed)} 부분은 시스템 설계가 변경되었다는 신호이다. 설계가 어떻게 변경되었는지 이해하면 설계의 안정성에 대한 통찰력을 얻을 수 있다.
 
 \noindent
-\emph{Unstable design.}
-If you detect repeated growth and refactoring in the same portion of the system, that should be a sign that the design is unstable. It may indicate opportunities to redesign that portion of the system to better accommodate the kinds of changes and extensions that habitually take place.
+\emph{불안정한 디자인.}
+시스템의 동일한 부분에서 반복적인 성장과 리팩터링이 감지되면 설계가 불안정하다는 신호일 수 있다. 습관적으로 발생하는 변경 및 확장을 더 잘 수용하기 위해 해당 부분을 재설계할 기회가 있음을 나타낼 수 있다.
 
 \noindent
-\emph{Mature and stable design.}
-A mature subsystem will exhibit some growth and refactoring, followed by a period of stability. Early versions of the subsystem will show growth followed by refactoring, followed by a period in which only new classes and subclasses are added. As the hierarchy stabilizes, classes near the top of the hierarchy will exhibit only moderate growth, but little refactoring.
+\emph{성숙하고 안정적인 설계.}
+성숙한 하위 시스템은 어느 정도 성장과 리팩토링을 거친 후 안정기에 접어든다. 초기 버전의 서브시스템은 성장과 리팩터링을 거친 후 새로운 클래스와 서브클래스만 추가되는 시기를 거친다. 계층 구조가 안정화되면 계층 구조의 최상단에 있는 클래스는 적당한 성장만 보일 뿐 리팩터링은 거의 이루어지지 않는다.
 
-\subsection*{Tradeoffs}
+\subsection*{트레이드오프}
 
-\subsubsection*{Pros}
+\subsubsection*{장점}
 
 \begin{bulletlist}
-\item \emph{Concentrates on important design artifacts,}
-because the changes point you to those places where the design is expanding or consolidating and this in turn provides insight into the underlying design rationale.
+\item \emph{중요한 디자인 아티팩트에 집중.}
+변경 사항은 디자인이 확장되거나 통합되는 부분을 가리키며, 이는 다시 기본 디자인 근거에 대한 통찰력을 제공하기 때문이다.
 
-\item \emph{Provides an unbiased view of the system,}
-because you do not have to formulate assumptions about what to expect in the software (in contrast to top-down techniques like \patpgref{Speculate about Design}{SpeculateAboutDesign}).
+\item \emph{시스템에 대한 편견 없는 시각을 제공.}
+소프트웨어에서 기대할 수 있는 것에 대한 가정을 공식화할 필요가 없기 때문이다(\patpgref{디자인 추측하기}{SpeculateAboutDesign}과 같은 하향식 기법과는 대조적임).
 \end{bulletlist}
 
-\subsubsection*{Cons}
+\subsubsection*{단점}
 
 \begin{bulletlist}
-\item \emph{Requires considerable experience,}
-in the sense that the reverse engineer must be well aware of how the refactorings interact with the coding idioms in the particular implementation language.
+\item \emph{상당한 경험 필요.}
+리버스 엔지니어가 리팩터링이 특정 구현 언어의 코딩 관용구와 어떻게 상호 작용하는지 잘 알고 있어야 한다는 의미에서 상당한 경험이 필요하다.
 
-\item \emph{Considerable tool support is required,}
-especially (a) a metrics tool or a configuration management system; (b) a code browsers that is able to trace back polymorphic method invocations.
+\item \emph{상당한 도구 지원이 필요.}
+특히 (a) 메트릭 도구 또는 구성 관리 시스템, (b) 다형성 메서드 호출을 역추적할 수 있는 코드 브라우저가 필요하다.
 \end{bulletlist}
 
-\subsubsection*{Difficulties}
+\subsubsection*{어려움}
 
 \begin{bulletlist}
-\item \emph{Imprecise for many changes,}
-because when too many changes have been applied on the same piece of code, it becomes difficult to reconstruct the change process.
+\item \emph{변경 사항이 많을 경우 부정확함.}
+동일한 코드에 너무 많은 변경 사항이 적용되면 변경 프로세스를 재구성하기가 어려워지기 때문이다.
 
-\item \emph{Sensitive to renaming,}
-if one identifies classes and methods via their name\footnote{Note that some configuration management systems keep track of renaming operations which will of course alleviate the problem.}. Then rename operations will show up as removals and additions which makes interpreting the data more difficult.
+\item \emph{이름 변경에 민감함.}
+이름을 통해 클래스와 메서드를 식별하는 경우\footnote{일부 구성 관리 시스템은 이름 변경 작업을 추적하여 문제를 완화할 수 있다.} 그렇다. 그러면 이름 변경 작업이 제거 및 추가 작업으로 표시되어 데이터 해석이 더 어려워진다.
 \end{bulletlist}
 
 %:HERE<===
 
-\subsection*{Rationale}
+\subsection*{근거}
 
-Many object-oriented systems came into being via a combination of iterative and incremental development (see \cite{Booc94a} \cite{Gold95a} \cite{Jaco97a} \cite{Reen96a}). That is, the original development team recognized their lack of problem domain expertise and therefore invested in a learning process where each learning phase resulted in a new system release. It is worthwhile to reconstruct that learning process because it will help you to understand the rationale embodied in the system design.
+많은 객체 지향 시스템은 반복적 개발과 점진적 개발의 조합을 통해 탄생했다(\cite{Booc94a} \cite{Gold95a} \cite{Jaco97a} \cite{Reen96a} 참조). 즉, 원래 개발팀은 문제 영역에 대한 전문 지식이 부족하다는 것을 인식하고 각 학습 단계가 새로운 시스템 릴리스로 이어지는 학습 프로세스에 투자했다. 이러한 학습 과정을 재구성하는 것은 시스템 설계에 구현된 근거를 이해하는 데 도움이 되므로 가치가 있다.
 
-One way to reconstruct the learning process is to recover its primitive steps. In object-oriented parlance, these steps are called refactorings and consequently this pattern tells you how to recover refactorings like they have been applied in the past. The technique itself compares two subsequent releases of the source code identifying entities that decrease in size, because that's the typical symptom of functionality that has been moved elsewhere.
+학습 과정을 재구성하는 한 가지 방법은 초기 단계를 복구하는 것이다. 객체 지향 용어로 이러한 단계를 리팩터링이라고 하며, 따라서 이 패턴은 과거에 적용되었던 리팩터링을 복구하는 방법을 알려준다. 이 기술 자체는 소스 코드의 두 후속 릴리스를 비교하여 크기가 줄어든 엔티티를 식별하는데, 이는 다른 곳으로 이동한 기능의 일반적인 증상이기 때문이다.
 
-\subsection*{Known Uses}
+\subsection*{알려진 용도}
 
-We ran an experiment on three medium-sized systems implemented in \ind{Smalltalk}. As reported in \cite{Deme00a}, these case studies suggest that some simple heuristics can support the reverse engineering process by focusing attention on parts of the system where functionality has been removed. This way, we could for instance detect where a class had been split or where methods have been moved to a sibling class. Of course these refactorings must be examined in further detail to guess the intent behind the refactoring. This is never easy but in our experience has proven worthwhile. In one particular case for instance, we discovered several classes where methods had been moved to sibling classes. Closer examination revealed that the reengineer was moving these methods to break circular dependencies and was in fact introducing a layer.
+저희는 \ind{Smalltalk}로 구현된 세 개의 중간 규모 시스템에서 실험을 진행했다. cite{Deme00a}에 보고된 바와 같이, 이 사례 연구는 몇 가지 간단한 휴리스틱을 통해 기능이 제거된 시스템 부분에 주의를 집중함으로써 리버스 엔지니어링 프로세스를 지원할 수 있음을 시사한다. 예를 들어 클래스가 분할된 위치나 메서드가 형제 클래스로 이동된 위치를 감지할 수 있다. 물론 이러한 리팩터링은 리팩터링의 의도를 추측하기 위해 더 자세히 조사해야 한다. 결코 쉬운 일은 아니지만 경험상 그만한 가치가 있는 것으로 입증되었다. 예를 들어 한 특별한 사례에서 메서드가 형제 클래스로 이동된 여러 클래스를 발견했다. 자세히 살펴보니 리엔지니어가 순환 종속성을 끊기 위해 이러한 메서드를 옮겼고 실제로는 레이어를 도입한 것이었다.
 
-Other researchers also report on examining changes to support the reverse engineering process. For instance, Ball \etal annotate code views with colors showing code age \cite{Ball96a}. On the other hand, Jazayeri \etal use a three-dimensional visual representation for examining a system's software release history \cite{Jaza99a}. The same people have also investigated which change requests affect which software modules to detect logical dependencies between software modules \cite{Gall98a}.
+다른 연구자들도 리버스 엔지니어링 프로세스를 지원하기 위한 변경 사항을 검토한 결과를 보고했다. 예를 들어, 볼외 연구자는 코드 뷰에 코드 수명을 나타내는 색상으로 주석을 달았다 \cite{Ball96a}. 반면에 자자예리는 시스템의 소프트웨어 릴리스 이력을 조사할 때 3차원 시각적 표현을 사용한다 \cite{Jaza99a}. 또한 같은 사람들이 소프트웨어 모듈 간의 논리적 종속성을 감지하기 위해 어떤 변경 요청이 어떤 소프트웨어 모듈에 영향을 미치는지 조사했다 \cite{Gall98a}.
 
-\subsection*{What Next}
+\subsection*{다음 단계}
 
-Now that you discovered some stable parts in the design, you will probably want to reuse them. In that case take some precautions: first document the interfaces of that part (see \patref{Look for the Contracts}{LookForTheContracts}) and then write the corresponding test cases (see \patpgref{Test the Interface, Not the Implementation}{TestTheInterfaceNotTheImplementation}).
+이제 디자인에서 안정적인 부분을 발견했으므로 이를 재사용하고 싶을 것이다. 이 경우 몇 가지 예방 조치를 취하자. 먼저 해당 부분의 인터페이스를 문서화하고(\patref{컨트랙트 찾기}{LookForTheContracts} 참조), 해당 테스트 케이스를 작성하세요(\patpgref{구현이 아닌 인터페이스 테스트하기}{TestTheInterfaceNotTheImplementation} 참조).
 
-On the other hand, the unstable parts of the design should probably be dismissed Nevertheless, if the unstable part seems crucial for your reengineering project, then you must seek which change requests caused the instability. In that case, \patpgref{Chat with the Maintainers}{ChatWithTheMaintainers} or even \patpgref{Interview During Demo}{InterviewDuringDemo} and based on this knowledge decide how to restructure that part so that it is better suited for the kind of change requests that come in.
+반면에 설계의 불안정한 부분은 삭제해야 한다. 그럼에도 불구하고 불안정한 부분이 리엔지니어링 프로젝트에 중요해 보인다면 어떤 변경 요청이 불안정성을 유발했는지 찾아야 한다. 이 경우 \patpgref{유지보수자와 담소나누기}{ChatWithTheMaintainers} 또는 \patpgref{데모 중 인터뷰하기}{InterviewDuringDemo}에서 이 지식을 바탕으로 들어오는 변경 요청의 종류에 더 적합하도록 해당 부분을 어떻게 재구성할지 결정하자.
 
 %=============================================================
 \ifx\wholebook\relax\else
