@@ -41,7 +41,7 @@
 \subsection*{포스: 주요한 요구사항}
 
 \begin{bulletlist}
-\item 빅뱅 마이그레이션(Big-bang migration)은 실패 위험이 높다.
+\item 빅뱅 마이그레이션(Big-bang migration)은 실패 리스크가 높다.
 
 \item 한 번에 너무 많은 변경 사항을 도입하면 사용자가 거리감을 느낄 수 있다.
 
@@ -66,7 +66,7 @@
 
 이 클러스터의 핵심 메시지는 \patref{시스템 점진적 마이그레이션하기}{MigrateSystemsIncrementally}이다. 그러나 이것은 말처럼 쉽지 않다. 그림 25에서 \patref{시스템 점진적 마이그레이션하기}{MigrateSystemsIncrementally}를 수행하려면 수많은 다른 패턴을 고려해야 한다는 것을 알 수 있다. 시스템 마이그레이션에 대한 방대한 문헌이 존재하기 때문에 이 주제를 자세히 다루지는 않겠다. 그러나 객체 지향 레거시 시스템을 리엔지니어링하는 데 가장 중요하다고 생각되는 패턴을 선택하고 주요 요점을 요약했다. 적절한 경우에 대해 독자는 추가 정보 출처를 찾을 수 있다.
 
-이 클러스터의 중심 패턴은 \patref{시스템 점진적 마이그레이션}{MigrateSystemsIncrementally}이지만, 핵심 동기는 \patref{사용자 참여시키기}{InvolveTheUsers}와 \patref{자신감 구축하기}{BuildConfidence}에서 제공된다. 이 처음 세 가지 패턴은 위험을 최소화하고 성공 확률을 높이기 위한 기본 패턴이다.
+이 클러스터의 중심 패턴은 \patref{시스템 점진적 마이그레이션}{MigrateSystemsIncrementally}이지만, 핵심 동기는 \patref{사용자 참여시키기}{InvolveTheUsers}와 \patref{자신감 구축하기}{BuildConfidence}에서 제공된다. 이 처음 세 가지 패턴은 리스크를 최소화하고 성공 확률을 높이기 위한 기본 패턴이다.
 
 \begin{bulletlist}
 \item \patref{사용자 참여시키기}{InvolveTheUsers}는 전체 리엔지니어링 프로세스에 사용자를 긴밀하게 참여시키고, 중간 결과물을 사용하게 하고, 강력한 지원을 제공함으로써 사용자가 새로운 시스템을 받아들일 가능성을 높인다. 단계별로 \patref{시스템 점진적 마이그레이션하기}{MigrateSystemsIncrementally}와 \patref{자신감 구축하기}{BuildConfidence}를 사용하면 더 쉽게 달성할 수 있다.
@@ -79,7 +79,7 @@
 다음 사례도 준수하지 않으면 \patref{시스템 점진적 마이그레이션하기}{MigrateSystemsIncrementally}를 수행하기가 매우 어렵다.
 
 \begin{bulletlist}
-\item \patref{목표 솔루션 프로토타입하기}{PrototypeTheTargetSolution}을 사용하여 새 아키텍처와 새로운 기술적 위험을 테스트한다. 이미 실행 중인 시스템이 있기 때문에 프로토타입이 필요 없다고 생각하기 쉽지만, 이는 거의 항상 실수이다.
+\item \patref{목표 솔루션 프로토타입하기}{PrototypeTheTargetSolution}을 사용하여 새 아키텍처와 새로운 기술적 리스크를 테스트한다. 이미 실행 중인 시스템이 있기 때문에 프로토타입이 필요 없다고 생각하기 쉽지만, 이는 거의 항상 실수이다.
 
 \item \patref{실행 버전 항상 보유하기}{AlwaysHaveARunningVersion}는 변경 사항을 자주 통합하여 동기화 상태를 유지하는 데 도움이 된다.
 
@@ -89,7 +89,7 @@
 상황에 따라 \patref{시스템 점진적 마이그레이션하기}{MigrateSystemsIncrementally}에 도움이 될 수 있는 다양한 방법이 있다.
 
 \begin{bulletlist}
-\item \patref{뉴 타운으로 가는 다리 만들기}{MakeABridgeToTheNewTown}는 (데이터) ``다리''의 은유를 도입하여 레거시 컴포넌트에서 대체 컴포넌트로 데이터를 점진적으로 마이그레이션하는 동시에 두 요소가 함께 실행될 수 있도록 한다. 모든 데이터가 전송되면 레거시 컴포넌트를 폐기할 수 있다.
+\item \patref{뉴 타운으로 가는 브리지 만들기}{MakeABridgeToTheNewTown}는 (데이터) ``다리''의 은유를 도입하여 레거시 컴포넌트에서 대체 컴포넌트로 데이터를 점진적으로 마이그레이션하는 동시에 두 요소가 함께 실행될 수 있도록 한다. 모든 데이터가 전송되면 레거시 컴포넌트를 폐기할 수 있다.
 
 \item \patref{올바른 인터페이스 제시하기}{PresentTheRightInterface}는 이전 기능을 래핑하여 실제로 원하는 추상화를 내보내 목표 시스템을 점진적으로 개발하는 데 도움이 된다.
 
@@ -151,7 +151,7 @@
 
 사용자와 개발자 간의 접촉을 장려할 수 있는 환경을 조성하자. 물리적 위치가 중요하다.
 
-정기적으로 중간 결과물을 전달하고 피드백을 받을 수 있는 간단한 절차를 마련하자. 초기 프로토타입은 특히 위험한 신기술이나 접근 방식을 평가하는 데 도움이 될 수 있다. 좋은 전략은 사용자가 새 시스템이 구축되는 대로 사용할 수 있도록 \patpgref{시스템 점진적 마이그레이션하기}{MigrateSystemsIncrementally}를 수행하는 것이다. 사용자가 느끼는 친숙도를 떨어 뜨리지 하기 위해 \patpgref{친숙도 보존하기}{ConserveFamiliarity}를 설정해야 한다.
+정기적으로 중간 결과물을 전달하고 피드백을 받을 수 있는 간단한 절차를 마련하자. 초기 프로토타입은 특히 리스크가 큰 신기술이나 접근 방식을 평가하는 데 도움이 될 수 있다. 좋은 전략은 사용자가 새 시스템이 구축되는 대로 사용할 수 있도록 \patpgref{시스템 점진적 마이그레이션하기}{MigrateSystemsIncrementally}를 수행하는 것이다. 사용자가 느끼는 친숙도를 떨어 뜨리지 하기 위해 \patpgref{친숙도 보존하기}{ConserveFamiliarity}를 설정해야 한다.
 
 \subsection*{트레이드오프}
 
@@ -261,11 +261,11 @@
 
 \subsection*{근거}
 
-작은 단계를 밟아나가면 개별 단계가 실패할 위험을 줄일 수 있다. 긍정적인 결과를 자주 얻으면 자신감을 키우는 데 도움이 된다. 같은 맥락에서 \ind{익스트림 프로그래밍}(Extreme Programming)은 \ind{소규모 릴리즈}(Small Releases)를 지지한다. \cite{Beck00a}. 부정적인 결과라도 진행 상황을 모니터링하고 상황을 더 잘 이해하는 데 도움이 되므로 자신감을 키우는 데 도움이 된다.
+작은 단계를 밟아나가면 개별 단계가 실패할 리스크를 줄일 수 있다. 긍정적인 결과를 자주 얻으면 자신감을 키우는 데 도움이 된다. 같은 맥락에서 \ind{익스트림 프로그래밍}(Extreme Programming)은 \ind{소규모 릴리즈}(Small Releases)를 지지한다. \cite{Beck00a}. 부정적인 결과라도 진행 상황을 모니터링하고 상황을 더 잘 이해하는 데 도움이 되므로 자신감을 키우는 데 도움이 된다.
 
 \subsection*{관련 패턴}
 
-\patref{목표 솔루션 프로토타입 만들기}{PrototypeTheTargetSolution}와 \patref{뉴 타운으로 가는 다리 만들기}{MakeABridgeToTheNewTown}를 사용하면 작은 단계로 결과를 쉽게 보여줄 수 있다. 
+\patref{목표 솔루션 프로토타입 만들기}{PrototypeTheTargetSolution}와 \patref{뉴 타운으로 가는 브리지 만들기}{MakeABridgeToTheNewTown}를 사용하면 작은 단계로 결과를 쉽게 보여줄 수 있다. 
 
 \patref{사용자 참여시키기}{InvolveTheUsers}를 사용하면 \patref{자신감 구축하기}{BuildConfidence}를 더 쉽게 수행할 수 있다. 
 
@@ -346,7 +346,7 @@
 \begin{bulletlist}
 \item 새로운 아키텍처로 마이그레이션하는 것이 어려울 수 있다. 새 아키텍처를 적용하기 위해 \patref{목표 솔루션 프로토타입하기}{PrototypeTheTargetSolution}를 사용할 수 있다, 그리고 기본 구성 요소를 마이그레이션하는 동안 레거시 인터페이스를 숨기려면 \patref{올바른 인터페이스 제시하기}{PresentTheRightInterface}를 이전 시스템에 적용할 수 있다.
 
-\item 실행 중인 시스템을 변경하는 것은 위험하다. 반드시 \patref{변경할 때마다 회귀 테스트하기}{RegressionTestAfterEveryChange}를 수행하자. 
+\item 실행 중인 시스템을 변경하는 것은 리스크가 크다. 반드시 \patref{변경할 때마다 회귀 테스트하기}{RegressionTestAfterEveryChange}를 수행하자. 
 \end{bulletlist}
 
 \subsection*{근거}
@@ -365,13 +365,13 @@
 
 리엔지니어링하거나 교체할 의도가 없는 레거시 컴포넌트에 대해서는 \patref{올바른 인터페이스 제시하기}{PresentTheRightInterface}를 적용하는 것이 좋다.
 
-교체하려는 레거시 컴포넌트에서 데이터를 마이그레이션해야 하는 경우 \patpgref{뉴 타운으로 가는 다리 만들기}{MakeABridgeToTheNewTown}을 적용할 수 있다.
+교체하려는 레거시 컴포넌트에서 데이터를 마이그레이션해야 하는 경우 \patpgref{뉴 타운으로 가는 브리지 만들기}{MakeABridgeToTheNewTown}을 적용할 수 있다.
 
 %=================================================================
 %:PATTERN -- {Prototype the Target Solution}
 \pattern{목표 솔루션 프로토타입하기n}{PrototypeTheTargetSolution}
 
-\intent{프로토타입을 만들어 새 대상 솔루션으로 마이그레이션할 위험을 평가한다.}
+\intent{프로토타입을 만들어 새 대상 솔루션으로 마이그레이션할 리스크를 평가한다.}
 
 \subsection*{문제}
 
@@ -380,7 +380,7 @@
 \emph{이 문제는 다음과 같은 이유로 어렵다.}
 
 \begin{bulletlist}
-\item 작동 중인 시스템을 급격하게 변경하는 것은 위험하다.
+\item 작동 중인 시스템을 급격하게 변경하는 것은 리스크가 크다.
 
 \item 설계 변경이 기존 기능에 어떤 영향을 미칠지 예측하기 어려울 수 있다.
 
@@ -400,7 +400,7 @@
 \subsubsection*{단계}
 
 \begin{bulletlist}
-\item 리엔지니어링 프로젝트의 가장 큰 기술적 위험을 파악하자. 일반적으로 다음과 같은 우려 사항이 있다.
+\item 리엔지니어링 프로젝트의 가장 큰 기술적 르시크를 파악하자. 일반적으로 다음과 같은 우려 사항이 있다.
 
 \begin{bulletlist}
 \item 새로운 시스템 아키텍처의 선택
@@ -455,7 +455,7 @@
 \index{러브, 톰}
 \index{푸트, 브라이언}
 \index{요더, 조셉}
-러브 \cite{Love93a}는 여기서 한 걸음 더 나아가 객체 지향 시스템의 경우 ``버릴 것을 각오하고 두 번 구현해야 한다(write two to throw away)''고 경고한다! 푸트와 요더 \cite{Foot00a}는 무엇보다도 \ind{버릴 임시 코드(Throwaway Code)}가 도메인 요구 사항을 명확히 하는 가장 좋은 방법이라고 주장하지만, 프로토타입이 ``\ind{큰 진흙 뭉치(Big Ball of Mud)}''로 발전할 위험이 있다고 경고하기도 한다.
+러브는 여기서 한 걸음 더 나아가 객체 지향 시스템의 경우 ``버릴 것을 각오하고 두 번 구현해야 한다(write two to throw away)''고 경고한다\cite{Love93a}. 푸트와 요더는 무엇보다도 \ind{버릴 임시 코드(Throwaway Code)}가 도메인 요구 사항을 명확히 하는 가장 좋은 방법이라고 주장하지만, 프로토타입이 ``\ind{큰 진흙 뭉치(Big Ball of Mud)}''로 발전할 리스크가 있다고 경고하기도 한다\cite{Foot00a}.
 
 \subsection*{관련 패턴}
 
@@ -475,29 +475,29 @@
 \emph{이 문제는 다음과 같은 이유로 어렵다.}
 
 \begin{bulletlist}
-\item It can be hard to demo a software system under development, or to discuss problems with users since there is often no stable, running version of the system available.
+\item 개발 중인 소프트웨어 시스템을 데모하거나 사용자와 문제를 논의하기 어려울 수 있다. 시스템의 안정적으로 실행되는 버전이 없는 경우가 많기 때문이다.
 
-\item Integrating changes from multiple versions of a system can be slow and painful.
+\item 여러 버전의 시스템에서 변경 사항을 통합하는 작업은 느리고 번거로울 수 있다.
 \end{bulletlist}
 
 \emph{그러나 이 문제를 해결할 수 있는 이유는 다음과 같다.}
 
 \begin{bulletlist}
-\item You don't have to wait until a component is ``finished'' before integrating it.
+\item 시스템 통합을 위해 컴포넌트 ``구현 완료''를 기다릴 필요가 없다.
 \end{bulletlist}
 
 \subsection*{해결}
 
-Institute a discipline of integrating new changes and developments on a daily basis.
+매일 새로운 변경 사항과 개발 사항을 통합하는 규칙을 확립하자.
 
 \subsubsection*{단계}
 
 \begin{bulletlist}
-\item Have version management and configuration management systems in place.
+\item 버전 관리 및 형상 관리(configuration management) 시스템을 마련하자.
 
-\item Make sure you have regression tests in place for the parts you are working on.
+\item 작업 중인 부분에 대한 회귀 테스트가 마련되어 있는지 확인하자.
 
-\item Institute a discipline of short transactions for checking out system components and checking them back in again. Plan iterations to be as short as possible to allow changes to be integrated into a running system.
+\item 시스템 컴포넌트를 체크 아웃하고 다시 체크인하는 짧은 트랜잭션 규율을 마련하자. 변경 사항이 실행 중인 시스템에 통합될 수 있도록 가능한 한 짧게 반복(iteration)을 계획하자.
 \end{bulletlist}
 
 \subsection*{트레이드오프}
@@ -505,131 +505,131 @@ Institute a discipline of integrating new changes and developments on a daily ba
 \subsubsection*{장점}
 
 \begin{bulletlist}
-\item You always have a working version to demo.
+\item 항상 데모할 수 있는 작동하는 버전이 있다.
 
-\item You can always have a working version to run your regression tests.
+\item 회귀 테스트를 실행하기 위해 항상 작동하는 버전을 사용할 수 있다.
 
-\item You can quickly validate your changes, thereby helping you to \patref{자신감 구축하기}{BuildConfidence}.
+\item 변경 사항을 빠르게 검증할 수 있어 \patref{자신감 구축하기}{BuildConfidence}에 도움이 된다.
 \end{bulletlist}
 
 \subsubsection*{단점}
 
 \begin{bulletlist}
-\item You must continuously integrate changes.
+\item 변경 사항을 지속적으로 통합해야 한다.
 \end{bulletlist}
 
 \subsubsection*{어려움}
 
 \begin{bulletlist}
-\item Large systems may have very long build times. You may need to rearchitect the system first to enable shorter build times.
+\item 대규모 시스템의 경우 빌드 시간이 매우 길어질 수 있다. 빌드 시간을 단축하려면 먼저 시스템을 재설계해야 할 수 있다.
 
-\item It can be hard to break some kinds of large modifications into meaningful updates that can be individually integrated. 
+\item 일부 종류의 대규모 수정 사항을 개별적으로 통합할 수 있는 의미 있는 업데이트로 나누기가 어려울 수 있다.
 \end{bulletlist}
 
 \subsection*{근거}
 
-Many practitioners advocate a process of continuous integration as a way to avoid a risky and painful big-bang integration \cite{Booc94a}.
+많은 실무자들은 리스크가 크고 고통스러운 빅뱅 통합을 피하기 위한 방법으로 지속적 통합 프로세스를 지지한다 \cite{Booc94a}.
 
 \subsection*{관련 패턴}
 
-\patref{변경할 때마다 회귀 테스트하기}{RegressionTestAfterEveryChange} minimizes the risk of defects creeping in during integration. 
+\patref{변경할 때마다 회귀 테스트하기}{RegressionTestAfterEveryChange}는 통합 중에 결함이 발생할 리스크를 최소화한다.
 
-\ind{Continuous Integration} \cite{Booc94a} \cite{Beck00a} is a proven way to \patref{실행 버전 항상 보유하기}{AlwaysHaveARunningVersion}.
+\ind{지속적 통합(Continuous Integration)} \cite{Booc94a} \cite{Beck00a}는 \patref{실행 버전 항상 보유하기}{AlwaysHaveARunningVersion}에 대한 입증된 방법이다.
 
 %=================================================================
 %:PATTERN -- {Regression Test After Every Change}
 \pattern{변경할 때마다 회귀 테스트하기}{RegressionTestAfterEveryChange}
 
 
-\intent{Build confidence by making sure that whatever worked before still works.}
+\intent{이전에도 효과가 있었던 것이 여전히 효과가 있는지 확인하여 신뢰를 구축한다.}
 
 \subsection*{문제}
 
-How can you be sure that the last change you made won't break the system?
+마지막으로 변경한 내용이 시스템을 손상시키지 않는다는 것을 어떻게 확신할 수 있는가?
 
 \emph{이 문제는 다음과 같은 이유로 어렵다.}
 
 \begin{bulletlist}
-\item In a complex system, small changes can have unexpected side effects. A seemingly innocuous change may break something without this being immediately discovered.
+\item 복잡한 시스템에서는 작은 변경이 예상치 못한 부작용을 초래할 수 있습니다. 무해해 보이는 변경이 즉시 발견되지 않고 무언가를 망가뜨릴 수 있다.
 \end{bulletlist}
 
 \emph{그러나 이 문제를 해결할 수 있는 이유는 다음과 같다.}
 
 \begin{bulletlist}
-\item You have written test suites that express how the system should behave.
+\item 시스템이 어떻게 동작해야 하는지 표현하는 테스트 스위트(test suite)를 작성했다.
 \end{bulletlist}
 
 \subsection*{해결}
 
-Run your regression test suite every time you think you have reached a stable state.
+안정적인 상태에 도달했다고 생각될 때마다 회귀 테스트 스위트를 실행하자.
 
 \subsection*{트레이드오프}
 
 \subsubsection*{장점}
 
 \begin{bulletlist}
-\item It is easier to \patref{실행 버전 항상 보유하기}{AlwaysHaveARunningVersion}.
+\item \patref{실행 버전 항상 보유하기}{AlwaysHaveARunningVersion}가 더 쉽다.
 
-\item It is easier to \patref{자신감 구축하기}{BuildConfidence} as you proceed.
+\item 진행하면서 \patref{자신감 구축하기}{BuildConfidence}가 더 쉽다.
 \end{bulletlist}
 
 \subsubsection*{단점}
 
 \begin{bulletlist}
-\item You must relentlessly write the tests. 
+\item 테스트를 끊임없이 작성해야 한다. 
 \end{bulletlist}
 
 \subsubsection*{어려움}
 
 \begin{bulletlist}
-\item The legacy system may not have adequate regression tests defined. To enable evolution, you will have to \patpgref{Grow Your Test Base Incrementally}{GrowYourTestBaseIncrementally}
+\item 레거시 시스템에 적절한 회귀 테스트가 정의되어 있지 않을 수 있다. 시스템이 진화하도록 하려면 \patpgref{기본 테스트를 증가시키기}{GrowYourTestBaseIncrementally}를 사용해야 한다.
 
-\item Tests can only show that defects are present, not that they are absent. You may have failed to test precisely the aspect that you have broken.
+\item 테스트는 결함이 있다는 것만 보여줄 수 있고 결함이 없다는 것은 보여주지 못한다. 망가져 있는 부분을 정확하게 테스트하지 못했을 수 있다.
 
-\item Run the tests may be very time-consuming, so you might want to run only those tests that you think might be affected by your change. Categorize your tests to avoid ``ad hoc'' testing of changes, but run all the tests at least once a day.
+\item 테스트를 실행하는 데 시간이 많이 걸릴 수 있으므로 변경 사항으로 인해 영향을 받을 수 있다고 생각되는 테스트만 실행하는 것이 좋다. 변경 사항에 대한 ``에드혹'' 테스트를 피하기 위해 테스트를 분류하되, 모든 테스트를 적어도 하루에 한 번씩 실행하자.
 \end{bulletlist}
 
 \subsection*{근거}
 
-Regression tests tell you that whatever ran before still runs. If you consistently build up tests for defects you discover and new features, you will end up with a reusable test base that gives you confidence that your changes are sound, and helps you detect problems earlier.
+회귀 테스트는 이전에 실행된 테스트가 여전히 동작되고 있음을 알려준다. 발견한 결함과 새로운 기능에 대한 테스트를 지속적으로 구축하면 재사용 가능한 테스트 기반을 확보하게 되어 변경 사항이 건전하다는 확신을 갖게 되고 문제를 조기에 발견하는 데 도움이 된다.
 
-\index{Davis, Alan}
-Davis advocates ``\patref{변경할 때마다 회귀 테스트하기}{RegressionTestAfterEveryChange}'' \cite{Davi95a} as standard Software Development practice.
+\index{데이비스, 앨런}
+데이비스는  ``\patref{변경할 때마다 회귀 테스트하기}{RegressionTestAfterEveryChange}''를 표준 소프트웨어 개발 실천법으로 \cite{Davi95a}를 권장한다.
 
 \subsection*{관련 패턴}
 
-You should have already started to \patpgref{진화 활성화를 위한 테스트 작성하기}{WriteTestsToEnableEvolution}. 
+이미 \patpgref{진화 활성화를 위한 테스트 작성하기}{진화 활성화를 위한 테스트 작성하기}를 시작했어야 한다. 
 
-\index{Test-Driven development}A common practice in \ind{Extreme Programming} is to write tests \emph{before} you implement new functionality \cite{Jeff01a}. In the context of reengineering, you should consider writing tests that will fail before you make a change, and will pass if the change is correctly implemented. (Unfortunately it is not generally possible to design tests that will \emph{only} pass if the change is correct!)
+\index{테스트 주도 개발(Test-Driven development)} \ind{익스트림 프로그래밍(Extreme Programming)}의 일반적인 실천법은 새로운 기능을 구현하기 \cite{Jeff01a} \emph{전에} 테스트를 작성하는 것이다. 리엔지니어링의 맥락에서는 변경을 하기 전에 실패하고 변경이 올바르게 구현되면 통과하는 테스트를 작성하는 것을 고려해야 한다. (안타깝게도 변경이 올바른 \emph{경우에만} 성공하는 테스트를 설계하는 것은 일반적으로 불가능하다!).
 
-Regression tests should help you to \patpgref{Retest Persistent Problems}{RetestPersistentProblems}.
+회귀 테스트는 \patpgref{지속적인 문제 재테스트하기}{RetestPersistentProblems}에 도움이 된다.
 
 %=================================================================
 %:PATTERN -- {Make a Bridge to the New Town}
-\pattern{뉴 타운으로 가는 다리 만들기}{MakeABridgeToTheNewTown}
+\pattern{뉴 타운으로 가는 브리지 만들기}{MakeABridgeToTheNewTown}
 
-\emph{Also Known As:}  The \ind{Bridge to the New Town} \cite{Kell00a}, \ind{Keep the Data --- Toss the Code} \cite{Brod95a}
+\ind{뉴 타운으로 가는 다리(Bridge to the New Town)} \cite{Kell00a}, \ind{데이터 유지 --- 코드 전달(Keep the Data --- Toss the Code)} \cite{Brod95a}로도 알려져 있다.
 
-\intent{Migrate data from a legacy system by running the new system in parallel, with a bridge in between.}
+\intent{브릿지를 사이에 두고 새 시스템을 병렬로 실행하여 레거시 시스템에서 데이터를 마이그레이션한다.}
 
 \subsection*{문제}
 
-How do you incrementally migrate data from a legacy system to its replacement while the two systems are running in tandem?
+두 시스템이 병렬로 실행되는 동안 레거시 시스템에서 대체 시스템으로 데이터를 점진적으로 마이그레이션하려면 어떻게 해야 하는가?
 
 \emph{이 문제는 다음과 같은 이유로 어렵다.}
 
 \begin{bulletlist}
-\item Some components of the legacy system are beyond repair and should be replaced.
+\item 레거시 시스템의 일부 컴포넌트는 수리가 불가능하여 교체해야 한다.
 
-\item Big-bang replacement of critical components is highly risky.
+\item 중요 컴포넌트의 갑작스러운 교체(Big-bang replacement)는 매우 리스크가 크다.
 
-\item The \emph{data} manipulated by the legacy components must be kept available and alive during the migration.
+\item 레거시 컴포넌트에 의해 조작되는 \emph{데이터}는 마이그레이션하는 동안 사용 가능한 상태로 유지되어야 한다.
 \end{bulletlist}
 
 \emph{그러나 이 문제를 해결할 수 있는 이유는 다음과 같다.}
 
 \begin{bulletlist}
-\item You have a running legacy system.
+\item 동작하는 레거시 시스템이 있다.
 \end{bulletlist}
 
 \subsection*{해결}
@@ -637,23 +637,23 @@ How do you incrementally migrate data from a legacy system to its replacement wh
 \begin{figure}
 \begin{center}
 \includegraphics[width=0.75\textwidth]{MigrationBridge}
-\caption{A Bridge helps you to transparently transfer data to the new system.}
+\caption{브리지(bridge)를 사용하면 데이터를 새 시스템으로 투명하게 전송할 수 있다.}
 \figlabel{MigrationBridge}
 \end{center}
 \end{figure}
 
-Make a (data) bridge that will incrementally transfer data from the legacy system to the replacement system as new components are ready to take the data over from their legacy counterparts.
+새 컴포넌트가 레거시 시스템에서 데이터를 가져 올 준비가 되면 레거시 시스템에서 교체할 시스템으로 데이터를 점진적으로 전송하는 (데이터) 브리지를 만들자.
 
 \subsubsection*{단계}
 
 \begin{bulletlist}
-\item Identify legacy and replacement components that deal with the same logical data entities.
+\item 동일한 논리 데이터 엔티티를 처리하는 레거시 시스템과 교체 시스템의 컴포넌트를 구별한다.
 
-\item Implement a ``\ind{data bridge}'' which is responsible for redirecting \emph{read} requests from the new component to the legacy data source, if the data have not already been migrated. The bridge is responsible for any necessary data conversion. The new component should not be aware of the bridge.
+\item 데이터가 아직 마이그레이션되지 않은 경우 새 컴포넌트에서 레거시 데이터 소스로 \emph{읽기(read)} 요청을 리디렉션하는 ``\ind{데이터 브리지}(data bridge)''를 구현한다. 브리지는 필요한 모든 데이터 변환을 담당한다. 새 컴포넌트는 브리지를 인식해서는 안 된다.
 
-\item Adapt the legacy component to redirect \emph{write} requests to the new component, so that the new data stay up-to-date.
+\item 레거시 컴포넌트를 조정하여 새 데이터가 최신 상태로 유지되도록 \emph{쓰기(write)} 요청을 새 컴포넌트로 리디렉션한다.
 
-\item When all the data have been transferred, remove the bridge and the legacy component.
+\item 모든 데이터를 옮기면 브리지와 레거시 컴포넌트를 제거한다.
 \end{bulletlist}
 
 \subsection*{트레이드오프}
@@ -661,163 +661,163 @@ Make a (data) bridge that will incrementally transfer data from the legacy syste
 \subsubsection*{장점}
 
 \begin{bulletlist}
-\item You can start using the new system without migrating all the legacy data.
+\item 모든 레거시 데이터를 마이그레이션하지 않고 새 시스템 사용을 시작할 수 있다.
 \end{bulletlist}
 
 \subsubsection*{단점}
 
 \begin{bulletlist}
-\item A data bridge can be tricky to implement correctly if there is not a simple mapping between the legacy data and the new data.
+\item 레거시 데이터와 새 데이터 사이에 간단한 매핑이 없는 경우 데이터 브리지를 올바르게 구현하기가 까다로울 수 있다.
 
-\item Once some of the data has been transferred, it can be hard to go back.
+\item 일부 데이터가 옮겨지면 되돌리기가 어려울 수 있다.
 
-\item The data bridge will add a performance overhead which may or may not be acceptable.
+\item 데이터 브리지는 성능 오버헤드를 추가한다. 이는 허용될 수도 있고 허용되지 않을 수도 있다.
 \end{bulletlist}
 
 \subsubsection*{어려움}
 
 \begin{bulletlist}
-\item \emph{``Stepwise migration schemes have proven very effective in large, layered business systems. They are not common in let's say CAD applications that have check in /check out persistence and a tightly coupled and very woven object net.''} \cite{Kell00a}
+\item \emph{``단계별 마이그레이션 방식(Stepwise migration scheme)은 대규모의 레이어드 비즈니스 시스템에서 매우 효과적인 것으로 입증되었다. 체크인/체크아웃 지속성이 있고 결합도가 높고 매우 촘촘하게 짜여진 오브젝트 망이 있는 CAD 애플리케이션에서는 일반적이지 않다.''} \cite{Kell00a}
 \end{bulletlist}
 
 \subsection*{알려진 용도}
 
-\index{Brodie, Michael}
-\index{Stonebraker, Michael}
-Brodie \& Stonebraker discuss much more thoroughly the use of data bridges and gateways in \emph{Migrating Legacy Systems} \cite{Brod95a}. 
+\index{브로디, 마이클}
+\index{스톤브레이커, 마이클}
+브로디와 스톤브레이커는\emph{레거시 시스템 마이그레이션(Migrating Legacy Systems)}에서 데이터 브리지 및 게이트웨이 사용에 대해 훨씬 더 자세히 설명한다. \cite{Brod95a}. 
 
-\index{Keller, Wolfgang}
-Keller in ``The Bridge to the New Town'' \cite{Kell00a} focusses more on the technical issue of migrating legacy data, and he points out numerous examples of the pattern successfully being applied.
+\index{켈러, 울프강}
+켈러는 ``뉴 타운으로 가는 브리지(The Bridge to the New Town)'' \cite{Kell00a}에서 레거시 데이터 마이그레이션의 기술적 문제에 더 중점을 두고 있으며, 이 패턴이 성공적으로 적용된 수많은 사례를 지적한다.
 
-There are many possible variants of this pattern, depending on whether the entire legacy system is to be replaced, or only a component, and whether users should be able to have access to both systems at the same time or not.
+이 패턴에는 레거시 시스템 전체를 교체할 것인지, 아니면 컴포넌트 하나만 교체할 것인지, 그리고 사용자가 두 시스템에 동시에 액세스할 수 있어야 하는지 여부에 따라 다양한 변형이 가능하다.
 
 \subsection*{근거}
 
-A bridge between the old and new systems allows you to let users start using features of the new system before it is complete. The bridge isolates the two systems from each other so that the new system can be developed according to a new architectural vision without influence from the legacy system.
+이전 시스템과 새 시스템 간의 브리지를 사용하면 새 시스템이 완성되기 전에 사용자가 새 시스템의 기능을 사용할 수 있도록 할 수 있다. 브리지는 두 시스템을 서로 분리하여 레거시 시스템의 영향을 받지 않고 새로운 아키텍처 비전에 따라 새 시스템을 개발할 수 있도록 한다.
 
 \subsection*{관련 패턴}
 
-A bridge helps you \patref{시스템 점진적 마이그레이션하기}{MigrateSystemsIncrementally} and thereby \patref{자신감 구축하기}{BuildConfidence}.
+브리지는 \patref{시스템 점진적 마이그레이션하기}{MigrateSystemsIncrementally}를 지원하여 \patref{자신감 구축하기}{BuildConfidence}를 지원한다.
 
 %=================================================================
 %:PATTERN -- {Present the Right Interface}
 \pattern{올바른 인터페이스 제시하기}{PresentTheRightInterface}
 
-\emph{Also Known As:}  \ind{Semantic Wrapper} \cite{Ocal00a}, \ind{Sweeping it Under the Rug} \cite{Foot00a}
+\ind{시맨틱 래퍼(Semantic Wrapper)} \cite{Ocal00a}, \ind{양탄자 밑으로 쓸어 넣기(Sweeping it Under the Rug)} \cite{Foot00a}로도 알려져 있다.
 
-\intent{Wrap a legacy system to export the right abstractions, even if they are not reflected in the existing implementation.}
+\intent{기존 구현에 반영되어 있지 않더라도 올바른 추상화를 드러나도록 레거시 시스템을 래핑한다.}
 
 \subsection*{문제}
 
-How should the new target system access legacy services during the migration process?
+마이그레이션 프로세스 중에 새 목표 시스템이 레거시 서비스를 어떻게 액세스해야 하는가?
 
 \emph{이 문제는 다음과 같은 이유로 어렵다.}
 
 \begin{bulletlist}
-\item The target system is not yet complete so you must rely on legacy services during the migration. 
+\item 목표 시스템 구현이 아직 완료되지 않았으므로 마이그레이션하는 동안 레거시 서비스에 의존해야 한다. 
 
-\item The legacy system does not present the interfaces you need for the target system.
+\item 레거시 시스템이 목표 시스템에 필요한 인터페이스를 제공하지 않는다.
 
-\item Implementing new components directly in terms of legacy components will bias the target towards the legacy architecture and design.
+\item 레거시 컴포넌트 측면에서 새 컴포넌트를 구현하면 목표 시스템이 레거시 아키텍처 및 디자인에 대해 편향이 발생한다.
 \end{bulletlist}
 
 \emph{그러나 이 문제를 해결할 수 있는 이유는 다음과 같다.}
 
 \begin{bulletlist}
-\item You don't have to access the legacy services directly.
+\item 레거시 서비스에 직접 액세스할 필요가 없다.
 \end{bulletlist}
 
 \subsection*{해결}
 
-Identify the abstractions that you want to have in the new system, and wrap up the old software to emulate the new abstractions.
+새 시스템에 포함할 추상화를 찾아네고 기존 소프트웨어를 래핑하여 새 추상화를 에뮬레이트한다.
 
-\subsubsection*{Hints}
+\subsubsection*{힌트}
 
-Consider, for example, a procedural graphics library that will be used within an object-oriented system. It will be too costly and time-consuming to reimplement the library in an object-oriented way. It would be easier to wrap it as a utility class (\ie as a class with static methods but no instances), but it would be wiser to write a slightly thicker wrapper that presents a truly object-oriented interface, but is implemented using the underlying procedural abstractions. In this way the new system will not be polluted by legacy abstractions. 
+예를 들어 객체 지향 시스템 내에서 사용되는 절차적 그래픽 라이브러리를 생각해 보자. 이 라이브러리를 객체 지향 방식으로 다시 구현하려면 너무 많은 비용과 시간이 필요하다. 유틸리티 클래스(즉, 정적 메서드는 있지만 인스턴스가 없는 클래스)로 래핑하는 것이 더 쉽겠지만, 진정한 객체 지향 인터페이스를 제공하지만 기본 절차적 추상화를 사용하여 구현되는 약간 두꺼운 래퍼를 작성하는 것이 더 현명할 것이다. 이렇게 하면 새로운 시스템이 레거시 추상화에 의해 오염되지 않는다. 
 
 \subsection*{트레이드오프}
 
 \subsubsection*{장점}
 
 \begin{bulletlist}
-\item It is easier to wean the target system from legacy services if they can use appropriate abstractions from the start.
+\item 처음부터 적절한 추상화를 사용할 수 있다면 목표 시스템을 레거시 서비스에서 떼어내기가 더 쉬워진다.
 
-\item You reduce the risk that the legacy design will adversely influence the new target.
+\item 레거시 설계가 새 대상에 악영향을 미칠 리스크를 줄일 수 있다.
 \end{bulletlist}
 
 \subsubsection*{단점}
 
 \begin{bulletlist}
-\item The new interface may not be stable, so developers may be reluctant to use it.
+\item 새 인터페이스가 안정적이지 않을 수 있으므로 개발자가 사용을 꺼릴 수 있다.
 \end{bulletlist}
 
 \subsubsection*{어려움}
 
 \begin{bulletlist}
-\item It can be hard to resist the temptation to simply wrap the procedural abstractions as utility classes.
+\item 절차적 추상화를 단순히 유틸리티 클래스로 포장하고 싶은 유혹을 뿌리치기가 어려울 수 있다.
 \end{bulletlist}
 
 \subsection*{알려진 용도}
 
-\index{O'Callaghan, Alan}
-Alan O'Callaghan \cite{Ocal00a} presents this pattern as ``\ind{Semantic Wrapper}'' briefly in the context of the \ind{ADAPTOR pattern language}, which addresses migration of large-scale business-critical legacy systems to object-oriented and component-based technology. 
+\index{오캘러한, 앨런}
+앨런 오캘러한 \cite{Ocal00a}은 대규모 비즈니스 크리티컬 레거시 시스템을 객체 지향 및 컴포넌트 기반 기술로 마이그레이션하는 \ind{ADAPTOR 패턴}의 맥락에서 이 패턴을 ``\ind{시맨틱 래퍼}(Semantic Wrapper)''로 간략하게 제시한다. 
 
 \subsection*{근거}
 
-\patref{올바른 인터페이스 제시하기}{PresentTheRightInterface} frees you from thinking in terms of the legacy design and makes it easier to consider alternative approaches.
+\patref{올바른 인터페이스 제시하기}{PresentTheRightInterface}는 레거시 설계의 관점에서 생각하지 않고 대체 접근 방식을 더 쉽게 고려할 수 있도록 해준다.
 
 \subsection*{관련 패턴}
 
-\patref{올바른 인터페이스 제시하기}{PresentTheRightInterface} superficially resembles an \patpgref{Adapter}{Adapter}, since both use wrappers as their implementation technique. An \patref{Adapter}{Adapter}, however, adapts an incompatible interfaces to another interface expected by its clients. \patref{올바른 인터페이스 제시하기}{PresentTheRightInterface}, on the other hand, introduces a new, more suitable interface to a legacy component. 
+\patref{올바른 인터페이스 제시하기}{PresentTheRightInterface}는 둘 다 래퍼를 구현 기법으로 사용하기 때문에 표면적으로는 \patpgref{Adapter}{Adapter}와 비슷하다. 그러나 \patref{Adapter}{Adapter}는 호환되지 않는 인터페이스를 클라이언트가 기대하는 다른 인터페이스에 맞게 조정한다. 반면 \patref{올바른 인터페이스 제시하기}{PresentTheRightInterface}는 레거시 컴포넌트에 더 적합한 새 인터페이스를 소개한다. 
 
-Be sure to \patref{폐기된 인터페이스 지원 중단하기}{DeprecateObsoleteInterfaces}. 
+반드시 \patref{폐기된 인터페이스 지원 중단하기}{DeprecateObsoleteInterfaces}를 사용하자. 
 
-If the new interface implemented by the \patref{올바른 인터페이스 제시하기}{PresentTheRightInterface} is not stable, you should \patref{Distinguish Public from Published Interface}{DistinguishPublicFromPublishedInterface}.
+\patref{올바른 인터페이스 제시하기}{PresentTheRightInterface}로 구현된 새 인터페이스가 안정적이지 않은 경우 \patref{공개 인터페이스와 게시된 인터페이스 구분하기}{DistinguishPublicFromPublishedInterface}를 사용해야 한다.
 
 %=================================================================
 %:PATTERN -- {Distinguish Public from Published Interface}
-\pattern{Distinguish Public from Published Interface}{DistinguishPublicFromPublishedInterface}
+\pattern{퍼블릭 인터페이스와 게시된 인터페이스 구분하기}{DistinguishPublicFromPublishedInterface}
 
-\emph{Also Known As:}  \ind{Published Interface} \cite{Ocal00a}
+\ind{게시된 인터페이스}(Published Interface) \cite{Ocal00a}로도 알려져 있다.
 
-\intent{Facilitate parallel development by distinguishing unstable ``published interfaces'' from stable ``public interfaces''.}
+\intent{불안정한 ``게시된 인터페이스(published interface)''와 안정적인 ``퍼블릭 인터페이스(published interface)''를 구분하여 병렬 개발을 용이하게 한다.}
 
 \subsection*{문제}
 
-How do you enable migration from legacy interfaces to new target interfaces while the new interfaces are still under development?
+새 인터페이스가 아직 개발 중인 동안 레거시 인터페이스에서 새 목표 인터페이스로 마이그레이션하려면 어떻게 해야 하는가?
 
 \emph{이 문제는 다음과 같은 이유로 어렵다.}
 
 \begin{bulletlist}
-\item You want to enable migration to the new target system as early as possible.
+\item 가능한 한 빨리 새 목표 시스템으로 마이그레이션을 활성화하려고 한다.
 
-\item You do not want to freeze the interfaces of new target components too early.
+\item 새 대상 컴포넌트의 인터페이스를 너무 일찍 고정하고 싶지 않다.
 
-\item Changing the interface to a component that is widely used will slow down development.
+\item 널리 사용되는 컴포넌트의 인터페이스를 변경하면 개발 속도가 느려진다.
 \end{bulletlist}
 
 \emph{그러나 이 문제를 해결할 수 있는 이유는 다음과 같다.}
 
 \begin{bulletlist}
-\item You can control the status of the interfaces you provide.
+\item 제공하는 인터페이스의 상태를 제어할 수 있다.
 \end{bulletlist}
 
 \subsection*{해결}
 
-Distinguish between public interfaces of components that are available to the rest of the system, and unstable ``published'' interfaces of components that are available within a subsystem, but are not yet ready for prime time.
+시스템의 나머지 부분에서 사용할 수 있는 컴포넌트의 퍼블릭 인터페이스와 하위 시스템 내에서 사용할 수 있지만 아직 프라임 타임에 사용할 준비가 되지 않은 컴포넌트의 불안정한 '게시된' 인터페이스를 구분한다.
 
-\subsubsection*{Hints}
+\subsubsection*{힌트}
 
-Since ``published'' interfaces are not supported by any programming language, you may have to use naming conventions, or abuse other features to achieve the desired effect.
+``게시된'' 인터페이스는 어떤 프로그래밍 언어에서도 지원되지 않으므로 네이밍 규칙(naming convention)을 사용하거나 원하는 효과를 얻기 위해 다른 기능을 악용해야 할 수 있다.
 
 \begin{bulletlist}
-\item In \ind{Java}, consider declaring such interfaces as \lct{protected}, or giving them package scope (undeclared). When the interfaces stabilize, you may redeclare them as being \lct{public}.
+\item \ind{Java}에서 이러한 인터페이스를 \lct{protected}로 선언하거나 패키지 범위를 지정하는 것을 고려하자(undeclared). 인터페이스가 안정화되면 \lct{public}으로 다시 선언할 수 있다.
 
-\item In \ind{C++}, consider declaring components with published interfaces \lct{private} or \lct{protected}, and declare as \lct{friends} the clients that are permitted to use them. When the interfaces stabilize, redeclare the components as \lct{public}, and delete the declarations of \lct{friends}.
+\item \ind{C++}에서 게시된 인터페이스가 \lct{private} 또는 \lct{protected}인 컴포넌트를 선언하고, 이를 사용할 수 있는 클라이언트를 \lct{friends}로 선언하는 것을 고려하자. 인터페이스가 안정화되면 컴포넌트를 \lct{public}으로 다시 선언하고 \lct{friends}의 선언을 삭제한다.
 
-\item In \ind{Smalltalk}, consider declaring categories of published components. Also consider declaring published message categories to distinguish stable and unstable messages.
+\item \ind{Smalltalk}에서, 게시된 컴포넌트의 카테고리를 선언하는 것을 고려해 보세요. 또한, 안정된 메시지와 불안정한 메시지를 구분하기 위해 게시된 메시지 카테고리를 선언하는 것도 고려해 보자.
 
-\item Consider decorating the names of unstable components or interfaces to indicate their ``published'' status. When the component becomes public, rename it and patch all its clients or deprecate the version with the old name (\patref{폐기된 인터페이스 지원 중단하기}{DeprecateObsoleteInterfaces}).
+\item 불안정한 컴포넌트나 인터페이스의 이름을 ``게시된'' 상태를 나타내도록 꾸미는 것을 고려하자. 컴포넌트가 퍼블릭이 되면 이름을 바꾸고 모든 클라이언트에 패치를 적용하거나 이전 이름으로 버전을 폐기하자(\patref{폐기된 인터페이스 지원 중단하기}{DeprecateObsoleteInterfaces}).
 \end{bulletlist}
 
 \subsection*{트레이드오프}
@@ -825,91 +825,93 @@ Since ``published'' interfaces are not supported by any programming language, yo
 \subsubsection*{장점}
 
 \begin{bulletlist}
-\item Clients of published interfaces are aware that they are likely to change.
+\item 게시된 인터페이스의 클라이언트는 해당 인터페이스가 변경될 수 있음을 알고 있다.
 \end{bulletlist}
 
 \subsubsection*{단점}
 
 \begin{bulletlist}
-\item Identifying an interface as ``published'' is purely a matter of convention and discipline.
+\item 인터페이스를 ``게시된'' 것으로 식별하는 것은 순전히 규칙(convention)과 규율(disipline)의 문제이다.
 
-\item Promoting an interface from published to public entails a certain overhead for clients who should upgrade to the new interface.
+\item 인터페이스를 게시된 인터페이스에서 퍼블릭으로 변경하면 새 인터페이스로 업그레이드해야 하는 클라이언트에게 일정한 오버헤드가 발생한다.
 \end{bulletlist}
 
 \subsubsection*{어려움}
 
 \begin{bulletlist}
-\item Clients can be put in a bind: should they use an unstable published interface, or continue to use the legacy service?
+\item 클라이언트는 불안정한 게시된 인터페이스를 사용해야 하는지, 아니면 레거시 서비스를 계속 사용해야 하는지 선택의 기로에 놓일 수 있다.
 \end{bulletlist}
 
 \subsection*{알려진 용도}
 
-\ind{Published Interface} is another pattern of the \ind{ADAPTOR pattern language} \cite{Ocal00a}.
+\ind{게시된 인터페이스}는 \ind{ADAPTOR 패턴}의 또 다른 패턴이다. \cite{Ocal00a}.
 
 \subsection*{근거}
 
 Clients are in a better position to evaluate the risk of using a component if they know its interface is declared to be ``published'' but not yet public.
+클라이언트는 컴포넌트의 인터페이스가 ``게시된'' 인터페이스로 선언되었지만 아직 퍼블릭 인터페이스가 되지 않은 경우 컴포넌트 사용의 리스크을 평가할 수 있는 더 나은 위치에 있다.
 
 \subsection*{관련 패턴}
 
-When you \patref{올바른 인터페이스 제시하기}{PresentTheRightInterface} to a legacy component, the new interface may not be stable, so be careful to \patref{Distinguish Public from Published Interface}{DistinguishPublicFromPublishedInterface}. When the new interface stabilizes, or is substituted by a stable replacement component, the interface may become public.
+레거시 컴포넌트에 \patref{올바른 인터페이스 제시하기}{PresentTheRightInterface}를 적용하면 새 인터페이스가 안정적이지 않을 수 있으므로 \patref{공개 인터페이스와 게시된 인터페이스 구분하기}{DistinguishPublicFromPublishedInterface}를 해야 한다. 새 인터페이스가 안정화되거나 안정적인 대체 컴포넌트로 대체되면 인터페이스가 퍼블릭 인터페이스가 될 수 있다.
 
-Upgrading an interface to public may entail a change to the way it is accessed. Be sure to \patref{폐기된 인터페이스 지원 중단하기}{DeprecateObsoleteInterfaces}.
+인터페이스를 퍼블릭으로 업그레이드하면 액세스 방식이 변경될 수 있다. 반드시 \patref{폐기된 인터페이스 지원 중단하기}{DeprecateObsoleteInterfaces}를 수행하자.
 
 %=================================================================
 %:PATTERN -- {Deprecate Obsolete Interfaces}
 \pattern{폐기된 인터페이스 지원 중단하기}{DeprecateObsoleteInterfaces}
 
 \emph{Also Known As:}  \ind{Deprecation} \cite{Stev98a}
+\ind{지원 중단(Deprecation)} \cite{Stev98a}로도 알려져 있다.
 
-\intent{Give clients time to react to changes to public interfaces by flagging obsolete interfaces as ``deprecated''.}
+\intent{사용되지 않는 인터페이스를 ``지원 중단(deprecated)''으로 플래그 지정하여 클라이언트가 퍼블릭 인터페이스 변경에 대응할 시간을 준다.}
 
 \subsection*{문제}
 
-How do you modify an interface without invalidating all the clients?
+모든 클라이언트를 무효화하지 않고 인터페이스를 수정하려면 어떻게 해야 하는가?
 
 \emph{이 문제는 다음과 같은 이유로 어렵다.}
 
 \begin{bulletlist}
-\item Changing a public interface can break many clients.
+\item 퍼블릭 인터페이스를 변경하면 많은 클라이언트의 지원이 중단될 수 있다.
 
-\item Leaving an obsolete interface in place will make future maintenance more difficult.
+\item 폐기된 인터페이스(obsolete interface)를 그대로 두면 향후 유지 관리가 더 어려워진다.
 
-\item Not all changes are for the better.
+\item 모든 변경이 더 나은 것은 아니다.
 \end{bulletlist}
 
 \emph{그러나 이 문제를 해결할 수 있는 이유는 다음과 같다.}
 
 \begin{bulletlist}
-\item The old and the new interfaces can coexist for a period of time.
+\item 이전 인터페이스와 새 인터페이스가 일정 기간 동안 공존할 수 있다.
 \end{bulletlist}
 
 \subsection*{해결}
 
-Flag the old interface as being ``deprecated'', thereby notifying clients that it will almost certainly be removed in the next upcoming release.
+이전 인터페이스를 '지원 중단됨(deprecated)'으로 플래그를 지정하여 다음 릴리스에서 거의 확실하게 제거될 것임을 클라이언트에 알린다.
 
 \subsubsection*{단계}
 
 \begin{bulletlist}
-\item You have determined that a public interface should be changed, but you do not want to break all clients. Implement the new interface, but ``deprecate'' the old one. The deprecation mechanism should inform clients that the interface has changed, and that a newer interface is recommended instead.
+\item 퍼블릭 인터페이스를 변경해야 한다고 결정했지만 모든 클라이언트를 중단하고 싶지는 않다. 새 인터페이스를 구현하되 이전 인터페이스는 ``지원 중단(deprecate)''하자. 지원 중단 메커니즘은 클라이언트에 인터페이스가 변경되었으며 대신 최신 인터페이스가 권장됨을 알려야 한다.
 
-\item Evaluate to what extent the deprecated interface continues to be used, and whether it can be permanently retired. Consider removing it in a future release.
+\item 지원 중단된 인터페이스가 어느 정도까지 계속 사용될 수 있는지, 그리고 영구적으로 폐기할 수 있는지 평가하자. 향후 릴리스에서 제거를 고려하자.
 
-\item \ind{Java} supports deprecation as a language feature:
+\item \ind{Java}는 언어 기능으로 지원 중단(deprecation)을 지원한다.
 \begin{bulletlist}
-\item Deprecate a feature by adding the tag \lct{@deprecated} to its javadoc documentation. The tag is not only recognized by the javadoc documentation generator, but the compiler will also generate compile-time warnings if code using deprecated features is compiled with the -deprecated option.
+\item javadoc 문서에 \lct{@deprecated} 태그를 추가하여 기능을 지원 중단하자. 이 태그는 javadoc 문서 생성기에서 인식될 뿐만 아니라 지원 중단된 기능을 사용하는 코드를 -deprecated 옵션으로 컴파일할 경우 컴파일 타임 경고도 생성한다.
 \end{bulletlist}
 
-\item Other approaches are:
+\item 다른 접근 방식은 다음과 같다.
 
 \begin{bulletlist}
-\item Simply inform users in the documentation which interfaces are deprecated.
+\item 지원 중단되는 인터페이스를 문서에서 사용자에게 알리기만 하면 된다.
 
-\item Move or rename the deprecated interface or component. Clients can continue to use them, but must adapt and recompile to continue to use the deprecated form.
+\item 지원 중단된 인터페이스 또는 컴포넌트를 이동하거나 이름을 바꾼다. 클라이언트는 계속 사용할 수 있지만 지원 중단된 양식을 계속 사용하려면 조정하고 다시 컴파일해야 한다.
 
-\item Replace deprecated components by equivalent ones that generate run-time warnings or output warnings to a log file. 
+\item 지원 중단된 컴포넌트를 런타임 경고를 생성하거나 로그 파일에 경고를 출력하는 동등한 컴포넌트로 대체한다. 
 
-\item Alternatively, consider configuring the programming environment or the deprecated components themselves to generate compile-time or link-time warnings.
+\item 다른 방법으로 컴파일 시간 또는 링크 시간 경고를 생성하도록 프로그래밍 환경 또는 지원 중단된 컴포넌트 자체를 구성하는 것을 고려하자.
 \end{bulletlist}
 \end{bulletlist}
 
@@ -918,155 +920,153 @@ Flag the old interface as being ``deprecated'', thereby notifying clients that i
 \subsubsection*{장점}
 
 \begin{bulletlist}
-\item Clients do not have to immediately adapt to changes.
+\item 클라이언트는 변경 사항에 즉시 적응할 필요가 없다.
 
-\item There is time to change your mind.
+\item 변경할 수 있는 여유 시간이 있다.
 \end{bulletlist}
 
 \subsubsection*{단점}
 
 \begin{bulletlist}
-\item Clients are free to ignore deprecation.
+\item 클라이언트는 지원 중단을 무시할 수 있습니다.
 \end{bulletlist}
 
 \subsubsection*{어려움}
 
 \begin{bulletlist}
-\item It may be hard to track down all the clients of a deprecated component.
+\item 지원 중단된 컴포넌트의 모든 클라이언트를 추적하기 어려울 수 있다.
 
-\item It can be hard to decide when to really retire a deprecated component.
+\item 지원 중단된 컴포넌트를 실제로 폐기할 시기를 결정하기 어려울 수 있다.
 
-\item If you want to keep the interface but change the semantics, you may need to introduce a new component and deprecate the old one. This can be the case if certain methods should now return default values instead of throwing exceptions (or vice versa).
+\item 인터페이스는 유지하되 의미를 변경하려면 새 컴포넌트를 도입하고 이전 컴포넌트는 지원 중단해야 할 수 있다. 특정 메서드가 이제 예외(exception)를 던지는 대신 기본값(default value)을 반환해야 하는 경우(또는 그 반대의 경우)가 이에 해당할 수 있다.
 \end{bulletlist}
 
 \subsection*{알려진 용도}
 
-\index{Stevens, Perdita}
-\index{Pooley, Rob}
-Perdita Stevens and Rob Pooley identify \ind{Deprecation} as a common practice for managing evolving APIs in complex systems \cite{Stev98a}.
+\index{스티븐스, 퍼디타}
+\index{풀리, 롭}
+퍼디타 스티븐스와 롭 풀리는 복잡한 시스템에서 진화하는 API를 관리하기 위한 일반적인 관행으로 \ind{지원 중단(Deprecation)}을 소개한다 \cite{Stev98a}.
 
 \subsection*{근거}
 
-Deprecation gives you a window of time to evaluate the impact of a change.
+지원 중단(Deprecation)은 변경의 영향을 평가할 수 있는 시간적 여유를 제공한다.
 
 %=================================================================
 %:PATTERN -- {Conserve Familiarity}
 \pattern{친숙도 보존하기}{ConserveFamiliarity}
 
-
-\intent{Avoid radical changes that may alienate users.}
+\intent{사용자를 소외시킬 수 있는 급진적인 변경은 피하기}
 
 \subsection*{문제}
 
-How do you accomplish a major overhaul of a legacy system without disrupting the way users are used to getting their job done?
+사용자가 익숙한 업무 수행 방식을 방해하지 않으면서 레거시 시스템을 대대적으로 개편하려면 어떻게 해야 할까?
 
 \emph{이 문제는 다음과 같은 이유로 어렵다.}
 
 \begin{bulletlist}
-\item The legacy system requires significant changes.
+\item 레거시 시스템에 상당한 변화가 필요하다.
 
-\item The users are not happy with the legacy system, but they understand it well.
+\item 사용자가 레거시 시스템에 만족하지 않지만 잘 이해하고 있다.
 \end{bulletlist}
 
 \emph{그러나 이 문제를 해결할 수 있는 이유는 다음과 같다.}
 
 \begin{bulletlist}
-\item You can migrate incrementally to a new solution.
+\item 새 솔루션으로 점진적으로 마이그레이션할 수 있다.
 \end{bulletlist}
 
 \subsection*{해결}
 
-Introduce only a constant, relatively low number of changes between each new release.
+각 새 릴리스 사이에 상대적으로 적은 수의 변경 사항만 지속적으로 도입하자.
 
 \subsection*{트레이드오프}
 
 \subsubsection*{장점}
 
 \begin{bulletlist}
-\item Users do not have to change their work habits too much between releases.
+\item 사용자는 릴리스 간에 작업 습관을 크게 바꿀 필요가 없다.
 \end{bulletlist}
 
 \subsubsection*{어려움}
 
 \begin{bulletlist}
-\item Sometimes radical change is necessary. It can be hard to migrate from a command-line interface to a GUI while conserving familiarity.
+\item 때로는 급진적인 변화가 필요하다. 익숙함을 유지하면서 명령줄 인터페이스에서 GUI로 마이그레이션하는 것은 어려울 수 있다.
 \end{bulletlist}
 
 \subsection*{근거}
 
-Too much change between releases increases the risk of hidden defects, and decreases the chance of user acceptance. 
+릴리스 간에 변경 사항이 너무 많으면 숨겨진 결함의 리스크가 커지고 사용자가 받아 드릴 가능성이 낮아진다. 
 
-\index{Lehman, Manny}
-\index{Belady, Les}
-Lehman and Belady's ``\ind{Law of Conservation of Familiarity}'' suggests that the incremental change between releases of a system stays roughly constant over time \cite{Lehm85a}. This is a relatively natural phenomenon because to do anything else introduces unnecessary risks.
+\index{리먼, 매니}
+\index{벨레디, 레스}
+리먼과 벨레디의 ``'\ind{친숙도 보존의 법칙}(Law of Conservation of Familiarity)''에 따르면 시스템의 릴리스 간 점진적 변화는 시간이 지나도 거의 일정하게 유지된다 \cite{Lehm85a}. 다른 작업을 수행하면 불필요한 리스크가 발생하기 때문에 이는 비교적 자연스러운 현상이다.
 
 \subsection*{관련 패턴}
 
-To \patref{친숙도 보존하기}{ConserveFamiliarity} you must \patref{시스템 점진적 마이그레이션하기}{MigrateSystemsIncrementally}. \patref{사용자 참여시키기}{InvolveTheUsers} to understand what changes will be acceptable. \patref{목표 솔루션 프로토타입하기}{PrototypeTheTargetSolution} to evaluate the potential impact of changes.
+\patref{친숙도 보존하기}{ConserveFamiliarity}를 수행하려면 \patref{시스템 점진적 마이그레이션하기}{MigrateSystemsIncrementally}를 수행해야 한다. 어떤 변경이 허용되는지 파악해야 하기 위해서 \patref{사용자 참여시키기}{InvolveTheUsers}를 해야 한다. 변경의 잠재적 영향을 평가하기 위해 \patref{목표 솔루션 프로토타입 만들기}{PrototypeTheTargetSolution}를 해야 한다.
 
 %=================================================================
 %:PATTERN -- {Use Profiler Before Optimizing}
 \pattern{최적화하기 전에 프로파일러 사용하기}{UseProfilerBeforeOptimizing}
 
-
-\intent{Avoid squandering reengineering effort on needless ``optimizations'' by verifying where the bottlenecks are.}
+\intent{병목 지점이 어디인지 확인하여 불필요한 ``최적화(optimizations)''에 리엔지니어링 노력을 낭비하지 않는다.}
 
 \subsection*{문제}
 
-When should you rewrite a clearly inefficient piece of code?
+명백히 비효율적인 코드는 언제 다시 작성해야 할까?
 
 \emph{이 문제는 다음과 같은 이유로 어렵다.}
 
 \begin{bulletlist}
-\item When you are reengineering software, you are likely to encounter many naive algorithms in the legacy code.
+\item 소프트웨어를 리엔지니어링할 때 레거시 코드에서 순진한 알고리즘을 많이 접할 수 있다.
 
-\item It can be hard to predict what will impact performance, and you can lose a lot of time on pure supposition.
+\item 어떤 것이 성능에 영향을 미칠지 예측하기 어려울 수 있으며, 순수한 가정으로 많은 시간을 낭비할 수 있다.
 
-\item Optimized code is often more complex than simple, naive code.
+\item 최적화된 코드는 단순하고 순진한 코드보다 더 복잡한 경우가 많다.
 \end{bulletlist}
 
 \emph{그러나 이 문제를 해결할 수 있는 이유는 다음과 같다.}
 
 \begin{bulletlist}
-\item There are tools to tell you where you may have a performance problem.
+\item 성능 문제가 있을 수 있는 위치를 알려주는 도구가 있다.
 \end{bulletlist}
 
 \subsection*{해결}
 
-Whenever you are tempted to optimize a ``clearly inefficient'' part of the system, first use a profiler to determine whether it is actually a bottleneck. 
+시스템의 ``명백히 비효율적인'' 부분을 최적화하고 싶을 때마다 먼저 프로파일러를 사용하여 실제로 병목 현상이 있는지 확인하자. 
 
-Don't optimize anything unless your profiler tells you it will make a difference.
+최적화가 효과를 가져올 것이라고 프로파일러로 확인하지 않는 한 어떤 것도 최적화하지 말자.
 
-If you decide to go ahead, prepare benchmarks that will demonstrate the performance gains. 
+계속 진행하기로 결정했다면 성능 향상을 입증할 수 있는 벤치마크를 준비하자. 
 
 \subsection*{트레이드오프}
 
 \subsubsection*{장점}
 
 \begin{bulletlist}
-\item You do not waste time optimizing something that will not make a difference to overall performance.
+\item 전체 성능에 영향을 주지 않는 최적화에 시간을 낭비하지 말자.
 \end{bulletlist}
 
 \subsubsection*{단점}
 
 \begin{bulletlist}
-\item Naive algorithms will survive longer in the system.
+\item 너무 순진한 알고리즘이 시스템에서 더 오래 남아 있게 된다.
 \end{bulletlist}
 
 \subsection*{근거}
 
-The performance improvement that you can gain by optimizing a bit of code depends on how much time the program, spends in that code in a typical run. A profiler will tell you how much time that is.
+약간의 코드를 최적화함으로써 얻을 수 있는 성능 향상은 프로그램이 일반적인 실행에서 해당 코드에 얼마나 많은 시간을 소비하는지에 따라 달라진다. 프로파일러를 통해서 그 시간이 얼마나 되는지 알수 있다.
 
-``\ind{Do it, then do it right, then do it fast}'' is a well-known aphorism that has been credited to many different sources. Very likely its origin is outside of the field of computer science. The rationale behind it is that you risk making a system complex and hard to maintain if you become preoccupied with performance issues too early. Instead, it is better to first find a solution that works, then clean it up once you understand it. Finally, if you can identify any important performance bottlenecks, that is the time to optimize just those parts that will make a difference.
+``\ind{동작하게 하고, 제대로 동작하게 하고, 빠르게 동작하게 하기}(Do it, then do it right, then do it fast)''는 여러 출처에서 인용된 잘 알려진 격언이다. 이 격언의 기원은 컴퓨터 과학 분야가 아닌 다른 곳에서 유래했을 가능성이 높다. 그 근거는 성능 문제에 너무 일찍 몰두하면 시스템을 복잡하고 유지보수하기 어렵게 만들 리스크가 있다는 것이다. 그보다는 먼저 작동하는 해결책을 찾은 다음 이해가 되면 정리하는 것이 좋다. 마지막으로, 중요한 성능 병목 현상을 파악할 수 있다면 그때가 바로 차이를 가져올 수 있는 부분만 최적화할 수 있는 시기이다.
 
-As a corollary, it may even be a good idea to replace a bit of complex, ``optimized'' code by a simpler, ``naive'' solution, if that won't severely impact performance, but will make it easier to make other changes. 
+결론적으로, 성능에 심각한 영향을 미치지는 않지만 다른 변경을 더 쉽게 할 수 있다면 약간 복잡한 '최적화' 코드를 더 간단한 '순진한' 솔루션으로 대체하는 것도 좋은 생각일 수 있다. 
 
-\index{Davis, Alan}
-See also Davis' discussion of ``\patref{최적화하기 전에 프로파일러 사용하기}{UseProfilerBeforeOptimizing}'' \cite{Davi95a}.
+\index{데이비스, 앨런}
+데이비스의 ``\patref{최적화하기 전에 프로파일러 사용하기}{UseProfilerBeforeOptimizing}''에 대한 논의도 참조하자. \cite{Davi95a}.
 
 \subsection*{관련 패턴}
 
-If you \patpgref{Refactor to Understand}{RefactorToUnderstand}, you will have started the second step to ``do it right."
+\patref{이해하기 위해 리팩터링하기}{RefactorToUnderstand}를 수행하면 ``제대로 하기(do it right)''를 위한 두 번째 단계가 시작된다.
 
 %=============================================================
 \ifx\wholebook\relax\else
