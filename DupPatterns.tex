@@ -30,122 +30,120 @@
 \chapter{중복 코드 감지}
 \chalabel{DetectingDuplicatedCode}
 
-\index{Fowler, Martin}
-\index{Beck, Kent}
-Fowler and Beck have ranked duplicated code as the first of the top ten code smells indicating the need to refactor a piece of software \cite{Fowl99a}. As they like to explain it, whenever you duplicate a piece of code, you are taking out a loan, in the sense that you are getting something now (an almost ready-made piece of software) that you will have to pay for later. There is nothing wrong with taking out a loan, but you have a choice between paying back a small amount now (by taking out the time to refactor your code to eliminate the duplication) or paying back a lot later (in terms of increased complexity and maintenance costs).
+\index{파울러, 마틴}
+\index{벡, 켄트}
+파울러와 벡은 소프트웨어 리팩터링의 필요성을 나타내는 상위 10가지 코드 스멜 중 첫 번째로 중복 코드(duplicated code)를 꼽았다 \cite{Fowl99a}. 그들이 설명하길, 코드를 복제할 때마다 나중에 비용을 지불해야 할 무언가(거의 기성품에 가까운 소프트웨어)를 지금 받는다는 의미에서 대출을 받는 것과 같다고 한다. 대출을 받는 것이 잘못된 것은 아니지만, 중복을 제거하기 위해 코드를 리팩터링하는 시간을 들여 지금 소액을 갚거나 (복잡성 및 유지 관리 비용의 증가로) 나중에 많은 금액을 갚는 것 중 하나를 선택할 수 있다.
 
-Data from empirical studies show that typically between 8\% and 12\% of industrial software consists of duplicated code \cite{Duca99b}. Although this may not seem like much, in fact it is difficult to achieve very high rates of duplication. (Imagine what it would take to have a duplication rate of even 50\%!) Duplication rates of 15 to 20\% are therefore considered to be severe. 
+경험적 연구 데이터에 따르면 일반적으로 산업용 소프트웨어의 8\%에서 12\%는 중복된 코드로 구성되어 있다 \cite{Duca99b}. 이 수치는 많지 않아 보일 수 있지만 실제로는 매우 높은 중복률을 달성하기 어렵습니다. (중복률이 50\%라도 되려면 얼마나 많은 노력이 필요할지 상상해 보자!) 따라서 15~20\%의 중복률은 심각한 것으로 간주된다. 
 
-It is important to identify duplicated code for the following reasons:
-
-\begin{bulletlist}
-\item Duplicated code hampers the introduction of changes, since every implemented variant of a piece of functionality will have to be changed. Since it is easy to miss some variants, bugs are likely to pop up in other places.
-
-\item Duplicated code replicates and scatters the logic of a system instead of grouping it into identifiable artifacts (classes, methods, packages). It leads to systems that are more difficult to understand and to change. Instead of just having to understand relationship between logical parts you will have first to identify them and then understand their relationships.
-\end{bulletlist}
-
-Duplicated code arises for a variety of reasons:
+다음과 같은 이유로 중복 코드를 식별하는 것이 중요하다.
 
 \begin{bulletlist}
-\item Whenever a programmer is implementing a piece of functionality that is remotely similar to something that has been done before, it is natural to use the existing code as a model for the new task. If it is a matter of recombining existing procedures, the task will be simple. But if the behavior is more complex, the easiest thing to do is to copy, paste and modify the old code to achieve the functionality. If both the old and new pieces of code belong to different applications, the harm is minimal. But if they are part of the same system, duplicated code has now been introduced.
+\item 중복 코드는 구현된 모든 기능의 변형을 변경해야 하므로 변경 사항을 도입하는 데 방해가 된다. 일부 변형을 놓치기 쉬우므로 다른 곳에서 버그가 발생할 가능성이 높다.
 
-\item Sometimes code is copied, pasted and modified between different applications, or different versions of the same application. When multiple versions must be maintained simultaneously, or when different applications or versions must be merged, you immediately have a duplicated code problem.
+\item 중복 코드는 시스템의 로직을 식별 가능한 산출물(클래스, 메서드, 패키지)로 그룹화하는 대신 복제하고 분산시킨다. 따라서 시스템을 이해하고 변경하기가 더 어려워진다. 논리적 부분 간의 관계를 이해하는 대신 먼저 식별한 다음 그 관계를 이해해야 한다.
 \end{bulletlist}
 
-From a reengineering perspective, usually people know whether or not a system suffers from duplication. First, the development team, or the manager will tell you. Second, there are normally some clear signs that duplication has been practiced in a project: for example, two developers cannot develop four millions of line of code in less than eight months without copying and pasting existing code. While analyzing the system you will also identify duplicated code by accident. There is a major difference, however, between knowing that a system contains duplicated code, and knowing exactly which parts have been duplicated. 
+중복 코드는 다양한 이유로 발생한다.
+
+\begin{bulletlist}
+\item 프로그래머가 이전에 수행한 작업과 원격으로 유사한 기능을 구현할 때마다 기존 코드를 새 작업의 모델로 사용하는 것은 당연하다. 기존 프로시저를 재조합하는 문제라면 작업은 간단할 것이다. 그러나 동작이 더 복잡한 경우 가장 쉬운 방법은 이전 코드를 복사, 붙여넣기 및 수정하여 기능을 달성하는 것이다. 이전 코드와 새 코드가 모두 다른 애플리케이션에 속한 경우 피해는 최소화된다. 하지만 같은 시스템에 속해 있다면 중복 코드가 발생하게 된다.
+
+\item 때때로 다른 애플리케이션 또는 동일한 애플리케이션의 다른 버전 간에 코드를 복사, 붙여넣기 및 수정하는 경우가 있다. 여러 버전을 동시에 유지보수해야 하거나 서로 다른 애플리케이션 또는 버전을 병합해야 하는 경우 코드 중복 문제가 즉시 발생한다.
+\end{bulletlist}
+
+리엔지니어링 관점에서 보면 일반적으로 사람들은 시스템에 중복 문제가 있는지 여부를 알 수 있다. 첫째, 개발팀이나 관리자가 알려줄 것이다. 둘째, 일반적으로 프로젝트에서 중복이 발생했다는 몇 가지 분명한 징후가 있다. 예를 들어, 두 명의 개발자가 기존 코드를 복사하여 붙여넣지 않고는 8개월 이내에 4백만 줄의 코드를 개발할 수 없다. 시스템을 분석하는 동안 우연히 중복된 코드를 발견할 수도 있다. 그러나 시스템에 중복된 코드가 있다는 것을 아는 것과 정확히 어떤 부분이 중복되었는지 아는 것에는 큰 차이가 있다. 
 
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=0.8\textwidth]{DuplicationMap}
-\caption{Two patterns to support \charef{Detecting Duplicated Code}{DetectingDuplicatedCode}.}
+\caption{\charef{중복 코드 감지}{DetectingDuplicatedCode}를 지원하는 두 가지 패턴.}
 \figlabel{DuplicationMap}
 \end{center}
 \end{figure}
 
-\subsection*{Overview}
+\subsection*{개요}
 
-\charef{Detecting Duplicated Code}{DetectingDuplicatedCode} consists of two patterns: \patref{Compare Code Mechanically}{CompareCodeMechanically}, which describes how we can detect duplicated code, and \patref{Visualize Code as Dotplots}{VisualizeCodeAsDotplots}, which shows how duplicated code can be better understood by simple matrix visualization.
+\charef{중복 코드 감지}{DetectingDuplicatedCode}는 두 가지 패턴으로 구성된다. 중복 코드를 감지하는 방법을 설명하는 \patref{기계적으로 코드 비교하기}{CompareCodeMechanically}, 그리고 간단한 이차원적 시각화를 통해 중복 코드를 더 잘 이해할 수 있는 방법을 보여주는 \patref{도트 플롯으로 코드 시각화하기}{VisualizeCodeAsDotplots}로 구성되어 있다.
 
-Once you have detected and understood duplication in the system, you may decide on a variety of tactics. Various refactoring patterns, such as \patpgref{Extract Method}{ExtractMethod} may help you to eliminate the duplication. Duplication may be a sign of misplaced responsibilities, in which you should may decide to \patpgref{Move Behavior Close to Data}{MoveBehaviorCloseToData}. 
+시스템에서 중복을 감지하고 이해한 후에는 다양한 전략을 결정할 수 있다. \patpgref{메시드 추출하기}{ExtractMethod}와 같은 다양한 리팩터링 패턴을 사용하면 중복을 제거하는 데 도움이 될 수 있다. 중복은 책임이 잘못 배치되었다는 신호일 수 있으며, 이 경우 \patpgref{데이터 가까이 동작 이동하기}{MoveBehaviorCloseToData}를 해야 할 수도 있다. 
 
-Complex conditional statements are also a form of duplication, and may indicate that multiple clients have to duplicate actions that should belong to the target class. The pattern cluster \charef{Transform Conditionals to Polymorphism}{TransformConditionalsToPolymorphism} can help you to resolve these problems.
+복잡한 조건문도 중복의 한 형태이며, 여러 클라이언트가 대상 클래스에 속해야 하는 동작을 중복해야 함을 나타낼 수 있다. 패턴 클러스터 \charef{다형성 적용된 조건문 변환}{TransformConditionalsTo다형성}을 사용하면 이러한 문제를 해결하는 데 도움이 될 수 있다.
 
 %=================================================================
 %:PATTERN -- {Compare Code Mechanically}
-\pattern{Compare Code Mechanically}{CompareCodeMechanically}
+\pattern{기계적으로 코드 비교하기}{CompareCodeMechanically}
 
+\intent{모든 소스 코드 파일을 한 줄씩 비교하여 \ind{중복 코드}(duplicated code) 발견하기.}
 
-\intent{Discover \ind{duplicated code} by comparing all the source code files line-by-line.}
+\subsection*{문제}
 
-\subsection*{Problem}
+애플리케이션 코드의 어느 부분이 중복되었는지 어떻게 발견하는가?
 
-How do you discover which parts of an application code have been duplicated?
-
-\emph{This problem is difficult because:} 
-
-\begin{bulletlist}
-\item You may suspect that code has been duplicated but you do not have any a priori evidence where the duplication occurs. For example, you know that two programmers cannot have developed 4 million lines of Cobol in one year without having duplicated some code.
-
-\item Browsing the code is not an effective way of discovering duplication; you will only find duplicated code by accident.
-
-\item Programmers may have not only copied and pasted code but also modified variables or changed the shape of the programs.
-\end{bulletlist}
-
-\emph{Yet, solving this problem is feasible because:}
+\emph{이 문제는 다음과 같은 이유로 어렵다.} 
 
 \begin{bulletlist}
-\item Most duplicated code can be detected by mechanical procedures.
+\item 코드가 중복되었다고 의심할 수 있지만 중복이 발생한 위치에 대한 증거가 없다. 예를 들어 두 명의 프로그래머가 일부 코드를 복제하지 않고는 1년 동안 4백만 줄의 코드를 개발할 수 없다는 것을 알고 있다.
+
+\item 코드를 검색하는 것은 중복을 발견하는 효과적인 방법이 아니며, 우연히 중복된 코드를 발견할 수 있을 뿐이다.
+
+\item 프로그래머는 코드를 복사하여 붙여넣었을 뿐만 아니라 변수를 수정하거나 프로그램의 모양을 변경했을 수도 있다.
 \end{bulletlist}
 
-\subsection*{Solution}
-
-Textually compare each line of the software source code with all the other lines of code.
-
-\subsubsection*{Steps}
+\emph{그러나 이 문제를 해결할 수 있는 이유는 다음과 같다.}
 
 \begin{bulletlist}
-\item Normalize the lines of code by removing comments, tabs and blanks.
+\item 대부분의 중복 코드는 기계적 절차를 통해 감지할 수 있다.
+\end{bulletlist}
 
-\item Remove lines that contain uninteresting code elements (\eg just \lct{else} or \lct{\}})
+\subsection*{해결}
 
-\item Compare each line with all the other lines. Reduce search complexity by hashing:
+소프트웨어 소스 코드의 각 줄을 다른 모든 코드 줄과 텍스트로 비교한다.
+
+\subsubsection*{단계}
 
 \begin{bulletlist}
-\item Preprocessing: Compute the hash value for each line
-\item Actual Comparison: Compare all lines in the same hash bucket
-\end{bulletlist}
-\end{bulletlist}
+\item 주석, 탭, 공백을 제거하여 코드 줄을 정규화한다.
 
-\subsubsection*{Variants}
+\item 흥미롭지 않은 코드 요소가 포함된 줄을 제거한다(예: 그냥 \lct{else} 또는 \lct{\}}).
 
-This approach may fail to identify some instances of duplicated code due to renaming of variables. By deleting all variable identifiers, or by mapping them to a common symbol, you can detect similar code patterns, while abstracting from the details of the specific identifiers. This variant, however, requires some syntactic processing of the code. 
-
-\subsection*{Tradeoffs}
-
-\subsubsection*{Pros}
+\item 각 줄을 다른 모든 줄과 비교한다. 해싱으로 검색 복잡성을 줄인다.
 
 \begin{bulletlist}
-\item The approach is simple and gives good results while only requiring modest resources.
-
-\item It is nearly language-independent in the sense that you only have to build a lexical analyzer and not a full parser. That's why a simple perl script can be sufficient depending on the level of sophistication that you want.
-
-\item Simple statistics and percentage rates are easily computed and may help you to gain credibility or more strength in discussions on resource allocation or hiring new people.
+\item 전처리: 각 줄의 해시 값 계산한다.
+\item 실제 비교: 동일한 해시 버킷의 모든 줄을 비교한다.
+\end{bulletlist}
 \end{bulletlist}
 
-\subsubsection*{Cons}
+\subsubsection*{변형}
+
+이 방법은 변수 이름 변경으로 인해 중복된 코드의 일부 인스턴스를 식별하지 못할 수 있다. 모든 변수 식별자를 삭제하거나 공통 기호에 매핑하면 특정 식별자의 세부 사항을 추상화하면서 유사한 코드 패턴을 감지할 수 있다. 그러나 이 변형은 일부 코드의 시맨틱 처리(syntactic processing)를 필요로 한다. 
+
+\subsection*{트레이드오프}
+
+\subsubsection*{장점}
 
 \begin{bulletlist}
-\item Code that has been heavily edited after copying may be hard to identify as duplicated code.
+\item 이 접근 방식은 간단하며 적당한 리소스만 사용해도 좋은 결과를 제공한다.
 
-\item Systems containing a lot of duplicated code will generate a lot of data that can be difficult to analyze effectively.
+\item 전체 구문 분석기(parser)가 아니라 어휘 분석기(lexical analyzer)만 구축하면 된다는 점에서 언어에 거의 독립적이다. 그렇기 때문에 원하는 정교함의 수준에 따라 간단한 perl 스크립트로도 충분할 수 있다.
+
+\item 간단한 통계와 비율은 쉽게 계산할 수 있으며 리소스 할당이나 신규 인력 채용에 대한 논의에서 신뢰성을 높이거나 더 많은 힘을 얻는데 도움이 될 수 있다.
 \end{bulletlist}
 
-\subsection*{Example}
+\subsubsection*{단점}
 
-Consider the case of a system written in C++ where you suspect duplicated code. However, you didn't write to code yourself so you don't know where the actual duplication occurs. How can you detect where the duplicated code fragments are? Consistent with \patpgref{Keep It Simple}{KeepItSimple} you do the simplest thing that may possibly work: you write a little script that first normalizes the code to remove all white space from the code and afterwards compares each line of code against itself.
+\begin{bulletlist}
+\item 복사 후 많이 편집된 코드는 중복된 코드로 식별하기 어려울 수 있다.
 
-The normalization would change the following code
+\item 중복 코드가 많이 포함된 시스템은 많은 데이터를 생성하여 효과적으로 분석하기 어려울 수 있다
+\end{bulletlist}
 
+\subsection*{예시}
+
+코드 중복이 의심되는 C++로 작성된 시스템의 경우를 생각해 보자. 하지만 직접 코드를 작성하지 않았기 때문에 실제 중복이 어디에서 발생하는지 알 수 없다. 중복 코드 조각이 어디에 있는지 어떻게 감지할 수 있을까? 가장 간단한 방법은 먼저 코드를 정규화하여 코드에서 모든 공백을 제거한 다음 각 코드 줄을 자체적으로 비교하는 작은 스크립트를 작성하는 것이다.
+
+정규화하면 다음 코드가 변경된다.
 
 \begin{code}
 ...
@@ -177,7 +175,7 @@ tmp[l]='\0';
 ...
 \end{code}
 
-Afterwards, the line-by-line comparison of the code against itself produces a report telling which sequences of lines are duplicated.
+그 후 코드를 한 줄씩 비교하면 중복된 줄의 순서를 알려주는 보고서가 생성된다.
 
 \begin{code}
 Lines:fastid=NULL;;constchar*fidptr=getFastid();;if(fidptr!=NULL);
@@ -187,7 +185,7 @@ Locations:
 </typesystem/Parser.C>6198/6199/6200/6201/6202
 \end{code}
 
-Below is a sample of a perl script that will do the trick.
+다음은 이 기능을 수행하는 perl 스크립트 샘플이다.
 
 \begin{code}
 #! /usr/bin/env perl -w
@@ -315,153 +313,153 @@ print "Number of marked equivalence classes: $numOfMarkedEquivClasses\n";
 print "Number of marked elements: $numOfMarkedElements\n";
 \end{code}
 
-\subsection*{Known Uses}
+\subsection*{알려진 용도}
 
-In the context of software reengineering, the pattern has been applied to detect duplicated code in FAMOOS case studies containing up to one million lines of \ind{C++}. It also has been applied to detect duplicated code in a \ind{COBOL} system of 4 million lines of code. \ind{DATRIX} has investigated multiple versions of a large telecommunications system, wading through 89 million lines of code all in all \cite{Lagu97a}. 
+소프트웨어 리엔지니어링의 맥락에서, 이 패턴은 최대 100만 줄의 \ind{C++}가 포함된 FAMOOS 사례 연구에서 중복 코드를 탐지하는 데 적용되었다. 또한 4백만 줄의 코드가 포함된 \ind{COBOL} 시스템에서 중복 코드를 탐지하는 데도 적용되었다. \ind{DATRIX}는 대규모 통신 시스템의 여러 버전을 조사하여 총 8,900만 줄의 코드를 모두 \cite{Lagu97a}로 분석했다. 
 
 %=================================================================
 %:PATTERN -- {Visualize Code as Dotplots}
-\pattern{Visualize Code as Dotplots}{VisualizeCodeAsDotplots}
+\pattern{도트 플롯으로 코드 시각화하기}{VisualizeCodeAsDotplots}
 
 
-\intent{Gain insight into the nature of the duplication by studying the patterns in the dotplots.}
+\intent{도트 플롯의 패턴을 연구하여 중복의 본질에 대한 통찰력을 얻는다.}
 
-\subsection*{Problem}
+\subsection*{문제}
 
-How can you gain insight into the scope and nature of code duplication in a software system?
+소프트웨어 시스템에서 코드 중복의 범위와 성격에 대한 통찰력을 어떻게 얻을 수 있는가?
 
-\emph{This problem is difficult because:} 
-
-\begin{bulletlist}
-\item Just knowing where in the system duplicated code exists does not necessarily help you to understand its nature, or what should be done about it.
-\end{bulletlist}
-
-\emph{Yet, solving this problem is feasible because:}
+\emph{이 문제는 다음과 같은 이유로 어렵다.} 
 
 \begin{bulletlist}
-\item A picture is worth a thousand words.
+\item 시스템에서 중복된 코드가 어디에 존재하는지 아는 것만으로는 그 성격을 이해하거나 이에 대해 무엇을 해야 하는지 파악하는 데 도움이 되지 않는다.
 \end{bulletlist}
 
-\subsection*{Solution}
-
-Visualize the code as a matrix in which the two axes represent two source code files (possibly the same file), and dots in the matrix occur where source code lines are duplicated.
-
-\subsubsection*{Steps}
-
-If you want to analyze two files A and B:
+\emph{그러나 이 문제를 해결할 수 있는 이유는 다음과 같다.}
 
 \begin{bulletlist}
-\item Normalize the contents of the two files to eliminate noise (white space \etc).
-
-\item Let each axis of the matrix represent elements (\eg the lines of code) of the normalized files.
-
-\item Represent a match between two elements as a dot in the matrix.
-
-\item Interpret the obtained pictures: a diagonal represents duplicated code between the two files.
+\item 하나의 그림이 천 마디 말보다 가치가 있다.
 \end{bulletlist}
 
-To analyze the duplication inside a single file, plot the elements of that file on both axes.
+\subsection*{해결}
 
-\subsubsection*{Interpretations}
+두 축이 각각의 소스 코드 파일(동일한 파일일 수 있음)을 나타내는 행렬로 시각화하고 점들은 소스 코드 줄이 중복되는 곳에 표시한다.
 
-The interpretation of the obtained matrices are illustrated in \figref{DuplicationDotplot}:
+\subsubsection*{단계}
+
+두 개의 파일 A와 B를 분석하려는 경우 다음과 같다.
+
+\begin{bulletlist}
+\item 두 파일의 내용을 정규화하여 노이즈(공백 등)를 제거한다.
+
+\item 행렬의 각 축이 정규화된 파일의 요소(예: 코드 줄)를 나타내도록 한다.
+
+\item 두 요소 사이의 일치를 행렬에 점으로 표시한다.
+
+\item 획득한 그림을 해석한다. 대각선은 두 파일 간에 중복된 코드를 나타낸다.
+\end{bulletlist}
+
+단일 파일 내부의 중복을 분석하기 위해 해당 파일의 요소를 양쪽 축에 플롯한다.
+
+\subsubsection*{해석}
+
+얻어진 행렬의 해석은 \figref{DuplicationDotplot}에 설명되어 있다.
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{DuplicationDotplot}
-\caption{Possible sequences of dot and their associated interpretations.}
+\caption{가능한 점의 시퀀스 및 관련 해석.}
 \figlabel{DuplicationDotplot}
 \end{center}
 \end{figure}
 
-Some interesting configurations formed by the dots in the matrices are the following:
+그림에 표시된 점으로 형성되는 몇 가지 흥미로운 구성은 다음과 같다.
 
 \begin{bulletlist}
-\item \emph{Exact Copies:} diagonals of dots indicate copied sequences of source code.
+\item \emph{정확한 복사본:} 점의 대각선은 소스 코드의 복사된 시퀀스를 나타낸다.
 
-\item \emph{Copies With Variations:} sequences that have holes in them indicate that a portion of a copied sequences has been changed.
+\item \emph{변형이 있는 복사본:} 시퀀스에 구멍이 있는 것은 복사된 시퀀스의 일부가 변경되었음을 나타낸다.
 
-\item \emph{Inserts/Deletes:} broken sequences with parts shifted to the right or left indicate that a portion of code has been inserted or deleted.
+\item \emph{인서트/삭제:} 오른쪽이나 왼쪽으로 이동된 부분이 있는 끊어진 시퀀스는 코드의 일부가 삽입되거나 삭제되었음을 나타낸다.
 
-\item \emph{Repetitive Code Elements:} rectangular configurations indicate periodic occurrences of the same code. An example is the break at the end of the individual cases of a C or C ++ switch statement, or recurring preprocessor commands like \lct{\#ifdef SOME CONDITION}.
+\item  \emph{반복코드 요소:} 직사각형 구성은 동일한 코드가 주기적으로 발생함을 나타낸다. 예를 들어 C 또는 C ++ 스위치 문의 개별 대소문자 끝의 쉼표나 \lct{\#ifdef 일부 조건}과 같은 반복되는 전처리기 명령이 있다.
 \end{bulletlist}
 
-\subsection*{Tradeoffs}
+\subsection*{트레이드오프}
 
-\subsubsection*{Pros}
+\subsubsection*{장점}
 
 \begin{bulletlist}
-\item The approach is largely language-independent, since only the code normalization depends on the language syntax.
+\item 이 접근 방식은 코드 정규화만 언어 구문에 의존하기 때문에 언어에 크게 구애받지 않는다.
 
-\item The approach works well when reverse engineering large amounts of unknown code, because the dotplots attract your eye to certain parts of the code to be studied more closely.
+\item 이 접근 방식은 도트 플롯을 통해 코드의 특정 부분을 더 자세히 살펴볼 수 있기 때문에 알려지지 않은 대량의 코드를 리버스 엔지니어링할 때 효과적이다.
 
-\item The idea is simple yet works surprisingly well. A simple version of the approach can be implemented by a good programmer using a appropriate tools in a couple of days. (One of our better students made a small dotplot browser in Delphi in two days.)
+\item 이 아이디어는 간단하지만 놀라울 정도로 잘 작동한다. 이 접근법의 간단한 버전은 유능한 프로그래머라면 적절한 도구를 사용하여 며칠 안에 구현할 수 있다. (실력 있는 학생 중 한 명은 이틀 만에 델파이로 작은 도트플롯 브라우저를 만들었다.)
 \end{bulletlist}
 
-\subsubsection*{Cons}
+\subsubsection*{단점}
 
 \begin{bulletlist}
-\item Dotplots only present pairwise comparisons. They do not necessarily help you identify all instances of duplicated elements in the entire software system. Although the approach can easily be extended to present multiple files across each axis, the comparisons are still only pairwise.
+\item 도트 플롯은 쌍으로만 비교를 표시한다. 전체 소프트웨어 시스템에서 중복된 요소의 모든 인스턴스를 식별하는 데 반드시 도움이 되는 것은 아니다. 이 접근 방식을 쉽게 확장하여 각 축에 여러 파일을 표시할 수 있지만 여전히 비교는 쌍 단위로만 이루어진다.
 \end{bulletlist}
 
-\subsubsection*{Difficulties}
+\subsubsection*{어려움}
 
 \begin{bulletlist}
-\item A naive implementation of a dotplot visualizer may not scale well to large systems. Tuning and optimizing the approach for large data sets can compromise the simplicity of the approach.
+\item 도트 플롯 시각화 도구의 나이브한 구현은 대규모 시스템의 확장이 쉽지 않을 수 있다. 대규모 데이터 집합에 맞게 접근 방식을 조정하고 최적화하면 접근 방식의 단순성이 저하될 수 있다.
 
 \begin{figure}[t]
 \begin{center}
 \includegraphics[width=0.8\textwidth]{DuplicationRefactoring}
-\caption{Code duplication before and after refactoring.}
+\caption{리팩토링 전후의 코드 중복.}
 \figlabel{DuplicationRefactoring}
 \end{center}
 \end{figure}
 
-\item The interpretation of the data may be more subtle than it appears at first glance. Indeed, while comparing multiple files the diagonals represent more duplication than is really in the system because we are comparing duplicated fragments with themselves over different files, as shown by \figref{DuplicationRefactoring} and \figref{DuplicationPython}.
+\item 데이터의 해석은 언뜻 보기보다 더 미묘할 수 있다. 실제로 여러 파일을 비교하는 동안 대각선은 실제보다 더 많은 중복을 나타내며, 이는 \figref{DuplicationRefactoring} 및 \figref{DuplicationPython}에 표시된 것처럼 여러 파일에서 중복된 조각을 비교하고 있기 때문이다.
 
-\index{mural visualization}
-\item The screen size limits the amount of information that can be visualized. Some success has been achieved with so-called ``mural'' visualization approaches \cite{Jerd96b}. However, these techniques are significantly more difficult to implement than simple dotplots and are not worth the extra effort.
+\index{벽화 시각화}
+\item 화면 크기는 시각화할 수 있는 정보의 양을 제한한다. 소위 ``벽화'' 시각화(mural visualization) 접근 방식인 \cite{Jerd96b}로 일부 성공을 거두었다. 그러나 이러한 기법은 단순한 도트 플롯보다 구현하기가 훨씬 더 어렵고 추가적인 노력을 기울일 가치는 없다.
 \end{bulletlist}
 
-\subsection*{Example}
+\subsection*{예시}
 
-In \figref{DuplicationRefactoring} we see a \ind{dotplot} of two versions of a piece of software, before and after the duplication has been removed. The first version is compared to itself in the top left square. The line down the diagonal simply shows us that every line of code is being compared to itself. What is more interesting is that several other diagonal lines occur in the dotplot, which means that code has been duplicated within this file. A second version of the same file is compared to itself in the lower right square. Here we see no significant duplication aside from the main diagonal, which reflects the fact that all the duplicated code has been successfully refactored.
+\figref{DuplicationRefactoring}에서는 중복이 제거되기 전과 후의 두 가지 버전의 소프트웨어에 대한 \ind{dotplot}을 볼 수 있다. 첫 번째 버전은 왼쪽 위 사각형에 비교되어 있다. 대각선 아래 선은 모든 코드 줄이 그 자체와 비교되고 있음을 보여준다. 더 흥미로운 점은 도트 플롯에 여러 개의 다른 대각선이 나타나는데, 이는 이 파일 내에서 코드가 중복되었다는 것을 의미한다. 동일한 파일의 두 번째 버전이 오른쪽 아래 사각형에서 자신과 비교되고 있다. 여기에서는 주 대각선을 제외하고는 크게 중복된 부분이 없는데, 이는 중복된 코드가 모두 성공적으로 리팩터링되었다는 사실을 반영한다.
 
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=\textwidth]{DuplicationPython}
-\caption{A Python file A being compared to itself and to a second file B.}
+\caption{파이썬 파일 A에 대해서 자신과 두 번째 파일 B를 비교하고 있다.}
 \figlabel{DuplicationPython}
 \end{center}
 \end{figure}
 
-The bottom left and top right squares are mirror images of each other. They tell us how the before and after files have been reorganized. Since there is no strong diagonal, this tells us that significant reorganization has taken place. The diagonal stripes show us which parts of the old version have survived and where they appear in the new version. From the dotplot alone, we can guess that about half of the code has survived, and another half of the code has been significantly rewritten.
+왼쪽 아래 사각형과 오른쪽 위 사각형은 서로의 거울 이미지이다. 이전과 이후 파일이 어떻게 재구성되었는지 알려준다. 강한 대각선이 없으므로 상당한 재구성이 이루어졌음을 알 수 있다. 대각선 줄무늬는 이전 버전에서 어떤 부분이 살아남았고 새 버전에서 어디에 나타나는지 보여준다. 도트 플롯만 보면 코드의 약 절반이 살아남았고 나머지 절반의 코드가 크게 재작성되었음을 짐작할 수 있다.
 
-Dotplots are also useful to detect duplication across multiple files. \figref{DuplicationPython} shows a dotplot comparing two \ind{Python} files. The comparison of A vs. A shows that there is essentially no internal duplication. Very likely there are some switch statements in the bottom have of the file, indicated by the matrix pattern.
+도트 플롯은 여러 파일에서 중복을 감지하는 데도 유용하다. \figref{DuplicationPython}은 두 개의 \ind{Python} 파일을 비교한 도트 플롯을 보여준다. A와 A를 비교하면 본질적으로 내부 중복이 없음을 알 수 있다. 파일의 하단에는 매트릭스 패턴으로 표시된 스위치 문이 있을 가능성이 높다.
 
-When we compare file A to file B, however, we detect a staggering amount of duplication. It looks very much like file B is just a copy of file A that has been extended in various ways. Closer investigation showed this to be the case. In fact, file A was just an older version of file B that had inadvertently been left in the release.
+하지만 파일 A와 파일 B를 비교하면 엄청난 양의 중복을 발견할 수 있다. 파일 B는 파일 A를 다양한 방식으로 확장한 복사본에 불과한 것처럼 보인다. 자세히 조사한 결과 사실로 밝혀졌다. 실제로 파일 A는 실수로 릴리스에 남겨진 파일 B의 이전 버전에 불과했다.
 
-Dotplots can also be useful to detect other problems. \figref{DuplicationSwitch} presents four clones that represent a switch statement over a type variable that is used to call individual construction code. The duplicated code could perhaps be eliminated by applying \charef{Transform Conditionals to Polymorphism}{TransformConditionalsToPolymorphism}.
+도트 플롯은 다른 문제를 감지하는 데도 유용할 수 있다. \figref{DuplicationSwitch}는 개별 구성 코드를 호출하는 데 사용되는 유형 변수에 대한 스위치 문을 나타내는 네 개의 복제본을 표시한다. 중복된 코드는 아마도 \charef{다형성 적용한 조건문 변환}{TransformConditionalsToPolymorphism}을 적용하여 제거할 수 있을 것이다.
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=0.75\textwidth]{DuplicationSwitch}
-\caption{Dotplots produced by four switch statements.}
+\caption{4개의 스위치 문으로 생성된 도트 플롯이다.}
 \figlabel{DuplicationSwitch}
 \end{center}
 \end{figure}
 
-\subsection*{Known Uses}
+\subsection*{알려진 용도}
 
-The pattern has been applied in biological research to detect DNA sequences \cite{Pust82a}. The Dotplot tool \cite{Helf95a} has been used to detect similarities in manual pages, literary texts and names from file systems. In the \ind{FAMOOS} project, the pattern has been applied to build \ind{Duploc}, a tool for identifying duplication in software source code \cite{Duca99b}. The \ind{Dup} tool \cite{Bake92a} has been used to investigated the source code of the X-Window system and uses a dotplot matrix graphical representation.
+이 패턴은 생물학적 연구에 적용되어 DNA 서열 \cite{Pust82a}을 검출하는 데 사용되었다. 도트플롯 도구 \cite{Helf95a}는 수동 페이지, 문학 텍스트 및 파일 시스템의 이름에서 유사성을 감지하는 데 사용되었다. \ind{FAMOOS} 프로젝트에서 이 패턴은 소프트웨어 소스 코드의 중복을 식별하는 도구 \cite{Duca99b}인 \ind{Duploc}을 구축하는 데 적용되었다. \ind{Dup} 도구 \cite{Bake92a}는 X-Window 시스템의 소스 코드를 조사하는 데 사용되었으며, 도트 플롯 매트릭스 그래픽 표현을 사용한다.
 
-\subsection*{Related Patterns}
+\subsection*{관련 패턴}
 
-Once you have detected duplicated code, numerous refactoring patterns may apply, in particular \patpgref{Extract Method}{ExtractMethod}.
+중복 코드를 감지한 후에는 특히 \patpgref{메시드 추출하기}{ExtractMethod}와 같은 수많은 리팩터링 패턴이 적용될 수 있다.
 
-Very often duplicated code arises because clients assume too many responsibilities. In that case, \patpgref{Move Behavior Close to Data}{MoveBehaviorCloseToData} will help you to eliminate the duplication.
+클라이언트가 너무 많은 책임을 맡기 때문에 중복 코드가 발생하는 경우가 많다. 이 경우 \patpgref{데이터 가까이 동작 이동하기}{MoveBehaviorCloseToData}를 사용하면 중복을 제거할 수 있다.
 
-Dotplots also help to detect large conditional constructs. You should probably \charef{Transform Conditionals to Polymorphism}{TransformConditionalsToPolymorphism} to eliminate these conditionals and thereby achieve a more flexible design. 
+도트 플롯은 또한 큰 조건부 구조를 감지하는 데 도움이 된다. 이러한 조건문을 제거하여 보다 유연한 설계를 달성하려면 \charef{다형성 적용된 조건문 변환}{TransformConditionalsToPolymorphism}을 사용해야 한다. 
 
 %=============================================================
 \ifx\wholebook\relax\else
