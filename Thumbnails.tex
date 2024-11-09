@@ -12,6 +12,7 @@
 		vmargin={.98in,.98in},
 		ignoreheadfoot
 	]{geometry}
+	\usepackage[hangul]{kotex}
 	\input{common.tex}
 	\pagestyle{headings}
 	\setboolean{lulu}{true}
@@ -27,7 +28,7 @@
 	\sloppy
 \fi
 %=================================================================
-\chapter{Thumbnail patterns}
+\chapter{섬네일 패턴}
 \chalabel{ThumbnailPatterns}
 
 \on{Put these in the right places:}
@@ -35,295 +36,295 @@
 \label{pat:Adapter}
 \label{pat:Facade}
 
-There are many patterns that are not specifically concerned with reengineering, but are still relevant to the reengineering process. In this chapter we have listed only those patterns that are specifically referred to at some point in this book. We have grouped them into the following three categories:
+리엔지니어링과 특별히 관련되지는 않지만 리엔지니어링 프로세스와 관련이 있는 패턴도 많이 있다. 이 장에서는 이 책의 어느 지점에서 구체적으로 언급된 패턴만 나열했다. 다음 세 가지 범주로 분류했다.
 
-\index{DeLano, David}
-\index{Rising, Linda}
-\index{Binder, Robert}
+\index{델라노, 데이비드}
+\index{라이징, 린다}
+\index{바인더, 로버트}
 \begin{bulletlist}
-\item \emph{Testing patterns.}
-These patterns help you to focus your testing efforts. Our principle source is a pattern language by DeLano and Rising \cite{DeLa98a}, though of course a vast literature is available on the subject. Binder, for example, devotes an entire book to the subject \cite{Bind99a}.
+\item \emph{테스팅 패턴(Testing patterns).}
+이러한 패턴은 테스트 작업에 집중하는 데 도움이 된다. 물론 이 주제에 대한 방대한 문헌이 있지만, 주요 출처는 델라노와 라이징 \cite{DeLa98a}의 패턴 언어이다. 예를 들어 바인더는 책 한 권 전체를 이 주제에 할애하고 있다 \cite{Bind99a}.
 
-\index{Fowler, Martin}
-\index{Roberts, Donald}
-\item \emph{Refactoring patterns.}
-These patterns focus on individual refactoring steps that you might applying during a reengineering project, or that you might just as well apply during any forward engineering project. Our principle sources are Fowler \etal \cite{Fowl99a}, and the Roberts' PhD thesis \cite{Robe99a}.
+\index{파울러, 마틴}
+\index{로버츠, 도널드}
+\item \emph{리팩터링 패턴(Refactoring patterns).}
+이 패턴은 리엔지니어링 프로젝트 중에 적용할 수 있거나 포워드 엔지니어링 프로젝트 중에도 적용할 수 있는 개별 리팩토링 단계에 중점을 둔다. 주요 출처는 파울러의 공저 \cite{Fowl99a}와 로버츠의 박사 학위 논문 \cite{Robe99a}이 있다.
 
-\item \emph{Design patterns.}
-Very frequently the result of a reengineering operation is to put a particular design pattern into place. Here we remind the reader of some of the most common design patterns that pop up in a reengineering context. Our main source is, of course, the \emphind{Design Patterns} book \cite{Gamm95a}.
+\item \emph{디자인 패턴(Design patterns).}
+리엔지니어링 작업의 결과는 특정 디자인 패턴을 제자리에 배치하는 경우가 매우 많다. 여기서는 리엔지니어링 상황에서 가장 흔히 나타나는 디자인 패턴 몇 가지를 소개한다. 물론 주요 출처는 \emphind{디자인 패턴} 책 \cite{Gamm95a}이다.
 \end{bulletlist}
 
 %=================================================================
 %:SECTION Testing Patterns
-\section{Testing Patterns}
+\section{테스팅 패턴}
 
 %:THUMBNAIL -- {Retest Persistent Problems}
-\thumbnail{Retest Persistent Problems}{RetestPersistentProblems}
+\thumbnail{지속적인 문제 재테스트하기}{RetestPersistentProblems}
 
-\paragraph*{Problem:}
-What areas of the system should receive concentrated testing, irrespective of the features being implemented?
+\paragraph*{문제:}
+구현 중인 기능에 관계없이 시스템에서 어떤 영역을 집중적으로 테스트해야 하는가?
 
-\paragraph*{Solution:}
-Keep a list of persistent problem areas and test cases to verify them, not just for resolving the current problems but also for use in subsequent testing. Test these areas thoroughly, even if there are no new features going into them. Retest regularly using, even one last time before the release goes out of the door. 
+\paragraph*{솔루션:}
+현재 문제를 해결할 뿐만 아니라 후속 테스트에 사용할 수 있도록 지속적으로 발생하는 문제 영역과 테스트 케이스 목록을 작성하여 이를 검증하자. 새로운 기능이 추가되지 않더라도 이러한 영역을 철저하게 테스트하자. 릴리스가 출시되기 전에 마지막으로 한 번이라도 정기적으로 다시 테스트하자.
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 Patterns for system testing \cite{DeLa98a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Regression Test After Every Change}{RegressionTestAfterEveryChange}.
+\paragraph*{참조처:}
+\patpgref{변경할 때마다 회귀 테스트하기}{RegressionTestAfterEveryChange}.
 
 %:THUMBNAIL -- {Test Fuzzy Features}
-\thumbnail{Test Fuzzy Features}{TestFuzzyFeatures}
+\thumbnail{퍼지 기능 테스트하기}{TestFuzzyFeatures}
 
-\paragraph*{Problem:}
-How can possible problem areas of the system be pinpointed so that the most problems can be found in the least amount of time?
+\paragraph*{문제:}
+시스템에서 발생할 수 있는 문제 영역을 정확히 찾아내어 최소한의 시간으로 가장 많은 문제를 발견하려면 어떻게 해야 할까?
 
-\paragraph*{Solution:}
-Study the documentation available on the system. Look for areas that seems ambiguous or ill-defined. Write test plans that cover these areas more thoroughly and concentrate testing in these areas. If designers can tell you all about a feature, it probably works. It's what they can't tell you that needs attention during testing. 
+\paragraph*{솔루션:}
+시스템에서 제공되는 문서를 학습하자. 모호하거나 제대로 정의되지 않은 영역을 찾아보자. 이러한 영역을 더 철저하게 다루는 테스트 계획을 작성하고 해당 영역에 집중적으로 테스트하자. 디자이너가 기능에 대해 모든 것을 말할 수 있다면 아마도 작동할 것이다. 테스트 중에 주의가 필요한 것은 그들이 이야기 해줄 수 없는 부분이다.
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 Patterns for system testing \cite{DeLa98a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Grow Your Test Base Incrementally}{GrowYourTestBaseIncrementally}.
+\paragraph*{참조처:}
+\patpgref{기본 테스트를 증가시키기}{GrowYourTestBaseIncrementally}.
 
 %:THUMBNAIL -- {Test Old Bugs}
-\thumbnail{Test Old Bugs}{TestOldBugs}
+\thumbnail{오래된 버그 테스트하기}{TestOldBugs}
 
-\paragraph*{Problem:}
-What areas of the system should be targeted for testing so that the most problems can be found in the least amount of time?
+\paragraph*{문제:}
+최소한의 시간에 가장 많은 문제를 발견할 수 있도록 시스템의 어떤 영역을 테스트 대상으로 삼아야 하는가?
 
-\paragraph*{Solution:}
-Examine problem reports from previous releases to help select test cases. Since it would be inefficient to test for all old problems, look at problems reported after the last valid snapshot of the system. Categorize problem reports to see if a trend is determined that could be used for additional testing.
+\paragraph*{솔루션:}
+이전 릴리스의 문제 보고서를 검토하여 테스트 사례를 선택하는 데 도움을 받자. 오래된 문제를 모두 테스트하는 것은 비효율적이므로 시스템의 마지막 유효성 검사 스냅샷 이후에 보고된 문제를 살펴보자. 문제 보고서를 분류하여 추가 테스트에 사용할 수 있는 추세가 확인되는지 확인하자.
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 Patterns for system testing \cite{DeLa98a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Grow Your Test Base Incrementally}{GrowYourTestBaseIncrementally}.
+\paragraph*{참조처:}
+\patpgref{기본 테스트를 증가시키기}{GrowYourTestBaseIncrementally}.
 
 %=================================================================
 %:SECTION Refactorings
-\section{Refactorings}
+\section{리펙터링}
 
 %:THUMBNAIL -- {Encapsulate Field}
-\thumbnail{Encapsulate Field}{EncapsulateField}
+\thumbnail{필드 캡슐화하기}{EncapsulateField}
 
-\paragraph*{Also Known As:}
-\ind{Abstract Instance Variable} \cite{Robe99a}.
+\paragraph*{다른 명칭:}
+\ind{추상 인스턴스 변수(Abstract Instance Variable)} \cite{Robe99a}.
 
-\intent{There is a public field. Make it private and provide accessors.}
+\intent{퍼블릭 필드가 있으면, 프라이빗으로 설정하고 접근자를 제공하자.}
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 \emph{Refactoring: Improving the Design of Existing Code} \cite{Fowl99a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Eliminate Navigation Code}{EliminateNavigationCode}.
+\paragraph*{참조처:}
+\patpgref{탐색 코드 제거하기}{EliminateNavigationCode}.
 
 %:THUMBNAIL -- {Extract Method}
-\thumbnail{Extract Method}{ExtractMethod}
+\thumbnail{메서드 추출하기}{ExtractMethod}
 
-\intent{You have a code fragment that can be grouped together. Turn the fragment into a method whose name explains the purpose of the method.}
+\intent{함께 그룹화할 수 있는 코드 조각이 있다. 이 조각을 메서드의 목적을 설명하는 이름을 가지는 메서드로 추출하자.}
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 \emph{Refactoring: Improving the Design of Existing Code} \cite{Fowl99a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Refactor to Understand}{RefactorToUnderstand}, \patpgref{Visualize Code as Dotplots}{VisualizeCodeAsDotplots}, \patpgref{Move Behavior Close to Data}{MoveBehaviorCloseToData}
+\paragraph*{참조처:}
+\patpgref{이해하기 위해 리팩터링하기}{RefactorToUnderstand}, \patpgref{도트 플롯으로 코드 시각화하기}{VisualizeCodeAsDotplots}, \patpgref{데이터 가까이 동작 이동하기}{MoveBehaviorCloseToData}
 
 %:THUMBNAIL -- {Move Method}
-\thumbnail{Move Method}{MoveMethod}
+\thumbnail{메서드 이동하기}{MoveMethod}
 
-\intent{A method is, or will be, using or used by more features of another class than the class on which it is defined. Create a new method with a similar body in the class it uses most. Either turn the old method into a simple delegation, or remove it altogether.}
+\intent{메서드가 정의된 클래스보다 다른 클래스의 더 많은 기능을 사용하거나 사용할 메서드가 있다. 가장 많이 사용하는 클래스에서 새 메서드를 만든다. 기존 메서드를 단순한 델리게이션으로 바꾸거나 완전히 제거하자.}
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 \emph{Refactoring: Improving the Design of Existing Code} \cite{Fowl99a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Refactor to Understand}{RefactorToUnderstand}, \patpgref{Move Behavior Close to Data}{MoveBehaviorCloseToData}
+\paragraph*{참조처:}
+\patpgref{이해하기 위해 리팩터링하기}{RefactorToUnderstand}, \patpgref{동작을 데이터 가까이 이동하기}{MoveBehaviorCloseToData}
 
 %:THUMBNAIL -- {Rename Attribute}
-\thumbnail{Rename Attribute}{RenameAttribute}
+\thumbnail{속성 이름 바꾸기}{RenameAttribute}
 
-\intent{Rename an instance variable and update all references to it.}
+\intent{인스턴스 변수의 이름을 바꾸고 그에 대한 모든 참조를 업데이트한다.}
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 \emph{Practical Analysis for Refactoring} \cite{Robe99a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Refactor to Understand}{RefactorToUnderstand}.
+\paragraph*{참조처:}
+\patpgref{이해하기 위해 리팩터링하기}{RefactorToUnderstand}.
 
 %:THUMBNAIL -- {Rename Method}
-\thumbnail{Rename Method}{RenameMethod}
+\thumbnail{메소드 이름 바꾸기}{RenameMethod}
 
-\intent{The name of a method does not reveal its purpose. Change the name of the method.}
+\intent{메소드의 이름이 그 목적을 드러내지 않는면, 메소드 이름을 변경하자.}
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 \emph{Refactoring: Improving the Design of Existing Code} \cite{Fowl99a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Refactor to Understand}{RefactorToUnderstand}
+\paragraph*{참조처:}
+\patpgref{이해하기 위해 리팩터링하기}{RefactorToUnderstand}
 
 %:THUMBNAIL -- {Replace Conditional with Polymorphism}
-\thumbnail{Replace Conditional with Polymorphism}{ReplaceConditionalWithPolymorphism}
+\thumbnail{조건문을 다형성으로 치환하기}{ReplaceConditionalWithPolymorphism}
 
-\intent{You have a conditional that chooses different behavior depending on the type of an object. Move each leg of the conditional to an overriding method in a subclass. Make the original method abstract.}
+\intent{개체의 타입에 따라 다른 동작을 선택하는 조건문이 있다. 조건의 각 레그를 서브클래스의 재정의 메서드로 옮긴다. 원본의 메서드는 추상화하자.}
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 \emph{Refactoring: Improving the Design of Existing Code} \cite{Fowl99a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Transform Client Type Checks}{TransformClientTypeChecks}
+\paragraph*{참조처:}
+\patpgref{클라이언트 타입 검사 변환하기}{TransformClientTypeChecks}
 
 %=================================================================
-\section{Design Patterns}
+\section{디자인 패턴}
 
 %:THUMBNAIL -- {Abstract Factory}
-\thumbnail{Abstract Factory}{AbstractFactory}
+\thumbnail{추상 팩토리}{AbstractFactory}
 
-\intent{Provide an interface for creating families of related or dependent objects without specifying their concrete classes.}
+\intent{구체적인 클래스를 지정하지 않고 관련 또는 종속 개체의 패밀리를 만들기 위한 인터페이스를 프로바이더가 제공한다.}
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 \emph{Design Patterns} \cite{Gamm95a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Look for the Contracts}{LookForTheContracts}, \patpgref{Transform Client Type Checks}{TransformClientTypeChecks}.
+\paragraph*{참조처:}
+\patpgref{컨트랙트 찾기}{LookForTheContracts}, \patpgref{클라이언트 타입 검사 변환하기}{TransformClientTypeChecks}.
 
 %:THUMBNAIL -- {Adapter}
-\thumbnail{Adapter}{Adapter}
+\thumbnail{어댑터}{Adapter}
 
-\intent{Convert the interface of a class into another interface clients expect. \patref{Adapter}{Adapter} lets classes work together that couldn't otherwise because of incompatible interfaces.}
+\intent{클래스의 인터페이스를 클라이언트가 기대하는 다른 인터페이스로 변환한다. \patref{어댑터}{Adapter}를 사용하면 호환되지 않는 인터페이스 때문에 함께 작동하지 않던 클래스가 함께 작동할 수 있다.}
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 \emph{Design Patterns} \cite{Gamm95a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Present the Right Interface}{PresentTheRightInterface}, \patpgref{Move Behavior Close to Data}{MoveBehaviorCloseToData}.
+\paragraph*{참조처:}
+\patpgref{올바른 인터페이스 제시하기}{PresentTheRightInterface}, \patpgref{동작을 데이터 가까이 이동하기}{MoveBehaviorCloseToData}.
 
 %:THUMBNAIL -- {Facade}
-\thumbnail{Facade}{Facade}
+\thumbnail{파사드}{Facade}
 
-\intent{Provide a unified interface to a set of interfaces in a subsystem. \patref{Facade}{Facade} defines a higher-level interface that makes the subsystem easier to use.}
+\intent{서브시스템의 인터페이스 집합에 통합 인터페이스를 프로바이더로 제공한다. \patref{파사드}{Facade}는 하위 시스템을 더 쉽게 사용할 수 있는 상위 레벨 인터페이스를 정의한다.}
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 \emph{Design Patterns} \cite{Gamm95a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Eliminate Navigation Code}{EliminateNavigationCode}, \patpgref{Split Up God Class}{SplitUpGodClass}.
+\paragraph*{참조처:}
+\patpgref{탐색 코드 제거하기}{EliminateNavigationCode}, \patpgref{신 클래스 분할하기}{SplitUpGodClass}.
 
 %:THUMBNAIL -- {Factory Method}
-\thumbnail{Factory Method}{FactoryMethod}
+\thumbnail{팩토리 메서드}{FactoryMethod}
 
-\intent{Define an interface for creating an object, but let subclasses decide which class to instantiate. \patref{Factory Method}{FactoryMethod} lets a class defer instantiation to subclasses.}
+\intent{개체를 생성하기 위한 인터페이스를 정의하되, 인스턴스화할 클래스는 서브클래스가 결정하도록 한다. \patref{팩토리 메서드}{FactoryMethod}는 클래스가 인스턴스화를 서브클래스로 연기할 수 있도록 한다.}
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 \emph{Design Patterns} \cite{Gamm95a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Look for the Contracts}{LookForTheContracts}
+\paragraph*{참조처:}
+\patpgref{컨트랙트 찾기}{LookForTheContracts}
 
 %:THUMBNAIL -- {Flyweight}
 \thumbnail{경량}{Flyweight}
 
-\intent{Use sharing to support large numbers of fine-grained objects efficiently.}
+\intent{공유를 사용하여 많은 수의 세분화된 개체를 효율적으로 지원한다.}
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 \emph{Design Patterns} \cite{Gamm95a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Speculate about Design}{SpeculateAboutDesign}
+\paragraph*{참조처:}
+\patpgref{디자인 추측하기}{SpeculateAboutDesign}
 
 %:THUMBNAIL -- {Null Object}
-\thumbnail{Null Object}{NullObject}
+\thumbnail{널 객체}{NullObject}
 
-\intent{A \patref{Null Object}{NullObject} provides a surrogate for another object that shares the same interface but does nothing. Thus, the \patref{Null Object}{NullObject} encapsulates the implementation decisions of how to do nothing and hides those details from its collaborators}
+\intent{\patref{널 객체}{NullObject}는 동일한 인터페이스를 공유하지만 아무 일도 하지 않는 다른 객체에 대한 대리자(surrogate)를 제공한다. 따라서 \patref{널 객체}{NullObject}는 아무것도 하지 않는 방법에 대한 구현 결정을 캡슐화하고 해당 세부 사항을 공동 작업자에게 숨긴다.}
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 \emph{Null Object} \cite{Wool98a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Introduce Null Object}{IntroduceNullObject}.
+\paragraph*{참조처:}
+\patpgref{널 객체 도입하기}{IntroduceNullObject}.
 
 %:THUMBNAIL -- {Quantity}
 \thumbnail{수량}{Quantity}
 
-\paragraph*{Problem:}
-Representing a value such as 6 feet or \$5.
+\paragraph*{문제:}
+6피트 또는 \$5와 같은 값을 나타냅니다.
 
-\paragraph*{Solution:}
-Use a quantity type that includes both the amount and the unit. Currencies are a kind of unit.
+\paragraph*{솔루션:}
+금액과 단위를 모두 포함하는 수량 타입을 사용한다. 달러와 같은 통화는 일종의 단위(unit)이다.
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 \emph{Analysis Patterns: Reusable Objects Models} \cite{Fowl97b}.
 
-\paragraph*{Referenced from:}
-\patpgref{Analyze the Persistent Data}{AnalyzeThePersistentData}.
+\paragraph*{참조처:}
+\patpgref{퍼시스턴트 데이터 분석하기}{AnalyzeThePersistentData}.
 
 %:THUMBNAIL -- {Singleton}
-\thumbnail{Singleton}{Singleton}
+\thumbnail{싱글턴}{Singleton}
 
-\intent{Ensure a class only has one instance, and provide a global point of access to it.}
+\intent{클래스에 인스턴스가 하나만 있는지 확인하고 이에 대한 전역 액세스 지점을 제공한다.}
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 \emph{Design Patterns} \cite{Gamm95a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Read all the Code in One Hour}{ReadAllTheCodeInOneHour}.
+\paragraph*{참조처:}
+\patpgref{한 시간 안에 모든 코드 읽기}{ReadAllTheCodeInOneHour}.
 
 %:THUMBNAIL -- {State}
-\thumbnail{State}{State}
+\thumbnail{상태}{State}
 
-\intent{Allow an object to alter its behavior when its internal state changes. The object will appear to change its class. }
+\intent{객체의 내부 상태가 변경될 때 객체의 동작을 변경하도록 허용한다. 객체가 클래스를 변경하는 것처럼 보인다.}
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 \emph{Design Patterns} \cite{Gamm95a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Factor out State}{FactorOutState}.
+\paragraph*{참조처:}
+\patpgref{상태 추출하기}{FactorOutState}.
 
 %:THUMBNAIL -- {State Patterns}
-\thumblang{State Patterns}{StatePatterns}
+\thumblang{상태 패턴}{StatePatterns}
 
-\intent{The \patref{State}{State} Patterns pattern language refines and clarifies the \patref{State}{State} Pattern.}
+\intent{\patref{State}{State} 패턴 패턴 언어는 \patref{State}{State} 패턴을 구체화(refine and clarify)한다.}
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 \emph{State Patterns} \cite{Dyso97a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Factor out State}{FactorOutState}.
+\paragraph*{참조처:}
+\patpgref{상태 추출하기}{FactorOutState}.
 
 %:THUMBNAIL -- {Strategy}
-\thumbnail{Strategy}{Strategy}
+\thumbnail{전략}{Strategy}
 
-\intent{Define a family of algorithms, encapsulate each one in a separate class, and define each class with the same interface so they can be interchangeable. \patref{Strategy}{Strategy} lets the algorithm vary independently from clients that use it. }
+\intent{알고리즘 제품군을 정의하고, 각 알고리즘을 별도의 클래스로 캡슐화하며, 각 클래스를 동일한 인터페이스로 정의하여 상호 교환할 수 있도록 한다. \patref{전략}{Strategy}을 사용하면 알고리즘을 사용하는 클라이언트와 독립적으로 알고리즘을 변경할 수 있다.}
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 \emph{Design Patterns} \cite{Gamm95a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Factor out Strategy}{FactorOutStrategy}.
+\paragraph*{참조처:}
+\patpgref{전략 추출하기}{FactorOutStrategy}.
 
 %:THUMBNAIL -- {Template Method}
-\thumbnail{Template Method}{TemplateMethod}
+\thumbnail{템플리트 메서드}{TemplateMethod}
 
-\intent{Define the skeleton of an algorithm in an operation, deferring some steps to subclasses. \patref{Template Method}{TemplateMethod} lets subclasses redefine certain steps of an algorithm without changing the algorithm's structure.}
+\intent{오펴레이션에서 알고리즘의 골격을 정의하여 일부 단계를 하위 클래스로 연기한다. \patref{템플릿 메서드}{TemplateMethod}를 사용하면 서브클래스가 알고리즘의 구조를 변경하지 않고 알고리즘의 특정 단계를 재정의할 수 있다.}
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 \emph{Design Patterns} \cite{Gamm95a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Look for the Contracts}{LookForTheContracts}.
+\paragraph*{참조처:}
+\patpgref{계약 찾기}{LookForTheContracts}.
 
 %:THUMBNAIL -- {Visitor}
-\thumbnail{Visitor}{Visitor}
+\thumbnail{비지터}{Visitor}
 
-\intent{Represent an operation to be performed on the elements of an object structure. \patref{Visitor}{Visitor} lets you define a new operation without changing the classes of the elements on which it operates.}
+\intent{객체 구조의 요소에 대해 수행할 오퍼레이션을 나타낸다. \patref{비지터}{Visitor}를 사용하면 연산이 수행되는 요소의 클래스를 변경하지 않고도 새 오펴레이션을 정의할 수 있다.}
 
-\paragraph*{Source:}
+\paragraph*{출처:}
 \emph{Design Patterns} \cite{Gamm95a}.
 
-\paragraph*{Referenced from:}
-\patpgref{Move Behavior Close to Data}{MoveBehaviorCloseToData}.
+\paragraph*{참조처:}
+\patpgref{동작을 데이터 가까이 이동하기}{MoveBehaviorCloseToData}.
 
 %=============================================================
 \ifx\wholebook\relax\else
