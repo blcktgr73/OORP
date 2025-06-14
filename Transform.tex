@@ -64,13 +64,13 @@ Case 문이 본질적으로 나쁜 것은 아니지만, 객체 지향 코드에�
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=\textwidth]{TransformMap}
+\includegraphics[width=\textwidth]{oldTransformMap.pdf}
 \caption{조건부 변환을 다형성으로 구성하는 패턴 간의 관계}
 \figlabel{TransformMap}
 \end{center}
 \end{figure}
 
-\figref{TransformMap} summarizes the relationships and the differences between the patterns.
+\figref{TransformMap}은 패턴들 간의 관계와 차이점을 요약해서 보여준다.
 
 \begin{bulletlist}
 \item \patref{자신 타입 체크 변환하기}{TransformSelfTypeChecks}는 각 타입 케이스에 대해 \emph{서브클래스 도입}을 통해 프로바이더 클래스에서 타입 정보에 대한 조건부를 제거한다. 조건부 코드는 새 하위 클래스 중 하나의 인스턴스에 대한 단일 다형성 메서드 호출로 대체된다.
@@ -818,7 +818,7 @@ void initiateCalls(Telephone ** phoneArray, int numOfCalls) {
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=\textwidth]{TransformNullObject}
+\includegraphics[width=\textwidth]{oldTransformNullObject.pdf}
 \caption{명시적인 널 값 테스트에 기반한 상황에서 널 객체가 도입된 상황으로 변환한다.}
 \figlabel{TransformNullObject}
 \end{center}

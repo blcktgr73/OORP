@@ -8,4 +8,7 @@ OORP.out
 OORP.log
 OORP.idx
 OORP.ilg
+OORP.fdb_latexmk
+OORP.fls
+OORP.ind
 warnings.txt
